@@ -6,7 +6,6 @@ import {
   Shield,
   Zap,
   Users,
-  TrendingUp,
   Mail,
   PieChart,
   Target,
@@ -79,29 +78,13 @@ export default function Hero() {
       </div>
 
       <div className="container" style={{ position: "relative", zIndex: 10 }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "3rem",
-            alignItems: "center",
-          }}
-        >
-          <style jsx global>{`
-            @media (min-width: 1024px) {
-              .hero-main-grid { grid-template-columns: 1.1fr 0.9fr !important; gap: 4rem !important; }
-              .hero-text-center { text-align: left !important; }
-              .hero-buttons-center { justify-content: flex-start !important; }
-            }
-          `}</style>
-
+        <div className="hero-grid-layout">
           {/* Main Content */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="hero-text-center"
-            style={{ textAlign: "center" }}
+            className="hero-text-content"
           >
             {/* Badge */}
             <motion.div
@@ -170,10 +153,7 @@ export default function Hero() {
             </p>
 
             {/* CTA Buttons */}
-            <div
-              className="flex flex-wrap gap-4 hero-buttons-center"
-              style={{ justifyContent: "center", marginBottom: "2.5rem" }}
-            >
+            <div className="hero-cta-buttons">
               <motion.a
                 href="#download"
                 whileHover={{ scale: 1.03 }}
@@ -220,7 +200,7 @@ export default function Hero() {
             </div>
 
             {/* Benefits Pills */}
-            <div className="flex flex-wrap gap-3 hero-buttons-center" style={{ justifyContent: "center" }}>
+            <div className="hero-benefits-row">
               {benefits.map((benefit, i) => (
                 <motion.div
                   key={i}
@@ -250,8 +230,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
-              className="flex flex-wrap gap-6 hero-buttons-center"
-              style={{ justifyContent: "center", marginTop: "2.5rem" }}
+              className="hero-trust-row"
             >
               {[
                 { icon: Shield, text: "100% Seguro", color: "#10B981" },
@@ -273,11 +252,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              position: "relative",
-            }}
+            className="hero-phone-wrapper"
           >
             {/* Glow Effect Behind Phone */}
             <div
