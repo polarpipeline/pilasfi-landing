@@ -1,15 +1,50 @@
 {
   "name": "PilasFi - Finanzas Personales Inteligentes",
   "short_name": "PilasFi",
-  "description": "La app que lee tus emails bancarios y organiza tus finanzas automáticamente. Presupuestos, metas de ahorro y finanzas compartidas.",
-  "start_url": "/",
+  "description": "La mejor app de finanzas personales para Ecuador. Lee automáticamente los emails de tu banco, crea presupuestos compartidos con tu pareja, define metas de ahorro y controla los gastos del hogar. Compatible con Banco Pichincha, Banco Guayaquil, Produbanco, Diners Club, Pacificard, Banco del Pacífico y De Una. 100% gratis, 100% seguro.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#0066FF",
+  "background_color": "#0f0f23",
+  "theme_color": "#6366F1",
   "orientation": "portrait-primary",
   "lang": "es-EC",
-  "categories": ["finance", "productivity", "lifestyle"],
+  "dir": "ltr",
+  "id": "com.pilasfi.app",
+  "categories": ["finance", "productivity", "lifestyle", "utilities"],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
+  "prefer_related_applications": false,
   "icons": [
+    {
+      "src": "/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
@@ -17,10 +52,59 @@
       "purpose": "maskable any"
     },
     {
+      "src": "/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
       "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Dashboard de gastos compartidos en pareja"
+    },
+    {
+      "src": "/screenshot-2.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Metas de ahorro personalizadas"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ver Gastos",
+      "short_name": "Gastos",
+      "description": "Ver tus gastos del mes",
+      "url": "/?action=expenses",
+      "icons": [{ "src": "/icon-expenses.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Agregar Gasto",
+      "short_name": "Agregar",
+      "description": "Registrar un nuevo gasto",
+      "url": "/?action=add",
+      "icons": [{ "src": "/icon-add.png", "sizes": "192x192" }]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.pilasfi.app",
+      "id": "com.pilasfi.app"
+    },
+    {
+      "platform": "itunes",
+      "url": "https://apps.apple.com/ec/app/pilasfi/id123456789"
     }
   ]
 }
