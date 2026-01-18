@@ -175,81 +175,93 @@ export default function Hero() {
         <div className="hero-grid-layout">
           {/* Text Content */}
           <div className="hero-text-content">
-            {/* Animated Content Container - Fixed Height */}
-            <div style={{ position: "relative", minHeight: "340px" }}>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`content-${currentSlide}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  style={{ position: "absolute", top: 0, left: 0, right: 0 }}
-                >
-                  {/* Badge */}
-                  <div
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "0.5rem",
-                      padding: "0.625rem 1.25rem",
-                      borderRadius: "9999px",
-                      background: "rgba(99, 102, 241, 0.15)",
-                      border: "1px solid rgba(99, 102, 241, 0.3)",
-                      marginBottom: "2rem",
-                    }}
-                  >
-                    <slide.badgeIcon size={18} color="#818CF8" />
-                    <span style={{ color: "#A5B4FC", fontWeight: 600, fontSize: "0.9375rem" }}>
-                      {slide.badge}
-                    </span>
-                  </div>
+            {/* Badge */}
+            <motion.div
+              key={`badge-${currentSlide}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.625rem 1.25rem",
+                borderRadius: "9999px",
+                background: "rgba(99, 102, 241, 0.15)",
+                border: "1px solid rgba(99, 102, 241, 0.3)",
+                marginBottom: "2rem",
+              }}
+            >
+              <slide.badgeIcon size={18} color="#818CF8" />
+              <span style={{ color: "#A5B4FC", fontWeight: 600, fontSize: "0.9375rem" }}>
+                {slide.badge}
+              </span>
+            </motion.div>
 
-                  {/* Headline */}
-                  <h1
-                    style={{
-                      fontSize: "clamp(2.75rem, 5.5vw, 4.5rem)",
-                      fontWeight: 800,
-                      lineHeight: 1.1,
-                      letterSpacing: "-0.025em",
-                      marginBottom: "1.75rem",
-                      color: "white",
-                    }}
-                  >
-                    {slide.headline.map((line, i) => (
-                      <span key={i} style={{ display: "block" }}>
-                        {i === slide.highlightIndex ? (
-                          <span
-                            style={{
-                              background: slide.gradient,
-                              WebkitBackgroundClip: "text",
-                              WebkitTextFillColor: "transparent",
-                              backgroundClip: "text",
-                            }}
-                          >
-                            {line}
-                          </span>
-                        ) : (
-                          line
-                        )}
-                      </span>
-                    ))}
-                  </h1>
+            {/* Headline - Fixed 3 lines */}
+            <h1
+              style={{
+                fontSize: "clamp(2.75rem, 5.5vw, 4.5rem)",
+                fontWeight: 800,
+                lineHeight: 1.1,
+                letterSpacing: "-0.025em",
+                marginBottom: "1.75rem",
+                color: "white",
+                minHeight: "clamp(9rem, 18vw, 15rem)",
+              }}
+            >
+              <motion.span
+                key={`line1-${currentSlide}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                style={{ display: "block" }}
+              >
+                {slide.headline[0]}
+              </motion.span>
+              <motion.span
+                key={`line2-${currentSlide}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                style={{
+                  display: "block",
+                  background: slide.gradient,
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                {slide.headline[1]}
+              </motion.span>
+              <motion.span
+                key={`line3-${currentSlide}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                style={{ display: "block" }}
+              >
+                {slide.headline[2]}
+              </motion.span>
+            </h1>
 
-                  {/* Description */}
-                  <p
-                    style={{
-                      fontSize: "clamp(1.125rem, 2vw, 1.3rem)",
-                      color: "rgba(255,255,255,0.7)",
-                      lineHeight: 1.7,
-                      maxWidth: "540px",
-                    }}
-                  >
-                    {slide.description}
-                  </p>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+            {/* Description - Fixed height */}
+            <motion.p
+              key={`desc-${currentSlide}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              style={{
+                fontSize: "clamp(1.125rem, 2vw, 1.3rem)",
+                color: "rgba(255,255,255,0.7)",
+                lineHeight: 1.7,
+                marginBottom: "2.5rem",
+                maxWidth: "540px",
+                minHeight: "5rem",
+              }}
+            >
+              {slide.description}
+            </motion.p>
 
             {/* CTA Buttons */}
             <div className="hero-cta-buttons">
