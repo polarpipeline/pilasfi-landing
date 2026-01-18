@@ -1,0 +1,26 @@
+{
+  "name": "PilasFi - Finanzas Personales Inteligentes",
+  "short_name": "PilasFi",
+  "description": "La app que lee tus emails bancarios y organiza tus finanzas automáticamente. Presupuestos, metas de ahorro y finanzas compartidas.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#0066FF",
+  "orientation": "portrait-primary",
+  "lang": "es-EC",
+  "categories": ["finance", "productivity", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ]
+}
