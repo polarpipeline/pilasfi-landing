@@ -65,8 +65,18 @@ export default function Navigation() {
               >
                 <Zap size={22} color="white" />
               </div>
-              <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--color-gray-900)" }}>
-                Pilas<span className="gradient-text">Fi</span>
+              <span style={{
+                fontSize: "1.25rem",
+                fontWeight: 700,
+                color: isScrolled ? "var(--color-gray-900)" : "white",
+                transition: "color 0.3s ease"
+              }}>
+                Pilas<span style={{
+                  background: "linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}>Fi</span>
               </span>
             </a>
 
@@ -77,14 +87,14 @@ export default function Navigation() {
                   key={link.name}
                   href={link.href}
                   style={{
-                    color: "var(--color-gray-600)",
+                    color: isScrolled ? "var(--color-gray-600)" : "rgba(255,255,255,0.8)",
                     textDecoration: "none",
                     fontSize: "0.9375rem",
                     fontWeight: 500,
-                    transition: "color 0.2s",
+                    transition: "color 0.3s ease",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-gray-900)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-gray-600)")}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = isScrolled ? "var(--color-gray-900)" : "white")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = isScrolled ? "var(--color-gray-600)" : "rgba(255,255,255,0.8)")}
                   aria-label={`Ir a ${link.name}`}
                 >
                   {link.name}
@@ -122,7 +132,8 @@ export default function Navigation() {
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-                color: "var(--color-gray-700)",
+                color: isScrolled ? "var(--color-gray-700)" : "white",
+                transition: "color 0.3s ease",
               }}
               aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={isMobileMenuOpen}
