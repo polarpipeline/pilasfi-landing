@@ -92,6 +92,72 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "PilasFi",
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "iOS, Android",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      ratingCount: "5000",
+    },
+    description:
+      "PilasFi lee automáticamente los emails de tu banco y organiza tus finanzas. Presupuestos inteligentes, metas de ahorro y finanzas compartidas con tu pareja.",
+    url: "https://pilasfi.com",
+    author: {
+      "@type": "Organization",
+      name: "PilasFi",
+      url: "https://pilasfi.com",
+    },
+    featureList: [
+      "Lectura automática de emails bancarios",
+      "Presupuestos compartidos en pareja",
+      "Categorización inteligente de gastos",
+      "Metas de ahorro",
+      "Dashboard en tiempo real",
+      "Alertas inteligentes",
+    ],
+    screenshot: "https://pilasfi.com/og-image.png",
+  };
+
+  const faqStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "¿Es seguro conectar mi email bancario?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Absolutamente. PilasFi solo lee los emails de notificaciones bancarias usando conexiones encriptadas. Nunca almacenamos tus credenciales bancarias ni accedemos a otros emails.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "¿Cuánto cuesta PilasFi?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "PilasFi es 100% gratis. No hay planes premium, suscripciones ocultas ni costos adicionales.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "¿Qué bancos están soportados?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Actualmente soportamos Banco Pichincha, Banco Guayaquil, Produbanco, Diners Club, Pacificard, Banco del Pacífico y De Una.",
+        },
+      },
+    ],
+  };
+
   return (
     <html lang="es" className={inter.variable}>
       <head>
@@ -100,6 +166,14 @@ export default function RootLayout({
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
         />
       </head>
       <body className="antialiased">{children}</body>

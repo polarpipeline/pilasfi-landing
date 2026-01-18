@@ -9,172 +9,179 @@ import {
   Users,
   Bell,
   Shield,
-  Smartphone,
   TrendingUp,
   Wallet,
-  Clock,
-  Lock,
+  Heart,
+  Home,
+  Eye,
 } from "lucide-react";
 
 const features = [
   {
+    icon: Users,
+    title: "Finanzas en Pareja",
+    description:
+      "Conecta con tu pareja y manejen juntos los gastos del hogar. Vean quién gastó qué y mantengan el equilibrio financiero.",
+    highlight: true,
+  },
+  {
+    icon: Home,
+    title: "Presupuesto del Hogar",
+    description:
+      "Crea presupuestos compartidos para el arriendo, servicios, supermercado y más. Ambos ven el progreso en tiempo real.",
+    highlight: true,
+  },
+  {
+    icon: Eye,
+    title: "Gastos Privados y Compartidos",
+    description:
+      "Decide qué gastos son visibles para tu pareja y cuáles son privados. Respetamos tu privacidad financiera.",
+    highlight: true,
+  },
+  {
     icon: Mail,
     title: "Lectura Automática de Emails",
     description:
-      "Conecta tu correo y PilasFi detecta automáticamente las notificaciones de tus bancos. Cada compra, transferencia o movimiento se registra sin que hagas nada.",
-    color: "from-blue-500 to-cyan-500",
+      "Conecta tu correo y PilasFi detecta automáticamente las notificaciones de tus bancos. Sin ingresar nada manual.",
   },
   {
     icon: Brain,
     title: "Categorización Inteligente",
     description:
-      "Nuestro sistema identifica automáticamente si gastaste en comida, transporte, entretenimiento o cualquier otra categoría. Aprende de tus hábitos.",
-    color: "from-purple-500 to-pink-500",
+      "Nuestro sistema identifica si gastaste en comida, transporte o entretenimiento. Aprende de tus hábitos.",
   },
   {
     icon: PieChart,
     title: "Dashboard en Tiempo Real",
     description:
-      "Visualiza tus ingresos, gastos y tendencias con gráficos claros. Compara mes a mes y entiende hacia dónde va tu dinero.",
-    color: "from-green-500 to-emerald-500",
+      "Visualiza ingresos, gastos y tendencias con gráficos claros. Compara mes a mes.",
   },
   {
     icon: Target,
     title: "Metas de Ahorro",
     description:
-      "Define cuánto quieres ahorrar y para qué. PilasFi te muestra tu progreso y te motiva a alcanzar tus objetivos financieros.",
-    color: "from-orange-500 to-amber-500",
+      "Define cuánto quieres ahorrar y para qué. PilasFi te muestra tu progreso hacia tus objetivos.",
   },
   {
     icon: Wallet,
-    title: "Presupuestos Inteligentes",
+    title: "Presupuestos por Categoría",
     description:
-      "Establece límites por categoría. Recibe alertas cuando estés cerca del 80% o lo superes. Toma el control de cada peso.",
-    color: "from-red-500 to-rose-500",
-  },
-  {
-    icon: Users,
-    title: "Finanzas en Pareja",
-    description:
-      "Comparte presupuestos con tu pareja. Decide qué gastos son privados y cuáles compartidos. Ideal para manejar el hogar juntos.",
-    color: "from-indigo-500 to-violet-500",
+      "Establece límites para comida, transporte, entretenimiento. Recibe alertas cuando te acerques al límite.",
   },
   {
     icon: Bell,
-    title: "Alertas Personalizadas",
+    title: "Alertas Inteligentes",
     description:
-      "Notificaciones cuando detectamos gastos inusuales, cuando superas un presupuesto o cuando alcanzas una meta de ahorro.",
-    color: "from-teal-500 to-cyan-500",
-  },
-  {
-    icon: TrendingUp,
-    title: "Proyecciones Financieras",
-    description:
-      "Basado en tus patrones de gasto, proyectamos cómo terminará el mes. Anticipa problemas antes de que ocurran.",
-    color: "from-fuchsia-500 to-pink-500",
-  },
-  {
-    icon: Shield,
-    title: "100% Seguro",
-    description:
-      "Solo leemos emails, nunca accedemos a tu cuenta bancaria. Tus datos están encriptados y protegidos con los más altos estándares.",
-    color: "from-emerald-500 to-green-500",
+      "Notificaciones cuando detectamos gastos inusuales o cuando superas un presupuesto.",
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-    },
-  },
-};
-
 export default function Features() {
   return (
-    <section id="features" className="section bg-[var(--color-gray-100)]">
+    <section id="features" className="section section-gray">
       <div className="container">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-2 rounded-full bg-[var(--color-primary-blue)]/10 text-[var(--color-primary-blue)] text-sm font-medium mb-4">
-            Funcionalidades
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Todo lo que necesitas para{" "}
-            <span className="gradient-text">controlar tu dinero</span>
-          </h2>
-          <p className="text-lg text-[var(--color-foreground-secondary)] max-w-2xl mx-auto">
-            Automatizamos lo tedioso para que tú solo te enfoques en tomar
-            mejores decisiones financieras.
-          </p>
-        </motion.div>
+        {/* Header */}
+        <div className="section-header">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="badge" style={{ margin: "0 auto 1rem" }}>
+              <Heart size={16} />
+              <span>Diseñado para parejas</span>
+            </div>
+            <h2 className="heading-lg">
+              Todo lo que necesitan para{" "}
+              <span className="gradient-text">manejar su dinero juntos</span>
+            </h2>
+            <p>
+              Automatizamos lo tedioso para que ustedes solo se enfoquen en
+              disfrutar su vida financiera en pareja.
+            </p>
+          </motion.div>
+        </div>
 
-        {/* Features Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
+        {/* Grid */}
+        <div className="grid-features">
           {features.map((feature, index) => (
             <motion.div
               key={index}
-              variants={itemVariants}
-              className="card group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+              className="card"
+              style={{
+                borderColor: feature.highlight
+                  ? "var(--color-primary)"
+                  : undefined,
+                borderWidth: feature.highlight ? 2 : 1,
+              }}
             >
-              <div
-                className={`feature-icon bg-gradient-to-br ${feature.color}`}
-              >
-                <feature.icon className="w-7 h-7" />
+              <div className="feature-icon">
+                <feature.icon size={28} />
               </div>
-              <h3 className="text-xl font-bold mb-3 group-hover:gradient-text transition-all duration-300">
+              <h3
+                style={{
+                  fontSize: "1.125rem",
+                  fontWeight: 600,
+                  marginBottom: "0.75rem",
+                  color: "var(--color-gray-900)",
+                }}
+              >
                 {feature.title}
               </h3>
-              <p className="text-[var(--color-foreground-secondary)]">
+              <p style={{ color: "var(--color-gray-500)", fontSize: "0.9375rem" }}>
                 {feature.description}
               </p>
+              {feature.highlight && (
+                <span
+                  style={{
+                    display: "inline-block",
+                    marginTop: "1rem",
+                    fontSize: "0.75rem",
+                    fontWeight: 600,
+                    color: "var(--color-primary)",
+                    background: "rgba(99, 102, 241, 0.1)",
+                    padding: "0.25rem 0.75rem",
+                    borderRadius: "9999px",
+                  }}
+                >
+                  Para parejas
+                </span>
+              )}
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Bottom Stats */}
+        {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
+          style={{
+            marginTop: "4rem",
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: "2rem",
+            textAlign: "center",
+          }}
         >
+          <style jsx global>{`
+            @media (min-width: 768px) {
+              .stats-grid { grid-template-columns: repeat(4, 1fr) !important; }
+            }
+          `}</style>
           {[
             { number: "7+", label: "Bancos soportados" },
             { number: "100%", label: "Gratis" },
-            { number: "<5s", label: "Sincronización" },
-            { number: "24/7", label: "Monitoreo" },
-          ].map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="stat-number mb-2">{stat.number}</div>
-              <p className="text-[var(--color-foreground-secondary)]">
+            { number: "5,000+", label: "Parejas activas" },
+            { number: "4.9★", label: "Calificación" },
+          ].map((stat, i) => (
+            <div key={i}>
+              <div className="stat-number">{stat.number}</div>
+              <p style={{ color: "var(--color-gray-500)", marginTop: "0.5rem" }}>
                 {stat.label}
               </p>
             </div>

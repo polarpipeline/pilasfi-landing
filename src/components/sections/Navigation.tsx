@@ -8,7 +8,9 @@ const navLinks = [
   { name: "Funciones", href: "#features" },
   { name: "Cómo Funciona", href: "#how-it-works" },
   { name: "Bancos", href: "#banks" },
+  { name: "Seguridad", href: "#security" },
   { name: "Testimonios", href: "#testimonials" },
+  { name: "FAQ", href: "#faq" },
 ];
 
 export default function Navigation() {
@@ -19,7 +21,6 @@ export default function Navigation() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -29,93 +30,155 @@ export default function Navigation() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? "glass py-3"
-            : "bg-transparent py-6"
-        }`}
+        transition={{ duration: 0.5 }}
+        className={isScrolled ? "nav-glass" : ""}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          padding: isScrolled ? "0.75rem 0" : "1.25rem 0",
+          transition: "all 0.3s ease",
+        }}
       >
-        <div className="container mx-auto px-6 flex items-center justify-between">
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <Zap className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-[var(--color-foreground)]">
-              Pilas<span className="gradient-text">Fi</span>
-            </span>
-          </a>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-[var(--color-foreground-secondary)] hover:text-[var(--color-foreground)] transition-colors duration-300 text-sm font-medium"
+        <div className="container">
+          <div className="flex items-center" style={{ justifyContent: "space-between" }}>
+            {/* Logo */}
+            <a
+              href="#"
+              className="flex items-center gap-2"
+              style={{ textDecoration: "none" }}
+              aria-label="PilasFi - Inicio"
+            >
+              <div
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 12,
+                  background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+                aria-hidden="true"
               >
-                {link.name}
-              </a>
-            ))}
-          </div>
+                <Zap size={22} color="white" />
+              </div>
+              <span style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--color-gray-900)" }}>
+                Pilas<span className="gradient-text">Fi</span>
+              </span>
+            </a>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+            {/* Desktop Nav */}
+            <nav className="flex items-center gap-8" style={{ display: "none" }} id="desktop-nav" aria-label="Navegación principal">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  style={{
+                    color: "var(--color-gray-600)",
+                    textDecoration: "none",
+                    fontSize: "0.9375rem",
+                    fontWeight: 500,
+                    transition: "color 0.2s",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-gray-900)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-gray-600)")}
+                  aria-label={`Ir a ${link.name}`}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </nav>
+            <style jsx global>{`
+              @media (min-width: 768px) {
+                #desktop-nav { display: flex !important; }
+                #mobile-btn { display: none !important; }
+              }
+            `}</style>
+
+            {/* CTA */}
             <a
               href="#download"
-              className="btn-primary text-sm py-3 px-6"
+              className="btn btn-primary"
+              style={{ display: "none", padding: "0.625rem 1.25rem", fontSize: "0.875rem" }}
+              id="desktop-cta"
             >
-              Descargar Gratis
+              Descargar
             </a>
-          </div>
+            <style jsx global>{`
+              @media (min-width: 768px) {
+                #desktop-cta { display: inline-flex !important; }
+              }
+            `}</style>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-[var(--color-foreground)]"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              id="mobile-btn"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              style={{
+                padding: "0.5rem",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                color: "var(--color-gray-700)",
+              }}
+              aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </motion.nav>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 glass pt-24 md:hidden"
+          <motion.nav
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 40,
+              background: "white",
+              paddingTop: "5rem",
+            }}
+            aria-label="Menú de navegación móvil"
           >
-            <div className="container mx-auto px-6 py-8 flex flex-col gap-6">
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+            <div className="container" style={{ paddingTop: "2rem" }}>
+              <div className="flex flex-col gap-6">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    style={{
+                      fontSize: "1.5rem",
+                      fontWeight: 600,
+                      color: "var(--color-gray-900)",
+                      textDecoration: "none",
+                    }}
+                    aria-label={`Ir a ${link.name}`}
+                  >
+                    {link.name}
+                  </a>
+                ))}
+                <a
+                  href="#download"
+                  className="btn btn-primary"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-2xl font-semibold text-[var(--color-foreground)] py-2"
+                  style={{ marginTop: "1rem" }}
+                  aria-label="Descargar PilasFi gratis"
                 >
-                  {link.name}
-                </motion.a>
-              ))}
-              <motion.a
-                href="#download"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="btn-primary mt-4"
-              >
-                Descargar Gratis
-              </motion.a>
+                  Descargar Gratis
+                </a>
+              </div>
             </div>
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </>

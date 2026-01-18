@@ -2,288 +2,480 @@
 
 import { motion } from "framer-motion";
 import {
-  Mail,
-  TrendingUp,
-  PiggyBank,
+  ArrowRight,
   Shield,
-  Play,
-  ChevronDown,
+  Zap,
+  Users,
+  TrendingUp,
+  Mail,
+  PieChart,
+  Target,
+  CheckCircle,
   Sparkles,
 } from "lucide-react";
 
-const floatingElements = [
-  { icon: Mail, delay: 0, x: -60, y: -40 },
-  { icon: TrendingUp, delay: 0.2, x: 60, y: -60 },
-  { icon: PiggyBank, delay: 0.4, x: -80, y: 40 },
-  { icon: Shield, delay: 0.6, x: 70, y: 60 },
+const benefits = [
+  { icon: Mail, text: "Lee emails de tu banco" },
+  { icon: Users, text: "Finanzas en pareja" },
+  { icon: PieChart, text: "Dashboard inteligente" },
+  { icon: Target, text: "Metas de ahorro" },
 ];
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Gradient Orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <section
+      style={{
+        position: "relative",
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        overflow: "hidden",
+        background: "linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)",
+        paddingTop: "6rem",
+        paddingBottom: "4rem",
+      }}
+    >
+      {/* Animated Background Elements */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          overflow: "hidden",
+          pointerEvents: "none",
+        }}
+      >
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.3, scale: 1 }}
-          transition={{ duration: 2 }}
-          className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] rounded-full"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{ duration: 8, repeat: Infinity }}
           style={{
-            background:
-              "radial-gradient(circle, rgba(0,102,255,0.3) 0%, transparent 70%)",
+            position: "absolute",
+            top: "-20%",
+            right: "-10%",
+            width: "600px",
+            height: "600px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%)",
           }}
         />
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.3, scale: 1 }}
-          transition={{ duration: 2, delay: 0.5 }}
-          className="absolute bottom-1/4 -right-1/4 w-[600px] h-[600px] rounded-full"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{ duration: 10, repeat: Infinity, delay: 2 }}
           style={{
-            background:
-              "radial-gradient(circle, rgba(0,212,170,0.3) 0%, transparent 70%)",
+            position: "absolute",
+            bottom: "-30%",
+            left: "-10%",
+            width: "500px",
+            height: "500px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%)",
           }}
         />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Left Content */}
+      <div className="container" style={{ position: "relative", zIndex: 10 }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: "3rem",
+            alignItems: "center",
+          }}
+        >
+          <style jsx global>{`
+            @media (min-width: 1024px) {
+              .hero-main-grid { grid-template-columns: 1.1fr 0.9fr !important; gap: 4rem !important; }
+              .hero-text-center { text-align: left !important; }
+              .hero-buttons-center { justify-content: flex-start !important; }
+            }
+          `}</style>
+
+          {/* Main Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="text-center lg:text-left"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="hero-text-center"
+            style={{ textAlign: "center" }}
           >
             {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-gray-100)] dark:bg-[var(--color-gray-800)] mb-6"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.5rem 1rem",
+                borderRadius: "9999px",
+                background: "rgba(99, 102, 241, 0.2)",
+                border: "1px solid rgba(99, 102, 241, 0.3)",
+                marginBottom: "1.5rem",
+              }}
             >
-              <Sparkles className="w-4 h-4 text-[var(--color-primary-blue)]" />
-              <span className="text-sm font-medium">
-                Disponible para Ecuador
+              <Sparkles size={16} color="#818CF8" />
+              <span style={{ color: "#818CF8", fontWeight: 600, fontSize: "0.875rem" }}>
+                Nuevo en Ecuador
               </span>
             </motion.div>
 
-            {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
-              Tus finanzas{" "}
-              <span className="gradient-text">en automático</span>
+            {/* Main Headline */}
+            <h1
+              style={{
+                fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+                fontWeight: 800,
+                lineHeight: 1.05,
+                marginBottom: "1.5rem",
+                color: "white",
+                letterSpacing: "-0.03em",
+              }}
+            >
+              Controla tus gastos{" "}
+              <span
+                style={{
+                  background: "linear-gradient(135deg, #6366F1 0%, #06B6D4 50%, #10B981 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}
+              >
+                en pareja
+              </span>
+              <br />
+              <span style={{ color: "rgba(255,255,255,0.9)" }}>automáticamente</span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg sm:text-xl text-[var(--color-foreground-secondary)] mb-8 max-w-xl mx-auto lg:mx-0">
-              PilasFi lee los emails de tu banco y organiza tus gastos
-              automáticamente. Sin esfuerzo. Sin errores. Solo resultados.
+            <p
+              style={{
+                fontSize: "clamp(1.125rem, 2vw, 1.375rem)",
+                color: "rgba(255,255,255,0.7)",
+                marginBottom: "2rem",
+                maxWidth: "600px",
+                lineHeight: 1.6,
+                marginLeft: "auto",
+                marginRight: "auto",
+              }}
+              className="hero-text-center"
+            >
+              PilasFi lee los emails de tu banco, organiza los gastos del hogar y te
+              ayuda a crear presupuestos compartidos con tu pareja.{" "}
+              <strong style={{ color: "white" }}>Sin ingresar nada manualmente.</strong>
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+            <div
+              className="flex flex-wrap gap-4 hero-buttons-center"
+              style={{ justifyContent: "center", marginBottom: "2.5rem" }}
+            >
               <motion.a
                 href="#download"
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
-                className="btn-primary text-lg py-4 px-8"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  padding: "1rem 2rem",
+                  borderRadius: "14px",
+                  background: "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
+                  color: "white",
+                  fontWeight: 600,
+                  fontSize: "1.125rem",
+                  textDecoration: "none",
+                  boxShadow: "0 8px 30px rgba(99, 102, 241, 0.4)",
+                }}
+                aria-label="Comenzar a usar PilasFi gratis"
               >
-                <span>Comenzar Gratis</span>
-                <ChevronDown className="w-5 h-5 rotate-[-90deg]" />
+                Comenzar Gratis
+                <ArrowRight size={20} />
               </motion.a>
               <motion.a
                 href="#how-it-works"
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
-                className="btn-secondary text-lg py-4 px-8"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  padding: "1rem 2rem",
+                  borderRadius: "14px",
+                  background: "rgba(255,255,255,0.1)",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  color: "white",
+                  fontWeight: 600,
+                  fontSize: "1.125rem",
+                  textDecoration: "none",
+                }}
+                aria-label="Ver cómo funciona PilasFi"
               >
-                <Play className="w-5 h-5" />
-                <span>Ver cómo funciona</span>
+                Cómo funciona
               </motion.a>
+            </div>
+
+            {/* Benefits Pills */}
+            <div className="flex flex-wrap gap-3 hero-buttons-center" style={{ justifyContent: "center" }}>
+              {benefits.map((benefit, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 + i * 0.1 }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    padding: "0.5rem 1rem",
+                    borderRadius: "9999px",
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                  }}
+                >
+                  <benefit.icon size={16} color="#06B6D4" />
+                  <span style={{ color: "rgba(255,255,255,0.8)", fontSize: "0.875rem" }}>
+                    {benefit.text}
+                  </span>
+                </motion.div>
+              ))}
             </div>
 
             {/* Trust Indicators */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="flex flex-wrap items-center gap-6 justify-center lg:justify-start text-sm text-[var(--color-foreground-secondary)]"
+              transition={{ delay: 0.8 }}
+              className="flex flex-wrap gap-6 hero-buttons-center"
+              style={{ justifyContent: "center", marginTop: "2.5rem" }}
             >
-              <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-[var(--color-success)]" />
-                <span>100% Seguro</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[var(--color-success)]" />
-                <span>Sin acceso a tu cuenta bancaria</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[var(--color-success)]" />
-                <span>Gratis para siempre</span>
-              </div>
+              {[
+                { icon: Shield, text: "100% Seguro", color: "#10B981" },
+                { icon: Zap, text: "Gratis siempre", color: "#F59E0B" },
+                { icon: CheckCircle, text: "7 bancos soportados", color: "#6366F1" },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <item.icon size={18} color={item.color} />
+                  <span style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.875rem" }}>
+                    {item.text}
+                  </span>
+                </div>
+              ))}
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Phone Mockup */}
+          {/* Phone Mockup */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative flex justify-center"
+            transition={{ duration: 0.8, delay: 0.3 }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              position: "relative",
+            }}
           >
-            {/* Floating Icons */}
-            {floatingElements.map((element, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  delay: element.delay + 0.5,
-                  duration: 0.5,
-                  y: {
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: element.delay,
-                  },
-                }}
-                className="absolute hidden lg:flex items-center justify-center w-14 h-14 rounded-2xl glass glow-primary"
-                style={{
-                  left: `calc(50% + ${element.x}px)`,
-                  top: `calc(50% + ${element.y}px)`,
-                }}
-              >
-                <element.icon className="w-7 h-7 text-[var(--color-primary-blue)]" />
-              </motion.div>
-            ))}
-
-            {/* Phone */}
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
+            {/* Glow Effect Behind Phone */}
+            <div
+              style={{
+                position: "absolute",
+                width: "300px",
+                height: "300px",
+                borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(99, 102, 241, 0.5) 0%, transparent 70%)",
+                filter: "blur(60px)",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
               }}
-              className="phone-mockup glow-primary"
-            >
-              <div className="phone-screen p-4">
-                {/* Status Bar */}
-                <div className="flex justify-between items-center text-white text-xs mb-4 opacity-60">
-                  <span>9:41</span>
-                  <div className="flex gap-1">
-                    <span>5G</span>
-                    <span>100%</span>
-                  </div>
-                </div>
+            />
 
+            <motion.div
+              animate={{ y: [0, -15, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="phone-mockup"
+              style={{
+                position: "relative",
+                zIndex: 10,
+                boxShadow: "0 60px 120px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.1)",
+              }}
+            >
+              <div className="phone-screen">
                 {/* App Header */}
-                <div className="mb-6">
-                  <p className="text-white/60 text-sm">Buenos días</p>
-                  <h3 className="text-white text-xl font-bold">Andrés</h3>
+                <div style={{ marginBottom: "1.25rem" }}>
+                  <div className="flex items-center" style={{ justifyContent: "space-between" }}>
+                    <div>
+                      <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.75rem" }}>
+                        Gastos del hogar
+                      </p>
+                      <div className="flex items-center gap-2">
+                        <span style={{ color: "white", fontSize: "1.125rem", fontWeight: 700 }}>
+                          Andrés & María
+                        </span>
+                        <span>👫</span>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: "50%",
+                        background: "linear-gradient(135deg, #6366F1, #06B6D4)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Users size={18} color="white" />
+                    </div>
+                  </div>
                 </div>
 
                 {/* Balance Card */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1 }}
-                  className="gradient-primary rounded-2xl p-4 mb-4"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.8 }}
+                  style={{
+                    background: "linear-gradient(135deg, #6366F1 0%, #06B6D4 100%)",
+                    borderRadius: "16px",
+                    padding: "1.25rem",
+                    marginBottom: "1rem",
+                  }}
                 >
-                  <p className="text-white/80 text-sm mb-1">Balance Total</p>
-                  <p className="text-white text-3xl font-bold">$4,850.00</p>
-                  <div className="flex items-center gap-1 mt-2">
-                    <TrendingUp className="w-4 h-4 text-white" />
-                    <span className="text-white/90 text-sm">+12% este mes</span>
+                  <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "0.75rem" }}>
+                    Presupuesto del mes
+                  </p>
+                  <p style={{ color: "white", fontSize: "2rem", fontWeight: 800, lineHeight: 1.2 }}>
+                    $2,500
+                  </p>
+                  <div style={{ marginTop: "0.75rem" }}>
+                    <div
+                      style={{
+                        height: 6,
+                        borderRadius: 3,
+                        background: "rgba(255,255,255,0.2)",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: "65%" }}
+                        transition={{ delay: 1.2, duration: 0.8 }}
+                        style={{
+                          height: "100%",
+                          borderRadius: 3,
+                          background: "white",
+                        }}
+                      />
+                    </div>
+                    <div className="flex items-center" style={{ justifyContent: "space-between", marginTop: "0.5rem" }}>
+                      <span style={{ color: "rgba(255,255,255,0.8)", fontSize: "0.75rem" }}>
+                        65% utilizado
+                      </span>
+                      <span style={{ color: "rgba(255,255,255,0.8)", fontSize: "0.75rem" }}>
+                        $1,625
+                      </span>
+                    </div>
                   </div>
                 </motion.div>
 
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-3 mb-4">
+                {/* Who spent what */}
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginBottom: "1rem" }}>
                   <motion.div
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 1.2 }}
-                    className="bg-white/10 rounded-xl p-3"
+                    transition={{ delay: 1 }}
+                    style={{
+                      background: "rgba(255,255,255,0.08)",
+                      borderRadius: "12px",
+                      padding: "0.875rem",
+                    }}
                   >
-                    <p className="text-white/60 text-xs mb-1">Ingresos</p>
-                    <p className="text-[var(--color-success-light)] font-bold">
-                      +$2,500
+                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.625rem", marginBottom: "0.25rem" }}>
+                      Andrés gastó
                     </p>
+                    <p style={{ color: "#10B981", fontWeight: 700, fontSize: "1.125rem" }}>$820</p>
                   </motion.div>
                   <motion.div
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: 10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 1.3 }}
-                    className="bg-white/10 rounded-xl p-3"
+                    transition={{ delay: 1.1 }}
+                    style={{
+                      background: "rgba(255,255,255,0.08)",
+                      borderRadius: "12px",
+                      padding: "0.875rem",
+                    }}
                   >
-                    <p className="text-white/60 text-xs mb-1">Gastos</p>
-                    <p className="text-[var(--color-error-light)] font-bold">
-                      -$1,234
+                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.625rem", marginBottom: "0.25rem" }}>
+                      María gastó
                     </p>
+                    <p style={{ color: "#06B6D4", fontWeight: 700, fontSize: "1.125rem" }}>$805</p>
                   </motion.div>
                 </div>
 
-                {/* Recent Transactions */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.5 }}
-                >
-                  <p className="text-white/60 text-sm mb-3">Recientes</p>
-                  <div className="space-y-3">
-                    {[
-                      { name: "Amazon", amount: "-$45.99", icon: "🛒" },
-                      { name: "Spotify", amount: "-$9.99", icon: "🎵" },
-                      { name: "Salario", amount: "+$2,500", icon: "💰" },
-                    ].map((tx, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 1.6 + i * 0.1 }}
-                        className="flex items-center justify-between bg-white/5 rounded-lg p-3"
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="text-lg">{tx.icon}</span>
-                          <span className="text-white text-sm">{tx.name}</span>
+                {/* Recent transactions */}
+                <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.75rem", marginBottom: "0.5rem" }}>
+                  Últimos gastos compartidos
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                  {[
+                    { name: "Supermaxi", amount: "-$85.50", icon: "🛒", who: "María" },
+                    { name: "Luz eléctrica", amount: "-$42.00", icon: "💡", who: "Andrés" },
+                    { name: "Netflix", amount: "-$15.99", icon: "📺", who: "Compartido" },
+                  ].map((tx, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.3 + i * 0.1 }}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        background: "rgba(255,255,255,0.05)",
+                        borderRadius: "10px",
+                        padding: "0.625rem 0.75rem",
+                      }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span style={{ fontSize: "1.25rem" }}>{tx.icon}</span>
+                        <div>
+                          <p style={{ color: "white", fontSize: "0.875rem", fontWeight: 500 }}>
+                            {tx.name}
+                          </p>
+                          <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.625rem" }}>
+                            {tx.who}
+                          </p>
                         </div>
-                        <span
-                          className={`text-sm font-medium ${
-                            tx.amount.startsWith("+")
-                              ? "text-[var(--color-success-light)]"
-                              : "text-white"
-                          }`}
-                        >
-                          {tx.amount}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
+                      </div>
+                      <span style={{ color: "white", fontSize: "0.875rem", fontWeight: 600 }}>
+                        {tx.amount}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <ChevronDown className="w-6 h-6 text-[var(--color-foreground-secondary)]" />
-        </motion.div>
-      </motion.div>
+      {/* Bottom Wave */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "120px",
+          background: "linear-gradient(to top, var(--color-gray-50), transparent)",
+        }}
+      />
     </section>
   );
 }

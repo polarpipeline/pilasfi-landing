@@ -1,124 +1,118 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
+import { Star } from "lucide-react";
 
 const testimonials = [
   {
-    name: "María García",
+    name: "María & Carlos",
+    role: "Casados hace 3 años",
+    avatar: "👫",
+    content:
+      "Antes peleábamos por dinero. Ahora con PilasFi vemos exactamente quién gastó qué y llevamos el presupuesto del hogar sin dramas. ¡Salvó nuestro matrimonio financiero!",
+  },
+  {
+    name: "Ana Lucía",
     role: "Emprendedora",
     avatar: "👩‍💼",
     content:
-      "Antes gastaba horas ingresando mis gastos manualmente. Ahora PilasFi lo hace todo automático. Por fin sé exactamente a dónde va mi dinero.",
-    rating: 5,
+      "Mi esposo y yo manejamos negocios separados pero gastos del hogar juntos. PilasFi nos permite ver los gastos compartidos sin mezclar lo personal.",
   },
   {
-    name: "Carlos Mendoza",
-    role: "Ingeniero de Software",
-    avatar: "👨‍💻",
+    name: "Roberto & Diana",
+    role: "Recién casados",
+    avatar: "💑",
     content:
-      "La función de finanzas en pareja cambió nuestra relación con el dinero. Ahora mi esposa y yo manejamos el presupuesto del hogar sin discusiones.",
-    rating: 5,
+      "Empezamos a vivir juntos y no sabíamos cómo manejar el dinero. PilasFi nos enseñó a crear presupuestos y ahora ahorramos juntos para nuestra casa.",
   },
   {
-    name: "Ana Lucía Pérez",
-    role: "Médica",
-    avatar: "👩‍⚕️",
-    content:
-      "Las alertas de presupuesto me salvaron. Ya no me paso de mis límites en comida o entretenimiento. Estoy ahorrando más que nunca.",
-    rating: 5,
-  },
-  {
-    name: "Roberto Sánchez",
-    role: "Contador",
-    avatar: "👨‍💼",
-    content:
-      "Como contador, valoro la precisión. PilasFi detecta cada transacción de mis tarjetas y las categoriza correctamente. Impresionante.",
-    rating: 5,
-  },
-  {
-    name: "Valentina Torres",
+    name: "Valentina",
     role: "Diseñadora",
     avatar: "👩‍🎨",
     content:
-      "El diseño es hermoso y súper fácil de usar. Los gráficos me ayudan a entender mis patrones de gasto de un vistazo. Lo recomiendo 100%.",
-    rating: 5,
+      "El diseño es hermoso y súper fácil. Los gráficos me muestran mis patrones de gasto de un vistazo. Lo mejor: mi novio también lo usa y vemos todo junto.",
   },
   {
-    name: "Diego Alvarado",
-    role: "Freelancer",
-    avatar: "🧑‍💻",
+    name: "Diego",
+    role: "Ingeniero",
+    avatar: "👨‍💻",
     content:
-      "Con ingresos variables, necesitaba algo que me ayude a planificar. Las proyecciones de PilasFi me muestran cómo voy a terminar el mes.",
-    rating: 5,
+      "Las alertas de presupuesto me salvaron. Ya no me paso de mis límites. Y lo mejor es que mi esposa ve cuando gasto de más en tecnología 😅",
+  },
+  {
+    name: "Camila & Luis",
+    role: "Novios",
+    avatar: "❤️",
+    content:
+      "Aunque no vivimos juntos, usamos PilasFi para planear viajes y gastos compartidos. Podemos ver cuánto aportó cada uno. ¡Súper útil!",
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="section bg-[var(--color-gray-100)]">
+    <section id="testimonials" className="section section-gray">
       <div className="container">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-2 rounded-full bg-[var(--color-primary-blue)]/10 text-[var(--color-primary-blue)] text-sm font-medium mb-4">
-            Testimonios
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Lo que dicen nuestros{" "}
-            <span className="gradient-text">usuarios</span>
-          </h2>
-          <p className="text-lg text-[var(--color-foreground-secondary)] max-w-2xl mx-auto">
-            Miles de ecuatorianos ya están tomando control de sus finanzas con
-            PilasFi.
-          </p>
-        </motion.div>
+        {/* Header */}
+        <div className="section-header">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="heading-lg">
+              Lo que dicen las{" "}
+              <span className="gradient-text">parejas</span>
+            </h2>
+            <p>
+              Miles de parejas ecuatorianas ya manejan sus finanzas juntos con PilasFi.
+            </p>
+          </motion.div>
+        </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
+        {/* Grid */}
+        <div className="grid-features">
+          {testimonials.map((t, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="card relative"
+              transition={{ delay: index * 0.05 }}
+              className="testimonial-card"
             >
-              {/* Quote Icon */}
-              <Quote className="absolute top-6 right-6 w-8 h-8 text-[var(--color-gray-200)]" />
-
-              {/* Rating */}
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
+              {/* Stars */}
+              <div className="flex gap-1" style={{ marginBottom: "1rem" }}>
+                {[...Array(5)].map((_, i) => (
                   <Star
                     key={i}
-                    className="w-5 h-5 fill-[var(--color-warning)] text-[var(--color-warning)]"
+                    size={16}
+                    fill="var(--color-warning)"
+                    color="var(--color-warning)"
                   />
                 ))}
               </div>
 
               {/* Content */}
-              <p className="text-[var(--color-foreground)] mb-6 leading-relaxed">
-                &ldquo;{testimonial.content}&rdquo;
+              <p
+                style={{
+                  color: "var(--color-gray-700)",
+                  flex: 1,
+                  marginBottom: "1.5rem",
+                  lineHeight: 1.7,
+                }}
+              >
+                &ldquo;{t.content}&rdquo;
               </p>
 
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--color-primary-blue)] to-[var(--color-primary-teal)] flex items-center justify-center text-2xl">
-                  {testimonial.avatar}
-                </div>
+                <span style={{ fontSize: "2rem" }}>{t.avatar}</span>
                 <div>
-                  <p className="font-semibold text-[var(--color-foreground)]">
-                    {testimonial.name}
+                  <p style={{ fontWeight: 600, color: "var(--color-gray-900)" }}>
+                    {t.name}
                   </p>
-                  <p className="text-sm text-[var(--color-foreground-secondary)]">
-                    {testimonial.role}
+                  <p style={{ fontSize: "0.875rem", color: "var(--color-gray-500)" }}>
+                    {t.role}
                   </p>
                 </div>
               </div>
@@ -126,29 +120,48 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Social Proof Stats */}
+        {/* Stats Banner */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 p-8 rounded-3xl gradient-primary"
+          style={{
+            marginTop: "4rem",
+            padding: "2.5rem",
+            borderRadius: "20px",
+            background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: "2rem",
+            textAlign: "center",
+          }}
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
-            {[
-              { number: "10K+", label: "Usuarios activos" },
-              { number: "500K+", label: "Transacciones procesadas" },
-              { number: "4.9", label: "Calificación promedio" },
-              { number: "$2M+", label: "Ahorrados por usuarios" },
-            ].map((stat, index) => (
-              <div key={index}>
-                <div className="text-3xl md:text-4xl font-bold mb-1">
-                  {stat.number}
-                </div>
-                <p className="text-white/80 text-sm">{stat.label}</p>
+          <style jsx global>{`
+            @media (min-width: 768px) {
+              .stats-banner { grid-template-columns: repeat(4, 1fr) !important; }
+            }
+          `}</style>
+          {[
+            { number: "10K+", label: "Usuarios activos" },
+            { number: "5K+", label: "Parejas conectadas" },
+            { number: "$500K+", label: "Ahorrados" },
+            { number: "4.9★", label: "En App Store" },
+          ].map((stat, i) => (
+            <div key={i}>
+              <div
+                style={{
+                  fontSize: "2rem",
+                  fontWeight: 800,
+                  color: "white",
+                }}
+              >
+                {stat.number}
               </div>
-            ))}
-          </div>
+              <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "0.875rem" }}>
+                {stat.label}
+              </p>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>
