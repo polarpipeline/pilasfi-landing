@@ -1,6 +1,7 @@
 "use client";
 
 import { Zap, Mail, MapPin, Instagram, Twitter, Linkedin } from "lucide-react";
+import Link from "next/link";
 
 const links = {
   product: [
@@ -11,14 +12,16 @@ const links = {
     { name: "FAQ", href: "#faq" },
   ],
   company: [
+    { name: "Soporte", href: "/soporte" },
     { name: "Sobre Nosotros", href: "#" },
     { name: "Blog", href: "#" },
-    { name: "Carreras", href: "#" },
   ],
   legal: [
-    { name: "Privacidad", href: "#" },
-    { name: "Términos", href: "#" },
-    { name: "Seguridad", href: "#security" },
+    { name: "Privacidad", href: "/privacidad" },
+    { name: "Términos", href: "/terminos" },
+    { name: "Cookies", href: "/cookies" },
+    { name: "Licencia (EULA)", href: "/licencia" },
+    { name: "Eliminar Datos", href: "/eliminar-datos" },
   ],
 };
 
@@ -28,19 +31,14 @@ export default function Footer() {
       <div className="container">
         {/* Main Grid */}
         <div
+          className="footer-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr",
             gap: "3rem",
             paddingBottom: "3rem",
             borderBottom: "1px solid rgba(255,255,255,0.1)",
           }}
         >
-          <style jsx global>{`
-            @media (min-width: 768px) {
-              .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr !important; }
-            }
-          `}</style>
 
           {/* Brand */}
           <div>
@@ -134,9 +132,15 @@ export default function Footer() {
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               {links.company.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="footer-link" style={{ fontSize: "0.875rem" }}>
-                    {link.name}
-                  </a>
+                  {link.href.startsWith("/") ? (
+                    <Link href={link.href} className="footer-link" style={{ fontSize: "0.875rem" }}>
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a href={link.href} className="footer-link" style={{ fontSize: "0.875rem" }}>
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -157,9 +161,9 @@ export default function Footer() {
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               {links.legal.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href} className="footer-link" style={{ fontSize: "0.875rem" }}>
+                  <Link href={link.href} className="footer-link" style={{ fontSize: "0.875rem" }}>
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -168,18 +172,13 @@ export default function Footer() {
 
         {/* Bottom */}
         <div
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-4 footer-bottom"
           style={{
             paddingTop: "1.5rem",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <style jsx global>{`
-            @media (min-width: 640px) {
-              .footer-bottom { flex-direction: row !important; }
-            }
-          `}</style>
           <p style={{ color: "var(--color-gray-500)", fontSize: "0.875rem" }}>
             © {new Date().getFullYear()} PilasFi. Todos los derechos reservados.
           </p>

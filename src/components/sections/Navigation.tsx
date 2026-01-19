@@ -101,27 +101,16 @@ export default function Navigation() {
                 </a>
               ))}
             </nav>
-            <style jsx global>{`
-              @media (min-width: 768px) {
-                #desktop-nav { display: flex !important; }
-                #mobile-btn { display: none !important; }
-              }
-            `}</style>
 
             {/* CTA */}
             <a
               href="#download"
               className="btn btn-primary"
-              style={{ display: "none", padding: "0.625rem 1.25rem", fontSize: "0.875rem" }}
+              style={{ padding: "0.625rem 1.25rem", fontSize: "0.875rem" }}
               id="desktop-cta"
             >
               Descargar
             </a>
-            <style jsx global>{`
-              @media (min-width: 768px) {
-                #desktop-cta { display: inline-flex !important; }
-              }
-            `}</style>
 
             {/* Mobile Menu Button */}
             <button

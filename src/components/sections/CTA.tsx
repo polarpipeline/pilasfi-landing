@@ -203,11 +203,6 @@ export default function CTA() {
 
           {/* Download Buttons */}
           <div className="flex flex-col gap-4 justify-center" style={{ alignItems: "center" }}>
-            <style jsx global>{`
-              @media (min-width: 640px) {
-                .download-btns { flex-direction: row !important; }
-              }
-            `}</style>
             <p
               style={{
                 color: "var(--color-gray-500)",

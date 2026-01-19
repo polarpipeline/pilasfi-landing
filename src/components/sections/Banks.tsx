@@ -37,19 +37,14 @@ export default function Banks() {
 
         {/* Banks Grid */}
         <div
+          className="banks-grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
             gap: "1rem",
             maxWidth: "800px",
             margin: "0 auto",
           }}
         >
-          <style jsx global>{`
-            @media (min-width: 768px) {
-              .banks-grid { grid-template-columns: repeat(4, 1fr) !important; }
-            }
-          `}</style>
           {banks.map((bank, index) => (
             <motion.div
               key={index}

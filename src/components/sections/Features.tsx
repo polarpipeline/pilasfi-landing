@@ -160,19 +160,14 @@ export default function Features() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="stats-grid"
           style={{
             marginTop: "4rem",
             display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
             gap: "2rem",
             textAlign: "center",
           }}
         >
-          <style jsx global>{`
-            @media (min-width: 768px) {
-              .stats-grid { grid-template-columns: repeat(4, 1fr) !important; }
-            }
-          `}</style>
           {[
             { number: "7+", label: "Bancos soportados" },
             { number: "100%", label: "Gratis" },

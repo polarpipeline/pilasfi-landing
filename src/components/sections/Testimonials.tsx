@@ -125,22 +125,17 @@ export default function Testimonials() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          className="stats-banner"
           style={{
             marginTop: "4rem",
             padding: "2.5rem",
             borderRadius: "20px",
             background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
             display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
             gap: "2rem",
             textAlign: "center",
           }}
         >
-          <style jsx global>{`
-            @media (min-width: 768px) {
-              .stats-banner { grid-template-columns: repeat(4, 1fr) !important; }
-            }
-          `}</style>
           {[
             { number: "10K+", label: "Usuarios activos" },
             { number: "5K+", label: "Parejas conectadas" },
