@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ChevronDown, Shield, Lock, Mail, Eye, Users, Zap } from "lucide-react";
+import { ChevronDown, Shield, Lock, Mail, Eye, Users, Zap, HelpCircle } from "lucide-react";
 
 const faqs = [
   {
@@ -114,7 +114,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="section">
+    <section id="faq" className="section" style={{ background: "var(--color-dark-900)" }}>
       <div className="container">
         {/* Header */}
         <div className="section-header">
@@ -123,7 +123,11 @@ export default function FAQ() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="heading-lg">
+            <div className="badge" style={{ margin: "0 auto 1.5rem" }}>
+              <HelpCircle size={16} color="#818CF8" />
+              <span>Resolvemos tus dudas</span>
+            </div>
+            <h2 className="display-lg">
               Preguntas{" "}
               <span className="gradient-text">Frecuentes</span>
             </h2>
@@ -151,22 +155,23 @@ export default function FAQ() {
               >
                 <div
                   style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: "10px",
+                    width: 44,
+                    height: 44,
+                    borderRadius: "12px",
                     background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
+                    boxShadow: "0 4px 15px rgba(99, 102, 241, 0.3)",
                   }}
                 >
-                  <category.icon size={20} color="white" />
+                  <category.icon size={22} color="white" />
                 </div>
                 <h3
                   style={{
                     fontSize: "1.25rem",
-                    fontWeight: 600,
-                    color: "var(--color-gray-900)",
+                    fontWeight: 700,
+                    color: "white",
                   }}
                 >
                   {category.category}
@@ -186,11 +191,16 @@ export default function FAQ() {
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: (categoryIndex * 0.1) + (questionIndex * 0.05) }}
-                      className="card"
+                      whileHover={{
+                        background: "rgba(255, 255, 255, 0.05)",
+                      }}
                       style={{
                         padding: "1.25rem 1.5rem",
                         cursor: "pointer",
-                        borderColor: isOpen ? "var(--color-primary)" : undefined,
+                        background: "rgba(255, 255, 255, 0.03)",
+                        borderRadius: "16px",
+                        border: `1px solid ${isOpen ? "rgba(99, 102, 241, 0.4)" : "rgba(255, 255, 255, 0.06)"}`,
+                        transition: "all 0.3s ease",
                       }}
                       onClick={() => toggleQuestion(globalIndex)}
                       onKeyDown={(e) => {
@@ -211,7 +221,7 @@ export default function FAQ() {
                           style={{
                             fontSize: "1rem",
                             fontWeight: 600,
-                            color: "var(--color-gray-900)",
+                            color: "white",
                             flex: 1,
                           }}
                         >
@@ -223,7 +233,7 @@ export default function FAQ() {
                         >
                           <ChevronDown
                             size={20}
-                            color="var(--color-gray-500)"
+                            color="rgba(255, 255, 255, 0.5)"
                           />
                         </motion.div>
                       </div>
@@ -238,9 +248,9 @@ export default function FAQ() {
                       >
                         <p
                           style={{
-                            color: "var(--color-gray-600)",
+                            color: "rgba(255, 255, 255, 0.6)",
                             marginTop: "1rem",
-                            lineHeight: 1.7,
+                            lineHeight: 1.8,
                             fontSize: "0.9375rem",
                           }}
                         >
@@ -262,13 +272,19 @@ export default function FAQ() {
           viewport={{ once: true }}
           style={{ textAlign: "center", marginTop: "3rem" }}
         >
-          <p style={{ color: "var(--color-gray-600)", marginBottom: "1rem" }}>
+          <p style={{ color: "rgba(255, 255, 255, 0.5)", marginBottom: "1.25rem" }}>
             ¿Tienes más preguntas?
           </p>
-          <a href="mailto:hola@pilasfi.com" className="btn btn-secondary">
+          <motion.a
+            href="mailto:hola@pilasfi.com"
+            className="btn btn-secondary"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            style={{ gap: "0.5rem" }}
+          >
             <Mail size={18} />
             Contáctanos
-          </a>
+          </motion.a>
         </motion.div>
       </div>
     </section>

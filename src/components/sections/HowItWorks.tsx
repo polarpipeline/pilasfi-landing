@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Sparkles, Users, BarChart3 } from "lucide-react";
+import { Mail, Sparkles, Users, BarChart3, ArrowRight, Zap } from "lucide-react";
 
 const steps = [
   {
@@ -36,7 +36,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="section">
+    <section id="how-it-works" className="section" style={{ background: "var(--color-dark-900)" }}>
       <div className="container">
         {/* Header */}
         <div className="section-header">
@@ -45,7 +45,11 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="heading-lg">
+            <div className="badge" style={{ margin: "0 auto 1.5rem" }}>
+              <Zap size={16} color="#818CF8" />
+              <span>Configuración rápida</span>
+            </div>
+            <h2 className="display-lg">
               Configúralo en{" "}
               <span className="gradient-text">minutos</span>
             </h2>
@@ -73,29 +77,37 @@ export default function HowItWorks() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
+              whileHover={{
+                x: 8,
+                background: "rgba(255, 255, 255, 0.05)",
+                borderColor: "rgba(99, 102, 241, 0.3)",
+              }}
               style={{
                 display: "flex",
                 gap: "1.5rem",
                 alignItems: "flex-start",
-                padding: "1.5rem",
-                background: "var(--color-white)",
-                borderRadius: "16px",
-                border: "1px solid var(--color-gray-100)",
+                padding: "1.75rem",
+                background: "rgba(255, 255, 255, 0.03)",
+                borderRadius: "20px",
+                border: "1px solid rgba(255, 255, 255, 0.06)",
+                transition: "all 0.3s ease",
               }}
             >
               <div className="step-number">{step.number}</div>
-              <div>
-                <h3
-                  style={{
-                    fontSize: "1.25rem",
-                    fontWeight: 600,
-                    marginBottom: "0.5rem",
-                    color: "var(--color-gray-900)",
-                  }}
-                >
-                  {step.title}
-                </h3>
-                <p style={{ color: "var(--color-gray-500)" }}>
+              <div style={{ flex: 1 }}>
+                <div className="flex items-center gap-3" style={{ marginBottom: "0.5rem" }}>
+                  <step.icon size={20} color="#818CF8" />
+                  <h3
+                    style={{
+                      fontSize: "1.25rem",
+                      fontWeight: 700,
+                      color: "white",
+                    }}
+                  >
+                    {step.title}
+                  </h3>
+                </div>
+                <p style={{ color: "rgba(255, 255, 255, 0.6)", lineHeight: 1.7 }}>
                   {step.description}
                 </p>
               </div>
@@ -108,11 +120,18 @@ export default function HowItWorks() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          style={{ textAlign: "center", marginTop: "3rem" }}
+          style={{ textAlign: "center", marginTop: "4rem" }}
         >
-          <a href="#download" className="btn btn-primary btn-lg">
+          <motion.a
+            href="#download"
+            className="btn btn-primary-glow btn-lg"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            style={{ gap: "0.75rem" }}
+          >
             Comenzar Ahora
-          </a>
+            <ArrowRight size={20} />
+          </motion.a>
         </motion.div>
       </div>
     </section>

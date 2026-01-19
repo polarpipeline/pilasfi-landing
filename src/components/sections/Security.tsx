@@ -59,7 +59,7 @@ const certifications = [
 
 export default function Security() {
   return (
-    <section id="security" className="section section-gray">
+    <section id="security" className="section" style={{ background: "var(--color-dark-800)" }}>
       <div className="container">
         {/* Header */}
         <div className="section-header">
@@ -68,11 +68,11 @@ export default function Security() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="badge" style={{ margin: "0 auto 1rem" }}>
-              <Shield size={16} />
+            <div className="badge" style={{ margin: "0 auto 1.5rem" }}>
+              <Shield size={16} color="#818CF8" />
               <span>Tu seguridad es nuestra prioridad</span>
             </div>
-            <h2 className="heading-lg">
+            <h2 className="display-lg">
               Protegemos tus{" "}
               <span className="gradient-text">datos financieros</span>
             </h2>
@@ -100,14 +100,14 @@ export default function Security() {
               <h3
                 style={{
                   fontSize: "1.125rem",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   marginBottom: "0.75rem",
-                  color: "var(--color-gray-900)",
+                  color: "white",
                 }}
               >
                 {feature.title}
               </h3>
-              <p style={{ color: "var(--color-gray-500)", fontSize: "0.9375rem" }}>
+              <p style={{ color: "rgba(255, 255, 255, 0.6)", fontSize: "0.9375rem", lineHeight: 1.7 }}>
                 {feature.description}
               </p>
             </motion.div>
@@ -122,18 +122,18 @@ export default function Security() {
           style={{
             marginTop: "4rem",
             padding: "2.5rem",
-            background: "var(--color-white)",
-            borderRadius: "20px",
-            border: "1px solid var(--color-gray-100)",
+            background: "rgba(255, 255, 255, 0.03)",
+            borderRadius: "24px",
+            border: "1px solid rgba(255, 255, 255, 0.06)",
           }}
         >
           <h3
             style={{
               textAlign: "center",
               fontSize: "1.25rem",
-              fontWeight: 600,
+              fontWeight: 700,
               marginBottom: "2rem",
-              color: "var(--color-gray-900)",
+              color: "white",
             }}
           >
             Certificaciones y Estándares
@@ -143,29 +143,29 @@ export default function Security() {
             style={{ alignItems: "center" }}
           >
             {certifications.map((cert, index) => (
-              <div
+              <motion.div
                 key={index}
+                whileHover={{ scale: 1.05, background: "rgba(99, 102, 241, 0.15)" }}
                 className="flex items-center gap-3"
                 style={{
                   padding: "1rem 1.5rem",
-                  background: "var(--color-gray-50)",
-                  borderRadius: "12px",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  borderRadius: "14px",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  transition: "all 0.3s ease",
                 }}
               >
-                <cert.icon
-                  size={24}
-                  className="text-[var(--color-primary)]"
-                />
+                <cert.icon size={24} color="#818CF8" />
                 <span
                   style={{
                     fontWeight: 600,
-                    color: "var(--color-gray-700)",
+                    color: "rgba(255, 255, 255, 0.8)",
                     fontSize: "0.9375rem",
                   }}
                 >
                   {cert.name}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>
@@ -178,22 +178,23 @@ export default function Security() {
           style={{
             marginTop: "3rem",
             textAlign: "center",
-            padding: "2rem",
-            background: "linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(6, 182, 212, 0.05))",
-            borderRadius: "16px",
+            padding: "2.5rem",
+            background: "linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(6, 182, 212, 0.1))",
+            borderRadius: "20px",
+            border: "1px solid rgba(99, 102, 241, 0.2)",
           }}
         >
-          <Shield size={32} className="text-[var(--color-primary)]" style={{ marginBottom: "1rem" }} />
+          <Shield size={36} color="#818CF8" style={{ marginBottom: "1.25rem" }} />
           <p
             style={{
-              color: "var(--color-gray-700)",
+              color: "rgba(255, 255, 255, 0.8)",
               fontSize: "1.125rem",
-              lineHeight: 1.7,
+              lineHeight: 1.8,
               maxWidth: "700px",
               margin: "0 auto",
             }}
           >
-            <strong>Nuestro compromiso:</strong> Nunca vendemos tus datos, nunca compartimos
+            <strong style={{ color: "white" }}>Nuestro compromiso:</strong> Nunca vendemos tus datos, nunca compartimos
             información con terceros sin tu consentimiento explícito, y siempre te damos control
             total sobre tu información. Puedes eliminar todos tus datos en cualquier momento.
           </p>

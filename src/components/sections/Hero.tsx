@@ -1,557 +1,628 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ArrowRight,
   Shield,
   Zap,
   Users,
-  Mail,
-  PieChart,
-  Target,
   CheckCircle,
   Sparkles,
-  TrendingUp,
-  Bell,
-  CreditCard,
+  Star,
 } from "lucide-react";
 
-const slides = [
-  {
-    id: 1,
-    badge: "Finanzas en Pareja",
-    badgeIcon: Users,
-    headline: ["Controla tus gastos", "en pareja", "automáticamente"],
-    highlightIndex: 1,
-    description:
-      "Crea presupuestos compartidos, ve quién gastó qué y lleva las finanzas del hogar juntos. Todo sincronizado en tiempo real.",
-    phone: {
-      title: "Gastos del hogar",
-      subtitle: "Andrés & María 👫",
-      mainCard: { label: "Presupuesto del mes", value: "$2,500", progress: 65 },
-      stats: [
-        { label: "Andrés gastó", value: "$820", color: "#10B981" },
-        { label: "María gastó", value: "$805", color: "#06B6D4" },
-      ],
-      transactions: [
-        { name: "Supermaxi", amount: "-$85.50", icon: "🛒", who: "María" },
-        { name: "Luz eléctrica", amount: "-$42.00", icon: "💡", who: "Andrés" },
-      ],
-    },
-    gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-  },
-  {
-    id: 2,
-    badge: "100% Automático",
-    badgeIcon: Mail,
-    headline: ["Lee los emails", "de tu banco", "por ti"],
-    highlightIndex: 1,
-    description:
-      "Conecta tu correo y PilasFi lee automáticamente las notificaciones de tus bancos. Sin ingresar nada manualmente, nunca más.",
-    phone: {
-      title: "Transacciones detectadas",
-      subtitle: "Hoy • 3 movimientos",
-      mainCard: { label: "Nuevo email detectado", value: "Banco Pichincha", progress: null },
-      stats: [
-        { label: "Este mes", value: "47", color: "#6366F1" },
-        { label: "Categorizadas", value: "100%", color: "#10B981" },
-      ],
-      transactions: [
-        { name: "Compra aprobada", amount: "-$125.00", icon: "📧", who: "Tarjeta *4521" },
-        { name: "Transferencia recibida", amount: "+$500.00", icon: "📩", who: "Produbanco" },
-      ],
-    },
-    gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-  },
-  {
-    id: 3,
-    badge: "Metas de Ahorro",
-    badgeIcon: Target,
-    headline: ["Ahorra para", "tus sueños", "sin esfuerzo"],
-    highlightIndex: 1,
-    description:
-      "Define metas de ahorro y observa tu progreso automáticamente. Viajes, emergencias, inversiones... todo bajo control.",
-    phone: {
-      title: "Mis metas",
-      subtitle: "3 metas activas 🎯",
-      mainCard: { label: "Vacaciones Galápagos", value: "$1,200 / $2,000", progress: 60 },
-      stats: [
-        { label: "Ahorrado este mes", value: "$350", color: "#F59E0B" },
-        { label: "Meta más cercana", value: "85%", color: "#10B981" },
-      ],
-      transactions: [
-        { name: "Fondo emergencia", amount: "$3,500", icon: "🛡️", who: "70% completado" },
-        { name: "Auto nuevo", amount: "$8,000", icon: "🚗", who: "40% completado" },
-      ],
-    },
-    gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-  },
+// Press logos data (simulated - using text for now)
+const pressLogos = [
+  { name: "El Comercio", url: "#" },
+  { name: "El Universo", url: "#" },
+  { name: "Vistazo", url: "#" },
+  { name: "TechCrunch", url: "#" },
 ];
 
+// Trust indicators
 const trustIndicators = [
-  { icon: Shield, text: "100% Seguro", color: "#10B981" },
-  { icon: Zap, text: "Gratis siempre", color: "#F59E0B" },
-  { icon: CheckCircle, text: "7 bancos", color: "#6366F1" },
+  { icon: Shield, text: "Encriptación bancaria", color: "#10B981" },
+  { icon: Zap, text: "100% Gratis", color: "#F59E0B" },
+  { icon: Users, text: "5,000+ parejas", color: "#6366F1" },
 ];
+
+// Animated Counter Component
+function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
+  return (
+    <motion.span
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
+      <motion.span
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+      >
+        {target.toLocaleString()}{suffix}
+      </motion.span>
+    </motion.span>
+  );
+}
+
+// Phone Screen Content Component
+function PhoneScreenContent() {
+  return (
+    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+      {/* Header */}
+      <div style={{ marginBottom: "1.25rem" }}>
+        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.75rem", marginBottom: "0.25rem" }}>
+          Gastos del mes
+        </p>
+        <p style={{ color: "white", fontSize: "1.25rem", fontWeight: 700 }}>
+          Andrés & María
+        </p>
+      </div>
+
+      {/* Main Card */}
+      <div
+        style={{
+          background: "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
+          borderRadius: "18px",
+          padding: "1.25rem",
+          marginBottom: "1rem",
+        }}
+      >
+        <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.75rem", marginBottom: "0.25rem" }}>
+          Presupuesto disponible
+        </p>
+        <p style={{ color: "white", fontSize: "2rem", fontWeight: 800, lineHeight: 1.1 }}>
+          $1,875
+        </p>
+        <div style={{ marginTop: "0.75rem" }}>
+          <div
+            style={{
+              height: "6px",
+              borderRadius: "3px",
+              background: "rgba(255,255,255,0.2)",
+              overflow: "hidden",
+            }}
+          >
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "65%" }}
+              transition={{ delay: 0.8, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                height: "100%",
+                borderRadius: "3px",
+                background: "white",
+              }}
+            />
+          </div>
+          <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "0.7rem", marginTop: "0.5rem" }}>
+            65% del presupuesto usado
+          </p>
+        </div>
+      </div>
+
+      {/* Stats Row */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginBottom: "1rem" }}>
+        {[
+          { label: "Andrés", value: "$820", color: "#10B981" },
+          { label: "María", value: "$805", color: "#06B6D4" },
+        ].map((stat, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1 + i * 0.1 }}
+            style={{
+              background: "rgba(255,255,255,0.06)",
+              borderRadius: "14px",
+              padding: "0.875rem",
+            }}
+          >
+            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.65rem", marginBottom: "0.25rem" }}>
+              {stat.label} gastó
+            </p>
+            <p style={{ color: stat.color, fontWeight: 700, fontSize: "1.125rem" }}>{stat.value}</p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Recent Transactions */}
+      <div style={{ flex: 1 }}>
+        <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.65rem", marginBottom: "0.5rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+          Últimos movimientos
+        </p>
+        {[
+          { name: "Supermaxi", amount: "-$85.50", icon: "🛒", who: "María" },
+          { name: "Luz eléctrica", amount: "-$42.00", icon: "💡", who: "Andrés" },
+          { name: "Netflix", amount: "-$15.99", icon: "🎬", who: "Compartido" },
+        ].map((tx, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.2 + i * 0.1 }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              background: "rgba(255,255,255,0.04)",
+              borderRadius: "12px",
+              padding: "0.625rem 0.875rem",
+              marginBottom: "0.5rem",
+            }}
+          >
+            <div className="flex items-center gap-2">
+              <span style={{ fontSize: "1rem" }}>{tx.icon}</span>
+              <div>
+                <p style={{ color: "white", fontSize: "0.8rem", fontWeight: 500 }}>{tx.name}</p>
+                <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.65rem" }}>{tx.who}</p>
+              </div>
+            </div>
+            <span style={{ color: "rgba(255,255,255,0.8)", fontSize: "0.8rem", fontWeight: 600 }}>
+              {tx.amount}
+            </span>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Floating Phone Component
+function FloatingPhone({
+  position,
+  delay = 0,
+  scale = 1,
+  rotation = 0,
+  zIndex = 1,
+}: {
+  position: { x: string; y: string };
+  delay?: number;
+  scale?: number;
+  rotation?: number;
+  zIndex?: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="floating-phone"
+      style={{
+        position: "absolute",
+        left: position.x,
+        top: position.y,
+        transform: `scale(${scale}) rotate(${rotation}deg)`,
+        transformOrigin: "center center",
+        zIndex,
+      }}
+    >
+      <motion.div
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: delay * 0.5 }}
+        style={{
+          width: "240px",
+          height: "480px",
+          background: "#0f0f0f",
+          borderRadius: "36px",
+          padding: "10px",
+          boxShadow: `
+            0 50px 100px rgba(0,0,0,0.5),
+            0 0 0 1px rgba(255,255,255,0.1),
+            inset 0 0 0 1px rgba(255,255,255,0.05)
+          `,
+        }}
+      >
+        {/* Notch */}
+        <div
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "80px",
+            height: "24px",
+            background: "#000",
+            borderRadius: "14px",
+            zIndex: 20,
+          }}
+        />
+        {/* Screen */}
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            background: "linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%)",
+            borderRadius: "28px",
+            overflow: "hidden",
+            padding: "2.25rem 1rem 1rem",
+          }}
+        >
+          <PhoneScreenContent />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 export default function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  }, []);
-
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    const interval = setInterval(nextSlide, 5000);
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, nextSlide]);
-
-  const slide = slides[currentSlide];
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <section
+      ref={sectionRef}
       style={{
         position: "relative",
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         overflow: "hidden",
-        background: "linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)",
-        paddingTop: "7rem",
-        paddingBottom: "4rem",
+        background: "var(--color-dark-950)",
+        paddingTop: "8rem",
+        paddingBottom: "6rem",
       }}
     >
-      {/* Animated Background Gradient */}
-      <AnimatePresence mode="wait">
+      {/* Gradient Mesh Background */}
+      <div className="gradient-mesh">
+        {/* Primary Orb */}
         <motion.div
-          key={currentSlide}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.15 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          animate={{
+            x: [0, 50, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
           style={{
             position: "absolute",
-            inset: 0,
-            background: slide.gradient,
-            filter: "blur(100px)",
+            top: "-10%",
+            right: "10%",
+            width: "600px",
+            height: "600px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%)",
+            filter: "blur(80px)",
           }}
         />
-      </AnimatePresence>
-
-      {/* Floating Orbs */}
-      <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+        {/* Secondary Orb */}
         <motion.div
-          animate={{ y: [0, -30, 0], x: [0, 20, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          animate={{
+            x: [0, -40, 0],
+            y: [0, 40, 0],
+            scale: [1, 0.9, 1],
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
           style={{
             position: "absolute",
-            top: "10%",
-            right: "15%",
+            bottom: "0%",
+            left: "5%",
+            width: "500px",
+            height: "500px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%)",
+            filter: "blur(80px)",
+          }}
+        />
+        {/* Accent Orb */}
+        <motion.div
+          animate={{
+            x: [0, 30, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+          style={{
+            position: "absolute",
+            top: "40%",
+            left: "30%",
             width: "400px",
             height: "400px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%)",
-          }}
-        />
-        <motion.div
-          animate={{ y: [0, 40, 0], x: [0, -30, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          style={{
-            position: "absolute",
-            bottom: "10%",
-            left: "10%",
-            width: "300px",
-            height: "300px",
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)",
+            filter: "blur(60px)",
           }}
         />
       </div>
 
-      <div className="container" style={{ position: "relative", zIndex: 10 }}>
-        <div className="hero-grid-layout">
-          {/* Text Content */}
-          <div className="hero-text-content">
-            {/* Badge */}
-            <motion.div
-              key={`badge-${currentSlide}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.625rem 1.25rem",
-                borderRadius: "9999px",
-                background: "rgba(99, 102, 241, 0.15)",
-                border: "1px solid rgba(99, 102, 241, 0.3)",
-                marginBottom: "2rem",
-              }}
-            >
-              <slide.badgeIcon size={18} color="#818CF8" />
-              <span style={{ color: "#A5B4FC", fontWeight: 600, fontSize: "0.9375rem" }}>
-                {slide.badge}
-              </span>
-            </motion.div>
+      {/* Noise Overlay */}
+      <div className="noise-overlay" />
 
-            {/* Headline - Fixed 3 lines */}
-            <h1
-              style={{
-                fontSize: "clamp(2.75rem, 5.5vw, 4.5rem)",
-                fontWeight: 800,
-                lineHeight: 1.1,
-                letterSpacing: "-0.025em",
-                marginBottom: "1.75rem",
-                color: "white",
-                minHeight: "clamp(9rem, 18vw, 15rem)",
-              }}
-            >
-              <motion.span
-                key={`line1-${currentSlide}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                style={{ display: "block" }}
-              >
-                {slide.headline[0]}
-              </motion.span>
-              <motion.span
-                key={`line2-${currentSlide}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+      <div className="container" style={{ position: "relative", zIndex: 10 }}>
+        {/* Press Badges Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "1rem",
+            marginBottom: "3rem",
+            flexWrap: "wrap",
+          }}
+        >
+          <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.8125rem" }}>
+            Mencionado en
+          </span>
+          <div className="press-logos" style={{ gap: "2rem" }}>
+            {pressLogos.map((logo) => (
+              <span
+                key={logo.name}
                 style={{
-                  display: "block",
-                  background: slide.gradient,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
+                  color: "rgba(255,255,255,0.5)",
+                  fontSize: "0.875rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.02em",
                 }}
               >
-                {slide.headline[1]}
-              </motion.span>
-              <motion.span
-                key={`line3-${currentSlide}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                style={{ display: "block" }}
-              >
-                {slide.headline[2]}
-              </motion.span>
-            </h1>
+                {logo.name}
+              </span>
+            ))}
+          </div>
+        </motion.div>
 
-            {/* Description - Fixed height */}
-            <motion.p
-              key={`desc-${currentSlide}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
+        <div className="hero-grid-layout">
+          {/* Text Content */}
+          <motion.div
+            className="hero-text-content"
+            style={{ opacity }}
+          >
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="badge badge-glow"
+              style={{ display: "inline-flex" }}
+            >
+              <Sparkles size={16} color="#818CF8" />
+              <span>La app #1 de finanzas en pareja de Ecuador</span>
+            </motion.div>
+
+            {/* Headline - Display XL */}
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="display-xl"
               style={{
-                fontSize: "clamp(1.125rem, 2vw, 1.3rem)",
-                color: "rgba(255,255,255,0.7)",
-                lineHeight: 1.7,
-                marginBottom: "2.5rem",
-                maxWidth: "540px",
-                minHeight: "5rem",
+                marginBottom: "1.75rem",
+                color: "white",
               }}
             >
-              {slide.description}
+              Controla tus finanzas{" "}
+              <span className="gradient-text-glow">en pareja</span>
+              <br />
+              automáticamente
+            </motion.h1>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="text-body-lg"
+              style={{
+                marginBottom: "2.5rem",
+                maxWidth: "540px",
+              }}
+            >
+              PilasFi lee automáticamente tus emails bancarios y te muestra
+              exactamente quién gastó qué. Crea presupuestos compartidos
+              y alcancen sus metas de ahorro juntos.
             </motion.p>
 
             {/* CTA Buttons */}
-            <div className="hero-cta-buttons">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="hero-cta-buttons"
+            >
               <motion.a
                 href="#download"
-                whileHover={{ scale: 1.03, boxShadow: "0 12px 40px rgba(99, 102, 241, 0.5)" }}
+                whileHover={{ scale: 1.02, boxShadow: "0 12px 40px rgba(99, 102, 241, 0.5)" }}
                 whileTap={{ scale: 0.98 }}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.75rem",
-                  padding: "1.125rem 2.25rem",
-                  borderRadius: "14px",
-                  background: "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
-                  color: "white",
-                  fontWeight: 600,
-                  fontSize: "1.125rem",
-                  textDecoration: "none",
-                  boxShadow: "0 8px 30px rgba(99, 102, 241, 0.4)",
-                  transition: "box-shadow 0.3s ease",
-                }}
+                className="btn btn-primary-glow btn-lg"
+                style={{ gap: "0.75rem" }}
               >
                 Comenzar Gratis
                 <ArrowRight size={20} />
               </motion.a>
               <motion.a
                 href="#how-it-works"
-                whileHover={{ scale: 1.03, background: "rgba(255,255,255,0.15)" }}
+                whileHover={{ scale: 1.02, background: "rgba(255,255,255,0.12)" }}
                 whileTap={{ scale: 0.98 }}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  padding: "1.125rem 2.25rem",
-                  borderRadius: "14px",
-                  background: "rgba(255,255,255,0.08)",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  color: "white",
-                  fontWeight: 600,
-                  fontSize: "1.125rem",
-                  textDecoration: "none",
-                  transition: "background 0.3s ease",
-                }}
+                className="btn btn-secondary btn-lg"
               >
                 Ver cómo funciona
               </motion.a>
-            </div>
-
-            {/* Carousel Dots */}
-            <div
-              style={{
-                display: "flex",
-                gap: "0.75rem",
-                marginTop: "3rem",
-              }}
-              className="hero-carousel-dots"
-            >
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setCurrentSlide(i);
-                    setIsAutoPlaying(false);
-                  }}
-                  style={{
-                    width: currentSlide === i ? "32px" : "10px",
-                    height: "10px",
-                    borderRadius: "5px",
-                    border: "none",
-                    cursor: "pointer",
-                    background: currentSlide === i
-                      ? "linear-gradient(135deg, #6366F1, #06B6D4)"
-                      : "rgba(255,255,255,0.3)",
-                    transition: "all 0.3s ease",
-                  }}
-                  aria-label={`Ir a slide ${i + 1}`}
-                />
-              ))}
-            </div>
+            </motion.div>
 
             {/* Trust Indicators */}
-            <div className="hero-trust-row" style={{ marginTop: "2.5rem" }}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="hero-trust-row"
+            >
               {trustIndicators.map((item, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <item.icon size={18} color={item.color} />
-                  <span style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.9rem", fontWeight: 500 }}>
+                  <span style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.875rem", fontWeight: 500 }}>
                     {item.text}
                   </span>
                 </div>
               ))}
-            </div>
-          </div>
+            </motion.div>
 
-          {/* Phone Mockup */}
-          <div className="hero-phone-wrapper">
-            {/* Glow */}
+            {/* Stats Row */}
             <motion.div
-              animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1 }}
+              style={{
+                display: "flex",
+                gap: "3rem",
+                marginTop: "3rem",
+                paddingTop: "2rem",
+                borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+                flexWrap: "wrap",
+              }}
+              className="hero-trust-row"
+            >
+              {[
+                { value: "10K+", label: "Usuarios activos" },
+                { value: "5K+", label: "Parejas conectadas" },
+                { value: "4.9", label: "Rating App Store", icon: Star },
+              ].map((stat, i) => (
+                <div key={i} style={{ textAlign: "left" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
+                    <span
+                      style={{
+                        fontSize: "1.75rem",
+                        fontWeight: 800,
+                        color: "white",
+                      }}
+                    >
+                      {stat.value}
+                    </span>
+                    {stat.icon && <stat.icon size={16} fill="#F59E0B" color="#F59E0B" />}
+                  </div>
+                  <span style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8125rem" }}>
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* Floating Screenshots */}
+          <motion.div
+            className="hero-phone-wrapper"
+            style={{
+              height: "600px",
+              position: "relative",
+              y: y1,
+            }}
+          >
+            {/* Glow behind phones */}
+            <motion.div
+              animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
               transition={{ duration: 4, repeat: Infinity }}
               style={{
                 position: "absolute",
-                width: "320px",
-                height: "320px",
+                width: "400px",
+                height: "400px",
                 borderRadius: "50%",
-                background: slide.gradient,
+                background: "linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(6, 182, 212, 0.2))",
                 filter: "blur(80px)",
-                opacity: 0.4,
                 top: "50%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
               }}
             />
 
+            {/* Main Phone (Center) */}
+            <FloatingPhone
+              position={{ x: "50%", y: "50%" }}
+              delay={0.3}
+              scale={1}
+              rotation={0}
+              zIndex={3}
+            />
+
+            {/* Left Phone (Smaller, rotated) */}
             <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 0.6, x: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
               style={{
-                position: "relative",
-                zIndex: 10,
-                width: "300px",
-                height: "600px",
-                background: "#1a1a1a",
-                borderRadius: "48px",
-                padding: "14px",
-                boxShadow: `
-                  0 60px 120px rgba(0,0,0,0.5),
-                  0 0 0 1px rgba(255,255,255,0.1),
-                  inset 0 0 0 1px rgba(255,255,255,0.05)
-                `,
+                position: "absolute",
+                left: "5%",
+                top: "55%",
+                transform: "translateX(-50%) translateY(-50%) scale(0.7) rotate(-12deg)",
+                opacity: 0.5,
               }}
             >
-              {/* Notch */}
-              <div
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 style={{
-                  position: "absolute",
-                  top: "14px",
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  width: "110px",
-                  height: "32px",
-                  background: "#0a0a0a",
-                  borderRadius: "20px",
-                  zIndex: 20,
+                  width: "200px",
+                  height: "400px",
+                  background: "#0f0f0f",
+                  borderRadius: "32px",
+                  padding: "8px",
+                  boxShadow: "0 30px 60px rgba(0,0,0,0.4)",
                 }}
-              />
-
-              {/* Screen */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`phone-${currentSlide}`}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.05 }}
-                  transition={{ duration: 0.5 }}
+              >
+                <div
                   style={{
                     width: "100%",
                     height: "100%",
-                    background: "linear-gradient(180deg, #1a1a2e 0%, #16213e 100%)",
-                    borderRadius: "38px",
-                    overflow: "hidden",
-                    padding: "3rem 1.25rem 1.5rem",
+                    background: "linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%)",
+                    borderRadius: "26px",
                   }}
-                >
-                  {/* Phone Header */}
-                  <div style={{ marginBottom: "1.5rem" }}>
-                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.75rem", marginBottom: "0.25rem" }}>
-                      {slide.phone.title}
-                    </p>
-                    <p style={{ color: "white", fontSize: "1.125rem", fontWeight: 700 }}>
-                      {slide.phone.subtitle}
-                    </p>
-                  </div>
-
-                  {/* Main Card */}
-                  <div
-                    style={{
-                      background: slide.gradient,
-                      borderRadius: "18px",
-                      padding: "1.25rem",
-                      marginBottom: "1.25rem",
-                    }}
-                  >
-                    <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.8rem", marginBottom: "0.25rem" }}>
-                      {slide.phone.mainCard.label}
-                    </p>
-                    <p style={{ color: "white", fontSize: "1.75rem", fontWeight: 800, lineHeight: 1.2 }}>
-                      {slide.phone.mainCard.value}
-                    </p>
-                    {slide.phone.mainCard.progress && (
-                      <div style={{ marginTop: "0.875rem" }}>
-                        <div
-                          style={{
-                            height: "6px",
-                            borderRadius: "3px",
-                            background: "rgba(255,255,255,0.2)",
-                            overflow: "hidden",
-                          }}
-                        >
-                          <motion.div
-                            initial={{ width: 0 }}
-                            animate={{ width: `${slide.phone.mainCard.progress}%` }}
-                            transition={{ delay: 0.5, duration: 0.8 }}
-                            style={{
-                              height: "100%",
-                              borderRadius: "3px",
-                              background: "white",
-                            }}
-                          />
-                        </div>
-                        <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "0.75rem", marginTop: "0.5rem" }}>
-                          {slide.phone.mainCard.progress}% completado
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Stats */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginBottom: "1.25rem" }}>
-                    {slide.phone.stats.map((stat, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 + i * 0.1 }}
-                        style={{
-                          background: "rgba(255,255,255,0.08)",
-                          borderRadius: "14px",
-                          padding: "1rem",
-                        }}
-                      >
-                        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.7rem", marginBottom: "0.25rem" }}>
-                          {stat.label}
-                        </p>
-                        <p style={{ color: stat.color, fontWeight: 700, fontSize: "1.25rem" }}>{stat.value}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Transactions */}
-                  <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                    {slide.phone.transactions.map((tx, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.5 + i * 0.1 }}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "space-between",
-                          background: "rgba(255,255,255,0.05)",
-                          borderRadius: "12px",
-                          padding: "0.75rem 1rem",
-                        }}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span style={{ fontSize: "1.25rem" }}>{tx.icon}</span>
-                          <div>
-                            <p style={{ color: "white", fontSize: "0.875rem", fontWeight: 500 }}>{tx.name}</p>
-                            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.7rem" }}>{tx.who}</p>
-                          </div>
-                        </div>
-                        <span
-                          style={{
-                            color: tx.amount.startsWith("+") ? "#10B981" : "white",
-                            fontSize: "0.9rem",
-                            fontWeight: 600,
-                          }}
-                        >
-                          {tx.amount}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+                />
+              </motion.div>
             </motion.div>
-          </div>
+
+            {/* Right Phone (Smaller, rotated) */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 0.6, x: 0 }}
+              transition={{ delay: 0.7, duration: 0.8 }}
+              style={{
+                position: "absolute",
+                right: "5%",
+                top: "45%",
+                transform: "translateX(50%) translateY(-50%) scale(0.7) rotate(12deg)",
+                opacity: 0.5,
+              }}
+            >
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                style={{
+                  width: "200px",
+                  height: "400px",
+                  background: "#0f0f0f",
+                  borderRadius: "32px",
+                  padding: "8px",
+                  boxShadow: "0 30px 60px rgba(0,0,0,0.4)",
+                }}
+              >
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    background: "linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%)",
+                    borderRadius: "26px",
+                  }}
+                />
+              </motion.div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Bottom Fade */}
+      {/* Bottom Fade to next section */}
       <div
         style={{
           position: "absolute",
           bottom: 0,
           left: 0,
           right: 0,
-          height: "150px",
-          background: "linear-gradient(to top, var(--color-gray-50), transparent)",
+          height: "200px",
+          background: "linear-gradient(to top, var(--color-dark-800), transparent)",
           pointerEvents: "none",
         }}
       />
