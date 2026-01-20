@@ -397,26 +397,41 @@ export default function Hero() {
                 color: "white",
               }}
             >
-              Controla tus finanzas{" "}
-              <span className="gradient-text-glow">en pareja</span>
+              <span className="gradient-text-glow">Ponte pilas</span>
               <br />
-              automáticamente
+              con tus finanzas en pareja
             </motion.h1>
+
+            {/* Tagline */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+              style={{
+                fontSize: "1.25rem",
+                fontWeight: 600,
+                color: "rgba(255, 255, 255, 0.7)",
+                marginBottom: "1.5rem",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Organiza tus gastos. Automáticamente.
+            </motion.p>
 
             {/* Description */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ duration: 0.6, delay: 0.55 }}
               className="text-body-lg"
               style={{
                 marginBottom: "2.5rem",
                 maxWidth: "540px",
               }}
             >
-              PilasFi lee automáticamente tus emails bancarios y te muestra
-              exactamente quién gastó qué. Crea presupuestos compartidos
-              y alcancen sus metas de ahorro juntos.
+              PilasFi lee tus emails bancarios y te muestra exactamente
+              quién gastó qué. Presupuestos compartidos, metas de ahorro
+              y control total de tu economía en pareja.
             </motion.p>
 
             {/* CTA Buttons */}
