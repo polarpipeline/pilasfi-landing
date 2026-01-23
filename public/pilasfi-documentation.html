@@ -1,0 +1,2514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PilasFi - Documentación Técnica Completa</title>
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --secondary-color: #1e293b;
+            --accent-color: #334155;
+            --highlight-color: #10b981;
+            --highlight-secondary: #06b6d4;
+            --text-color: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --code-bg: #020617;
+            --success-color: #22c55e;
+            --warning-color: #f59e0b;
+            --error-color: #ef4444;
+            --info-color: #3b82f6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'SF Mono', 'Consolas', 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--primary-color);
+        }
+        .container { display: flex; min-height: 100vh; }
+        .sidebar {
+            width: 300px;
+            background: var(--secondary-color);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        .sidebar-header h1 { font-size: 20px; color: var(--highlight-color); margin-bottom: 5px; }
+        .sidebar-header .version { font-size: 12px; color: var(--text-muted); }
+        .nav-section { padding: 10px 20px; }
+        .nav-section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--highlight-color);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        .nav-link {
+            display: block;
+            padding: 8px 12px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 4px;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+        .nav-link:hover { background: var(--accent-color); }
+        .main-content { margin-left: 300px; flex: 1; padding: 40px; max-width: 1400px; }
+        .page-header { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+        .page-header h1 { font-size: 32px; margin-bottom: 10px; color: var(--highlight-color); }
+        .page-header .meta { color: var(--text-muted); font-size: 13px; }
+        .section { margin-bottom: 50px; }
+        .section-title {
+            font-size: 22px;
+            color: var(--highlight-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--highlight-color);
+        }
+        h3 { font-size: 17px; margin: 25px 0 15px; color: var(--highlight-secondary); }
+        h4 { font-size: 15px; margin: 20px 0 10px; color: var(--text-color); }
+        p { margin-bottom: 15px; color: var(--text-muted); }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; }
+        th, td { padding: 12px 14px; text-align: left; border: 1px solid var(--border-color); }
+        th { background: var(--accent-color); color: var(--text-color); font-weight: 600; }
+        tr:nth-child(even) { background: var(--secondary-color); }
+        pre {
+            background: var(--code-bg);
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid var(--border-color);
+        }
+        code { font-family: 'SF Mono', 'Consolas', 'Monaco', monospace; font-size: 13px; color: var(--success-color); }
+        pre code { color: var(--text-color); }
+        p code, li code, td code { background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-size: 12px; }
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin: 2px;
+        }
+        .badge-quarkus { background: #4695eb; color: #fff; }
+        .badge-pubsub { background: #4285f4; color: #fff; }
+        .badge-postgres { background: #336791; color: #fff; }
+        .badge-java { background: #f89820; color: #000; }
+        .badge-openai { background: #412991; color: #fff; }
+        .badge-gemini { background: #8e44ad; color: #fff; }
+        .badge-gmail { background: #ea4335; color: #fff; }
+        .badge-outlook { background: #0078d4; color: #fff; }
+        .badge-k8s { background: #326ce5; color: #fff; }
+        .badge-flutter { background: #02569B; color: #fff; }
+        .badge-firebase { background: #FFCA28; color: #000; }
+        .badge-terraform { background: #7b42bc; color: #fff; }
+        .badge-gcp { background: #4285f4; color: #fff; }
+        .collapsible {
+            background: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .collapsible-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .collapsible-header:hover { background: var(--accent-color); border-radius: 8px 8px 0 0; }
+        .collapsible-header h3 { margin: 0; font-size: 15px; color: var(--text-color); }
+        .collapsible-content { padding: 0 20px 20px; display: none; }
+        .collapsible.open .collapsible-content { display: block; }
+        .collapsible-toggle { font-size: 18px; color: var(--text-muted); transition: transform 0.2s; }
+        .collapsible.open .collapsible-toggle { transform: rotate(180deg); }
+        ul, ol { margin: 10px 0 15px 25px; color: var(--text-muted); }
+        li { margin-bottom: 5px; }
+        .diagram {
+            background: var(--code-bg);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 12px;
+            overflow-x: auto;
+            white-space: pre;
+            border: 1px solid var(--border-color);
+            line-height: 1.4;
+        }
+        .project-card {
+            background: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .project-card-header {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            padding: 18px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .project-card-header h2 { font-size: 17px; margin: 0; color: var(--highlight-color); }
+        .project-card-body { padding: 22px; }
+        .alert { padding: 15px 18px; border-radius: 8px; margin: 15px 0; }
+        .alert-warning { background: rgba(245, 158, 11, 0.1); border: 1px solid var(--warning-color); color: var(--warning-color); }
+        .alert-info { background: rgba(59, 130, 246, 0.1); border: 1px solid var(--info-color); color: var(--info-color); }
+        .alert-success { background: rgba(34, 197, 94, 0.1); border: 1px solid var(--success-color); color: var(--success-color); }
+        .flow-step {
+            background: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .flow-step-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: var(--highlight-color);
+            color: var(--primary-color);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+        .flow-arrow { text-align: center; color: var(--highlight-color); font-size: 24px; margin: 5px 0; }
+        .toc {
+            background: var(--secondary-color);
+            padding: 22px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid var(--border-color);
+        }
+        .toc-title { font-size: 15px; font-weight: 600; margin-bottom: 15px; color: var(--highlight-color); }
+        .toc-list { list-style: none; margin: 0; padding: 0; }
+        .toc-list li { margin: 8px 0; }
+        .toc-list a { color: var(--text-muted); text-decoration: none; }
+        .toc-list a:hover { color: var(--highlight-color); }
+        @media (max-width: 1000px) {
+            .sidebar { display: none; }
+            .main-content { margin-left: 0; }
+        }
+        .highlight { color: var(--highlight-color); }
+        .highlight-secondary { color: var(--highlight-secondary); }
+        .pubsub-topic {
+            background: #4285f4;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1>PilasFi Platform</h1>
+                <div class="version">Documentacion Tecnica v3.0</div>
+                <div class="version">Actualizado: 2026-01-23</div>
+                <div class="version">Arquitectura: GCP Cloud Run</div>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">General</div>
+                <a href="#overview" class="nav-link">Vista General</a>
+                <a href="#architecture" class="nav-link">Arquitectura Hexagonal</a>
+                <a href="#data-flow" class="nav-link">Flujo de Datos</a>
+                <a href="#pubsub-topics" class="nav-link">Pub/Sub Topics</a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Microservicios</div>
+                <a href="#pilasfi-quarkus" class="nav-link">pilasfi-quarkus (API)</a>
+                <a href="#pilasfi-parser" class="nav-link">pilasfi-parser-service</a>
+                <a href="#pilasfi-email-sync" class="nav-link">pilasfi-email-sync</a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Frontend</div>
+                <a href="#app-pilas-fe" class="nav-link">app-pilas-fe (Flutter)</a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Infraestructura</div>
+                <a href="#infra-gcp" class="nav-link">pilasfi-infra-gcp</a>
+                <a href="#infra-apps" class="nav-link">pilasfi-infra-apps (K8s)</a>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Flujos Detallados</div>
+                <a href="#email-sync-flow" class="nav-link">Sincronizacion Email</a>
+                <a href="#parser-flow" class="nav-link">Pipeline de Parsing</a>
+                <a href="#oauth-flow" class="nav-link">Flujo OAuth</a>
+                <a href="#token-refresh" class="nav-link">Token Refresh</a>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1>PilasFi - Documentacion Tecnica</h1>
+                <p class="meta">
+                    Plataforma de gestion financiera personal con sincronizacion automatica de emails bancarios
+                    <br>
+                    <span class="badge badge-gcp">GCP</span>
+                    <span class="badge badge-pubsub">Pub/Sub</span>
+                    <span class="badge badge-quarkus">Quarkus</span>
+                    <span class="badge badge-flutter">Flutter</span>
+                    <span class="badge badge-openai">OpenAI</span>
+                    <span class="badge badge-gemini">Gemini</span>
+                </p>
+            </div>
+
+            <!-- OVERVIEW SECTION -->
+            <section id="overview" class="section">
+                <h2 class="section-title">Vista General del Sistema</h2>
+
+                <div class="alert alert-info">
+                    <strong>Arquitectura Nueva:</strong> El sistema ahora usa Google Cloud Pub/Sub para mensajeria asincrona
+                    y soporta multiples proveedores de IA (OpenAI GPT-4o-mini y Google Gemini).
+                </div>
+
+                <h3>Repositorios del Proyecto</h3>
+                <table>
+                    <tr>
+                        <th>Repositorio</th>
+                        <th>Branch Activo</th>
+                        <th>Descripcion</th>
+                        <th>Tecnologias</th>
+                    </tr>
+                    <tr>
+                        <td><code>pilasfi-quarkus</code></td>
+                        <td><code>feat/new-backend-architecture</code></td>
+                        <td>API principal, OAuth, gestion de transacciones</td>
+                        <td>Quarkus, Java 21, PostgreSQL</td>
+                    </tr>
+                    <tr>
+                        <td><code>pilasfi-parser-service</code></td>
+                        <td><code>feature/newarch</code></td>
+                        <td>Parsing de emails con Regex + IA</td>
+                        <td>Quarkus, OpenAI, Gemini</td>
+                    </tr>
+                    <tr>
+                        <td><code>pilasfi-email-sync</code></td>
+                        <td><code>feature/fixandres</code></td>
+                        <td>Sincronizacion Gmail/Outlook</td>
+                        <td>Quarkus, OAuth2, Pub/Sub</td>
+                    </tr>
+                    <tr>
+                        <td><code>app-pilas-fe</code></td>
+                        <td><code>main</code></td>
+                        <td>Aplicacion movil</td>
+                        <td>Flutter, Riverpod, Firebase</td>
+                    </tr>
+                    <tr>
+                        <td><code>pilasfi-infra-gcp</code></td>
+                        <td><code>feature/init</code></td>
+                        <td>Infraestructura GCP con Terraform</td>
+                        <td>Terraform, Cloud Run, Cloud SQL</td>
+                    </tr>
+                    <tr>
+                        <td><code>pilasfi-infra-apps</code></td>
+                        <td><code>feature/new</code></td>
+                        <td>Manifiestos Kubernetes (alternativo)</td>
+                        <td>Kustomize, ArgoCD, Helm</td>
+                    </tr>
+                </table>
+
+                <h3>Diagrama de Arquitectura General</h3>
+                <div class="diagram">
++------------------+     +-------------------+     +----------------------+
+|   app-pilas-fe   |     |  pilasfi-quarkus  |     | pilasfi-email-sync   |
+|    (Flutter)     |---->|    (API Core)     |<----|  (Gmail/Outlook)     |
++------------------+     +-------------------+     +----------------------+
+        |                        |                          |
+        | REST API               | Pub/Sub                  | Pub/Sub
+        v                        v                          v
++------------------+     +-------------------+     +----------------------+
+|  Firebase Auth   |     |   Cloud SQL       |     | pilasfi-parser-svc   |
+|  (Google SSO)    |     |  (PostgreSQL)     |     |  (Regex + AI)        |
++------------------+     +-------------------+     +----------------------+
+
+                    Google Cloud Pub/Sub Topics:
+    +------------------------------------------------------------------+
+    |  user-email-config  |  email-raw  |  email-transaction  |        |
+    |  token-refreshed    |  sync-batch |  parsing-result     |        |
+    +------------------------------------------------------------------+
+                </div>
+            </section>
+
+            <!-- ARCHITECTURE SECTION -->
+            <section id="architecture" class="section">
+                <h2 class="section-title">Arquitectura Hexagonal</h2>
+
+                <p>Todos los microservicios siguen el patron de Arquitectura Hexagonal (Ports & Adapters),
+                separando claramente el dominio de la infraestructura.</p>
+
+                <h3>Estructura de Capas</h3>
+                <div class="diagram">
++------------------------------------------------------------------+
+|                        ADAPTERS (Infrastructure)                  |
+|  +--------------------+  +--------------------+  +--------------+ |
+|  | REST Controllers   |  | Pub/Sub Consumers  |  | Pub/Sub      | |
+|  | (Inbound)          |  | (Inbound)          |  | Publishers   | |
+|  +--------------------+  +--------------------+  +--------------+ |
++------------------------------------------------------------------+
+                              |
+                              v
++------------------------------------------------------------------+
+|                          PORTS (Interfaces)                       |
+|  +--------------------+  +--------------------+  +--------------+ |
+|  | Use Cases          |  | Repository Ports   |  | Event Ports  | |
+|  | (Application)      |  | (Domain)           |  | (Domain)     | |
+|  +--------------------+  +--------------------+  +--------------+ |
++------------------------------------------------------------------+
+                              |
+                              v
++------------------------------------------------------------------+
+|                           DOMAIN (Core)                           |
+|  +--------------------+  +--------------------+  +--------------+ |
+|  | Entities           |  | Value Objects      |  | Domain       | |
+|  | Aggregates         |  | Domain Services    |  | Events       | |
+|  +--------------------+  +--------------------+  +--------------+ |
++------------------------------------------------------------------+
+                </div>
+
+                <h3>Paquetes por Servicio</h3>
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>pilasfi-quarkus - Estructura de Paquetes</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code>com.pilasfi/
+├── domain/
+│   ├── model/
+│   │   ├── Transaction.java
+│   │   ├── User.java
+│   │   ├── EmailConfig.java
+│   │   ├── EmailAccount.java
+│   │   └── UserProfile.java
+│   ├── event/
+│   │   ├── EmailConfigUpdatedEvent.java
+│   │   ├── TransactionParsedEvent.java
+│   │   └── TokenRefreshedEvent.java
+│   ├── port/
+│   │   ├── in/
+│   │   │   ├── TransactionUseCase.java
+│   │   │   ├── EmailConfigUseCase.java
+│   │   │   └── UserProfileUseCase.java
+│   │   └── out/
+│   │       ├── TransactionRepository.java
+│   │       ├── EmailConfigRepository.java
+│   │       └── EventPublisher.java
+│   └── service/
+│       ├── TransactionService.java
+│       ├── EmailConfigService.java
+│       └── UserProfileService.java
+├── application/
+│   ├── TransactionApplicationService.java
+│   └── EmailConfigApplicationService.java
+└── adapter/
+    ├── in/
+    │   ├── rest/
+    │   │   ├── TransactionResource.java
+    │   │   ├── EmailConfigResource.java
+    │   │   ├── UserProfileResource.java
+    │   │   └── AuthResource.java
+    │   └── pubsub/
+    │       ├── TransactionParsedEventConsumer.java
+    │       └── TokenRefreshedEventConsumer.java
+    └── out/
+        ├── persistence/
+        │   ├── TransactionRepositoryImpl.java
+        │   ├── EmailConfigRepositoryImpl.java
+        │   └── entity/ (JPA Entities)
+        └── messaging/
+            └── PubSubEventPublisher.java</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PUBSUB TOPICS SECTION -->
+            <section id="pubsub-topics" class="section">
+                <h2 class="section-title">Google Cloud Pub/Sub Topics</h2>
+
+                <div class="alert alert-warning">
+                    <strong>Importante:</strong> La arquitectura usa Pub/Sub en lugar de Kafka para el despliegue en GCP.
+                    Los topics de Kubernetes (Strimzi Kafka) son una alternativa para despliegues on-premise.
+                </div>
+
+                <h3>Topics y Flujo de Mensajes</h3>
+                <table>
+                    <tr>
+                        <th>Topic</th>
+                        <th>Publisher</th>
+                        <th>Subscriber</th>
+                        <th>Payload</th>
+                    </tr>
+                    <tr>
+                        <td><span class="pubsub-topic">user-email-config</span></td>
+                        <td>pilasfi-quarkus</td>
+                        <td>pilasfi-email-sync</td>
+                        <td>EmailConfigUpdatedEvent (userId, emailProvider, tokens)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pubsub-topic">email-raw</span></td>
+                        <td>pilasfi-email-sync</td>
+                        <td>pilasfi-parser-service</td>
+                        <td>EmailRawEvent (messageId, subject, body, sender, userId)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pubsub-topic">email-transaction</span></td>
+                        <td>pilasfi-parser-service</td>
+                        <td>pilasfi-quarkus</td>
+                        <td>TransactionParsedEvent (amount, merchant, category, date)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pubsub-topic">token-refreshed</span></td>
+                        <td>pilasfi-email-sync</td>
+                        <td>pilasfi-quarkus</td>
+                        <td>TokenRefreshedEvent (userId, provider, newTokens)</td>
+                    </tr>
+                </table>
+
+                <h3>Diagrama de Flujo Pub/Sub</h3>
+                <div class="diagram">
+Usuario configura email en App
+            |
+            v
++-------------------+   user-email-config   +----------------------+
+| pilasfi-quarkus   |---------------------->| pilasfi-email-sync   |
+| (API)             |                       | (Sync Service)       |
++-------------------+                       +----------------------+
+            ^                                         |
+            |                                         | Lee emails de
+            |                                         | Gmail/Outlook
+            |                                         v
+            |                               +----------------------+
+            |         email-raw             |  Emails encontrados  |
+            |         <---------------------|  (filtrados)         |
+            |                               +----------------------+
+            |                                         |
+            |                                         v
+            |                               +----------------------+
+            |    email-transaction          | pilasfi-parser-svc   |
+            |<------------------------------| (Regex + AI Parse)   |
+            |                               +----------------------+
+            |
+            v
++-------------------+
+| Transaccion       |
+| guardada en DB    |
++-------------------+
+                </div>
+            </section>
+
+            <!-- PILASFI-QUARKUS SECTION -->
+            <section id="pilasfi-quarkus" class="section">
+                <h2 class="section-title">pilasfi-quarkus (API Principal)</h2>
+
+                <div class="project-card">
+                    <div class="project-card-header">
+                        <h2>Microservicio Core</h2>
+                        <div>
+                            <span class="badge badge-quarkus">Quarkus 3.x</span>
+                            <span class="badge badge-java">Java 21</span>
+                            <span class="badge badge-postgres">PostgreSQL</span>
+                            <span class="badge badge-pubsub">Pub/Sub</span>
+                        </div>
+                    </div>
+                    <div class="project-card-body">
+                        <p>API REST principal que maneja autenticacion, usuarios, transacciones y configuracion de emails.
+                        Actua como orquestador del sistema publicando eventos y consumiendo resultados.</p>
+                    </div>
+                </div>
+
+                <h3>Endpoints REST Principales</h3>
+                <table>
+                    <tr>
+                        <th>Metodo</th>
+                        <th>Endpoint</th>
+                        <th>Descripcion</th>
+                        <th>Archivo</th>
+                    </tr>
+                    <tr>
+                        <td><code>POST</code></td>
+                        <td><code>/api/auth/google</code></td>
+                        <td>Login con Google OAuth</td>
+                        <td>AuthResource.java</td>
+                    </tr>
+                    <tr>
+                        <td><code>GET</code></td>
+                        <td><code>/api/transactions</code></td>
+                        <td>Listar transacciones del usuario</td>
+                        <td>TransactionResource.java</td>
+                    </tr>
+                    <tr>
+                        <td><code>POST</code></td>
+                        <td><code>/api/transactions</code></td>
+                        <td>Crear transaccion manual</td>
+                        <td>TransactionResource.java</td>
+                    </tr>
+                    <tr>
+                        <td><code>PUT</code></td>
+                        <td><code>/api/transactions/{id}</code></td>
+                        <td>Actualizar transaccion</td>
+                        <td>TransactionResource.java</td>
+                    </tr>
+                    <tr>
+                        <td><code>DELETE</code></td>
+                        <td><code>/api/transactions/{id}</code></td>
+                        <td>Eliminar transaccion</td>
+                        <td>TransactionResource.java</td>
+                    </tr>
+                    <tr>
+                        <td><code>POST</code></td>
+                        <td><code>/api/email-config</code></td>
+                        <td>Configurar sincronizacion de email</td>
+                        <td>EmailConfigResource.java</td>
+                    </tr>
+                    <tr>
+                        <td><code>GET</code></td>
+                        <td><code>/api/email-config</code></td>
+                        <td>Obtener configuracion actual</td>
+                        <td>EmailConfigResource.java</td>
+                    </tr>
+                    <tr>
+                        <td><code>GET</code></td>
+                        <td><code>/api/user/profile</code></td>
+                        <td>Obtener perfil de usuario</td>
+                        <td>UserProfileResource.java</td>
+                    </tr>
+                    <tr>
+                        <td><code>PUT</code></td>
+                        <td><code>/api/user/profile</code></td>
+                        <td>Actualizar perfil (display name)</td>
+                        <td>UserProfileResource.java</td>
+                    </tr>
+                </table>
+
+                <h3>Consumidores Pub/Sub</h3>
+                <div class="collapsible open">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>TransactionParsedEventConsumer</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <p>Consume transacciones parseadas del topic <code>email-transaction</code> y las persiste en la base de datos.</p>
+<pre><code>@ApplicationScoped
+public class TransactionParsedEventConsumer {
+
+    @Inject TransactionRepository transactionRepository;
+    @Inject UserRepository userRepository;
+
+    @Incoming("email-transaction")
+    public CompletionStage&lt;Void&gt; consume(TransactionParsedEvent event) {
+        // 1. Buscar usuario por ID
+        User user = userRepository.findById(event.getUserId());
+
+        // 2. Crear entidad Transaction
+        Transaction transaction = Transaction.builder()
+            .user(user)
+            .amount(event.getAmount())
+            .merchant(event.getMerchant())
+            .category(event.getCategory())
+            .transactionDate(event.getTransactionDate())
+            .emailMessageId(event.getEmailMessageId())
+            .type(event.getTransactionType())
+            .build();
+
+        // 3. Verificar duplicados por emailMessageId
+        if (!transactionRepository.existsByEmailMessageId(event.getEmailMessageId())) {
+            transactionRepository.persist(transaction);
+        }
+
+        return CompletableFuture.completedFuture(null);
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>TokenRefreshedEventConsumer</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <p>Consume eventos de tokens refrescados y actualiza los tokens OAuth en la base de datos.</p>
+<pre><code>@ApplicationScoped
+public class TokenRefreshedEventConsumer {
+
+    @Inject EmailConfigRepository emailConfigRepository;
+
+    @Incoming("token-refreshed")
+    public CompletionStage&lt;Void&gt; consume(TokenRefreshedEvent event) {
+        // 1. Buscar configuracion de email del usuario
+        EmailConfig config = emailConfigRepository
+            .findByUserIdAndProvider(event.getUserId(), event.getProvider());
+
+        // 2. Actualizar tokens
+        config.setAccessToken(event.getAccessToken());
+        config.setRefreshToken(event.getRefreshToken());
+        config.setTokenExpiresAt(event.getExpiresAt());
+
+        // 3. Persistir cambios
+        emailConfigRepository.persist(config);
+
+        return CompletableFuture.completedFuture(null);
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <h3>Modelo de Dominio</h3>
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Entidades Principales</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code>// Transaction.java
+@Entity
+public class Transaction {
+    @Id @GeneratedValue
+    private UUID id;
+
+    @ManyToOne
+    private User user;
+
+    private BigDecimal amount;
+    private String merchant;
+    private String category;
+    private LocalDateTime transactionDate;
+    private String emailMessageId;  // Para evitar duplicados
+
+    @Enumerated(EnumType.STRING)
+    private TransactionType type;  // INCOME, EXPENSE
+
+    private String description;
+    private String bankName;
+}
+
+// EmailConfig.java
+@Entity
+public class EmailConfig {
+    @Id @GeneratedValue
+    private UUID id;
+
+    @ManyToOne
+    private User user;
+
+    @Enumerated(EnumType.STRING)
+    private EmailProvider provider;  // GMAIL, OUTLOOK
+
+    private String emailAddress;
+    private String accessToken;
+    private String refreshToken;
+    private LocalDateTime tokenExpiresAt;
+    private LocalDateTime lastSyncAt;
+    private boolean active;
+}
+
+// UserProfile.java
+@Entity
+public class UserProfile {
+    @Id @GeneratedValue
+    private UUID id;
+
+    @OneToOne
+    private User user;
+
+    private String displayName;  // Usado para filtrar transferencias personales
+    private String preferredCurrency;
+    private String timezone;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PILASFI-PARSER-SERVICE SECTION -->
+            <section id="pilasfi-parser" class="section">
+                <h2 class="section-title">pilasfi-parser-service</h2>
+
+                <div class="project-card">
+                    <div class="project-card-header">
+                        <h2>Servicio de Parsing</h2>
+                        <div>
+                            <span class="badge badge-quarkus">Quarkus 3.x</span>
+                            <span class="badge badge-openai">OpenAI</span>
+                            <span class="badge badge-gemini">Gemini</span>
+                            <span class="badge badge-postgres">PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="project-card-body">
+                        <p>Servicio que parsea emails bancarios usando un pipeline de 3 niveles:
+                        Regex desde base de datos, IA como fallback, y descarte para emails no transaccionales.</p>
+                    </div>
+                </div>
+
+                <h3>Pipeline de Parsing (3 Niveles)</h3>
+                <div class="diagram">
+Email Entrante (email-raw topic)
+            |
+            v
++---------------------------+
+|  1. REGEX DB PARSERS      |
+|  - Busca patron por banco |
+|  - Extrae con regex       |
++---------------------------+
+            |
+            | No match?
+            v
++---------------------------+
+|  2. DISCARD PARSERS       |
+|  - Detecta emails no-tx   |
+|  - Marketing, alertas     |
++---------------------------+
+            |
+            | No es descartable?
+            v
++---------------------------+
+|  3. AI FALLBACK           |
+|  - OpenAI GPT-4o-mini     |
+|  - Google Gemini          |
+|  - Extraccion inteligente |
++---------------------------+
+            |
+            v
++---------------------------+
+|  4. CATEGORY PARSERS      |
+|  - Categoriza merchant    |
+|  - Mapeo de categorias    |
++---------------------------+
+            |
+            v
++---------------------------+
+|  5. DISPLAY NAME FILTER   |
+|  - Filtra transferencias  |
+|  - a uno mismo            |
++---------------------------+
+            |
+            v
+Publica a email-transaction topic
+                </div>
+
+                <h3>Tipos de Parsers</h3>
+                <table>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Descripcion</th>
+                        <th>Tabla DB</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Transaction Parser</strong></td>
+                        <td>Extrae monto, comercio, fecha de emails de compra/venta</td>
+                        <td><code>transaction_parsers</code></td>
+                        <td>Regex para BCP, BBVA, Interbank</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discard Parser</strong></td>
+                        <td>Identifica emails que NO son transacciones</td>
+                        <td><code>discard_parsers</code></td>
+                        <td>Marketing, alertas de seguridad, OTPs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Category Parser</strong></td>
+                        <td>Asigna categoria al comercio detectado</td>
+                        <td><code>category_parsers</code></td>
+                        <td>"UBER" -> Transporte, "WONG" -> Supermercado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Blacklist</strong></td>
+                        <td>Remitentes a ignorar completamente</td>
+                        <td><code>sender_blacklist</code></td>
+                        <td>newsletters@bank.com</td>
+                    </tr>
+                </table>
+
+                <h3>Modelo de Datos del Parser</h3>
+                <div class="collapsible open">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Entidades del Parser</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code>// TransactionParser.java - Parser de transacciones
+@Entity
+@Table(name = "transaction_parsers")
+public class TransactionParser {
+    @Id @GeneratedValue
+    private UUID id;
+
+    private String bankName;           // "BCP", "BBVA", "Interbank"
+    private String senderPattern;      // Regex para validar remitente
+    private String subjectPattern;     // Regex para validar asunto
+    private String amountRegex;        // Regex para extraer monto
+    private String merchantRegex;      // Regex para extraer comercio
+    private String dateRegex;          // Regex para extraer fecha
+    private String dateFormat;         // "dd/MM/yyyy", "yyyy-MM-dd"
+    private boolean active;
+    private int priority;              // Orden de evaluacion
+}
+
+// DiscardParser.java - Parser de descarte
+@Entity
+@Table(name = "discard_parsers")
+public class DiscardParser {
+    @Id @GeneratedValue
+    private UUID id;
+
+    private String name;               // "BCP Marketing", "OTP Alert"
+    private String senderPattern;      // Regex del remitente
+    private String subjectPattern;     // Regex del asunto (opcional)
+    private String bodyPattern;        // Regex del cuerpo (opcional)
+    private String reason;             // "Marketing email", "Security alert"
+    private boolean active;
+}
+
+// CategoryParser.java - Parser de categorias
+@Entity
+@Table(name = "category_parsers")
+public class CategoryParser {
+    @Id @GeneratedValue
+    private UUID id;
+
+    private String merchantPattern;    // Regex: "UBER.*", "WONG|METRO"
+    private String category;           // "Transporte", "Supermercado"
+    private int priority;
+    private boolean active;
+}
+
+// SenderBlacklist.java - Lista negra
+@Entity
+@Table(name = "sender_blacklist")
+public class SenderBlacklist {
+    @Id @GeneratedValue
+    private UUID id;
+
+    private String senderEmail;        // Email completo o patron
+    private String reason;
+    private boolean active;
+}</code></pre>
+                    </div>
+                </div>
+
+                <h3>Proveedores de IA</h3>
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Selector de Proveedor IA</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <p>El sistema soporta multiples proveedores de IA con seleccion dinamica:</p>
+<pre><code>// AIProviderSelector.java
+@ApplicationScoped
+public class AIProviderSelector {
+
+    @ConfigProperty(name = "ai.provider", defaultValue = "openai")
+    String configuredProvider;
+
+    @Inject OpenAIService openAIService;
+    @Inject GeminiService geminiService;
+
+    public AIProvider getProvider() {
+        return switch (configuredProvider.toLowerCase()) {
+            case "gemini" -> geminiService;
+            case "openai" -> openAIService;
+            default -> openAIService;
+        };
+    }
+}
+
+// OpenAIService.java
+@ApplicationScoped
+public class OpenAIService implements AIProvider {
+
+    @ConfigProperty(name = "openai.api.key")
+    String apiKey;
+
+    @ConfigProperty(name = "openai.model", defaultValue = "gpt-4o-mini")
+    String model;
+
+    @Override
+    public TransactionData parseEmail(String subject, String body) {
+        // Llamada a OpenAI API con prompt estructurado
+        // Retorna TransactionData con amount, merchant, date, category
+    }
+}
+
+// GeminiService.java
+@ApplicationScoped
+public class GeminiService implements AIProvider {
+
+    @ConfigProperty(name = "gemini.api.key")
+    String apiKey;
+
+    @ConfigProperty(name = "gemini.model", defaultValue = "gemini-pro")
+    String model;
+
+    @Override
+    public TransactionData parseEmail(String subject, String body) {
+        // Llamada a Google Gemini API
+        // Retorna TransactionData
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <h3>Filtro de Display Name</h3>
+                <div class="alert alert-info">
+                    <strong>Nuevo:</strong> El sistema filtra transferencias donde el destinatario coincide con el
+                    display name del usuario, evitando registrar transferencias a uno mismo como gastos.
+                </div>
+<pre><code>// DisplayNameFilter.java
+@ApplicationScoped
+public class DisplayNameFilter {
+
+    public boolean shouldDiscard(TransactionData tx, String userDisplayName) {
+        if (userDisplayName == null || userDisplayName.isBlank()) {
+            return false;
+        }
+
+        String merchant = tx.getMerchant().toLowerCase();
+        String displayName = userDisplayName.toLowerCase();
+
+        // Filtra si el comercio/destinatario contiene el nombre del usuario
+        return merchant.contains(displayName) ||
+               similarity(merchant, displayName) > 0.8;
+    }
+}</code></pre>
+            </section>
+
+            <!-- PILASFI-EMAIL-SYNC SECTION -->
+            <section id="pilasfi-email-sync" class="section">
+                <h2 class="section-title">pilasfi-email-sync</h2>
+
+                <div class="project-card">
+                    <div class="project-card-header">
+                        <h2>Servicio de Sincronizacion</h2>
+                        <div>
+                            <span class="badge badge-quarkus">Quarkus 3.x</span>
+                            <span class="badge badge-gmail">Gmail API</span>
+                            <span class="badge badge-outlook">MS Graph</span>
+                            <span class="badge badge-pubsub">Pub/Sub</span>
+                        </div>
+                    </div>
+                    <div class="project-card-body">
+                        <p>Sincroniza emails de Gmail y Outlook, maneja tokens OAuth, implementa sync inicial (hacia atras)
+                        e incremental, con bloqueo distribuido para evitar sincronizaciones concurrentes.</p>
+                    </div>
+                </div>
+
+                <h3>Modos de Sincronizacion</h3>
+                <table>
+                    <tr>
+                        <th>Modo</th>
+                        <th>Descripcion</th>
+                        <th>Direccion</th>
+                        <th>Trigger</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Initial Sync</strong></td>
+                        <td>Primera sincronizacion, procesa emails historicos</td>
+                        <td>Hacia atras (mas reciente primero)</td>
+                        <td>Primera configuracion de email</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Incremental Sync</strong></td>
+                        <td>Solo emails nuevos desde ultima sincronizacion</td>
+                        <td>Hacia adelante</td>
+                        <td>Scheduler cada 15 minutos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Manual Sync</strong></td>
+                        <td>Sincronizacion forzada por usuario</td>
+                        <td>Incremental</td>
+                        <td>Boton en app</td>
+                    </tr>
+                </table>
+
+                <h3>Flujo de Initial Sync (Backwards)</h3>
+                <div class="diagram">
+Usuario configura email por primera vez
+                |
+                v
++----------------------------------+
+| 1. Recibe EmailConfigUpdatedEvent|
+|    desde topic user-email-config |
++----------------------------------+
+                |
+                v
++----------------------------------+
+| 2. Adquiere distributed lock     |
+|    (15 min expiry)               |
++----------------------------------+
+                |
+                v
++----------------------------------+
+| 3. Obtiene emails en BATCHES     |
+|    - Gmail: 50 emails por batch  |
+|    - Outlook: 50 emails por batch|
+|    - Orden: MAS RECIENTE PRIMERO |
++----------------------------------+
+                |
+                v
++----------------------------------+
+| 4. Por cada email:               |
+|    - Filtra por remitentes banco |
+|    - Publica a email-raw topic   |
++----------------------------------+
+                |
+                v
++----------------------------------+
+| 5. Continua hacia atras hasta:   |
+|    - Limite de 6 meses, o        |
+|    - No hay mas emails           |
++----------------------------------+
+                |
+                v
++----------------------------------+
+| 6. Libera lock                   |
+|    Guarda lastSyncAt             |
++----------------------------------+
+                </div>
+
+                <h3>Bloqueo Distribuido</h3>
+                <div class="collapsible open">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Implementacion del Lock</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code>// DistributedLockService.java
+@ApplicationScoped
+public class DistributedLockService {
+
+    @Inject EntityManager em;
+
+    private static final Duration LOCK_EXPIRY = Duration.ofMinutes(15);
+
+    @Transactional
+    public boolean tryAcquireLock(String userId, String lockType) {
+        // 1. Verificar si existe lock activo
+        SyncLock existingLock = em.createQuery(
+            "SELECT l FROM SyncLock l WHERE l.userId = :userId " +
+            "AND l.lockType = :lockType AND l.expiresAt > :now", SyncLock.class)
+            .setParameter("userId", userId)
+            .setParameter("lockType", lockType)
+            .setParameter("now", Instant.now())
+            .getResultStream()
+            .findFirst()
+            .orElse(null);
+
+        if (existingLock != null) {
+            return false;  // Lock activo, no sincronizar
+        }
+
+        // 2. Crear nuevo lock
+        SyncLock lock = new SyncLock();
+        lock.setUserId(userId);
+        lock.setLockType(lockType);
+        lock.setAcquiredAt(Instant.now());
+        lock.setExpiresAt(Instant.now().plus(LOCK_EXPIRY));
+        em.persist(lock);
+
+        return true;
+    }
+
+    @Transactional
+    public void releaseLock(String userId, String lockType) {
+        em.createQuery(
+            "DELETE FROM SyncLock l WHERE l.userId = :userId AND l.lockType = :lockType")
+            .setParameter("userId", userId)
+            .setParameter("lockType", lockType)
+            .executeUpdate();
+    }
+}
+
+// SyncLock.java - Entidad
+@Entity
+@Table(name = "sync_locks")
+public class SyncLock {
+    @Id @GeneratedValue
+    private UUID id;
+    private String userId;
+    private String lockType;  // "INITIAL_SYNC", "INCREMENTAL_SYNC"
+    private Instant acquiredAt;
+    private Instant expiresAt;
+}</code></pre>
+                    </div>
+                </div>
+
+                <h3>Adaptadores de Email</h3>
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Gmail Adapter</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code>// GmailAdapter.java
+@ApplicationScoped
+public class GmailAdapter implements EmailProviderAdapter {
+
+    private static final int BATCH_SIZE = 50;
+
+    @Override
+    public List&lt;RawEmail&gt; fetchEmails(EmailConfig config, FetchDirection direction) {
+        Gmail gmail = buildGmailClient(config.getAccessToken());
+
+        // Query para emails de bancos
+        String query = buildBankQuery();  // "from:notificaciones@bcp.com.pe OR from:..."
+
+        ListMessagesResponse response = gmail.users().messages()
+            .list("me")
+            .setQ(query)
+            .setMaxResults(BATCH_SIZE)
+            .execute();
+
+        List&lt;RawEmail&gt; emails = new ArrayList&lt;&gt;();
+        for (Message msg : response.getMessages()) {
+            Message full = gmail.users().messages().get("me", msg.getId())
+                .setFormat("full")
+                .execute();
+
+            emails.add(convertToRawEmail(full));
+        }
+
+        // Ordenar segun direccion
+        if (direction == FetchDirection.BACKWARDS) {
+            emails.sort(Comparator.comparing(RawEmail::getDate).reversed());
+        }
+
+        return emails;
+    }
+
+    @Override
+    public TokenPair refreshToken(String refreshToken) {
+        // Usa OAuth2 para refrescar el access token
+        GoogleTokenResponse response = new GoogleRefreshTokenRequest(
+            new NetHttpTransport(),
+            GsonFactory.getDefaultInstance(),
+            refreshToken,
+            clientId,
+            clientSecret
+        ).execute();
+
+        return new TokenPair(
+            response.getAccessToken(),
+            response.getRefreshToken(),
+            Instant.now().plusSeconds(response.getExpiresInSeconds())
+        );
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Outlook Adapter (MS Graph)</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code>// OutlookAdapter.java
+@ApplicationScoped
+public class OutlookAdapter implements EmailProviderAdapter {
+
+    private static final int BATCH_SIZE = 50;
+    private static final String GRAPH_API = "https://graph.microsoft.com/v1.0";
+
+    @Override
+    public List&lt;RawEmail&gt; fetchEmails(EmailConfig config, FetchDirection direction) {
+        GraphServiceClient client = buildGraphClient(config.getAccessToken());
+
+        // Filtro para emails de bancos
+        String filter = buildBankFilter();
+
+        MessageCollectionPage messages = client.me().messages()
+            .buildRequest()
+            .filter(filter)
+            .top(BATCH_SIZE)
+            .orderBy(direction == FetchDirection.BACKWARDS ?
+                "receivedDateTime desc" : "receivedDateTime asc")
+            .get();
+
+        return messages.getCurrentPage().stream()
+            .map(this::convertToRawEmail)
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public TokenPair refreshToken(String refreshToken) {
+        // Azure AD OAuth2 token refresh
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://login.microsoftonline.com/common/oauth2/v2.0/token"))
+            .POST(HttpRequest.BodyPublishers.ofString(
+                "grant_type=refresh_token" +
+                "&refresh_token=" + refreshToken +
+                "&client_id=" + clientId +
+                "&client_secret=" + clientSecret +
+                "&scope=Mail.Read offline_access"
+            ))
+            .header("Content-Type", "application/x-www-form-urlencoded")
+            .build();
+
+        // Parse response and return TokenPair
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <h3>Token Refresh Flow</h3>
+                <div class="diagram">
+Scheduler detecta token proximo a expirar (< 5 min)
+                    |
+                    v
++----------------------------------+
+| 1. EmailSyncService.refreshToken |
+|    - Llama al adapter correcto   |
++----------------------------------+
+                    |
+                    v
++----------------------------------+
+| 2. Adapter hace OAuth refresh    |
+|    - Gmail: Google OAuth         |
+|    - Outlook: Azure AD           |
++----------------------------------+
+                    |
+                    v
++----------------------------------+
+| 3. Publica TokenRefreshedEvent   |
+|    al topic token-refreshed      |
++----------------------------------+
+                    |
+                    v
++----------------------------------+
+| 4. pilasfi-quarkus consume       |
+|    y actualiza tokens en DB      |
++----------------------------------+
+                </div>
+            </section>
+
+            <!-- APP-PILAS-FE SECTION -->
+            <section id="app-pilas-fe" class="section">
+                <h2 class="section-title">app-pilas-fe (Flutter)</h2>
+
+                <div class="project-card">
+                    <div class="project-card-header">
+                        <h2>Aplicacion Movil</h2>
+                        <div>
+                            <span class="badge badge-flutter">Flutter 3.x</span>
+                            <span class="badge badge-firebase">Firebase</span>
+                        </div>
+                    </div>
+                    <div class="project-card-body">
+                        <p>Aplicacion movil multiplataforma (iOS/Android) construida con Flutter,
+                        usando Riverpod para state management y Firebase para autenticacion.</p>
+                    </div>
+                </div>
+
+                <h3>Estructura del Proyecto</h3>
+<pre><code>lib/
+├── main.dart                    # Entry point
+├── app/
+│   ├── app.dart                 # MaterialApp + GoRouter
+│   └── theme/
+│       └── app_theme.dart       # Tema de la aplicacion
+├── core/
+│   ├── constants/
+│   │   └── api_constants.dart   # URLs del backend
+│   ├── network/
+│   │   ├── dio_client.dart      # Cliente HTTP configurado
+│   │   └── interceptors/
+│   │       └── auth_interceptor.dart
+│   └── utils/
+│       └── date_utils.dart
+├── features/
+│   ├── auth/
+│   │   ├── data/
+│   │   │   ├── repositories/
+│   │   │   │   └── auth_repository_impl.dart
+│   │   │   └── datasources/
+│   │   │       └── firebase_auth_datasource.dart
+│   │   ├── domain/
+│   │   │   ├── entities/
+│   │   │   │   └── user.dart
+│   │   │   └── repositories/
+│   │   │       └── auth_repository.dart
+│   │   └── presentation/
+│   │       ├── providers/
+│   │       │   └── auth_provider.dart
+│   │       ├── screens/
+│   │       │   └── login_screen.dart
+│   │       └── widgets/
+│   │           └── google_sign_in_button.dart
+│   ├── transactions/
+│   │   ├── data/
+│   │   │   └── repositories/
+│   │   │       └── transaction_repository_impl.dart
+│   │   ├── domain/
+│   │   │   ├── entities/
+│   │   │   │   └── transaction.dart
+│   │   │   └── usecases/
+│   │   │       ├── get_transactions.dart
+│   │   │       └── create_transaction.dart
+│   │   └── presentation/
+│   │       ├── providers/
+│   │       │   └── transactions_provider.dart
+│   │       ├── screens/
+│   │       │   ├── transactions_screen.dart
+│   │       │   └── transaction_detail_screen.dart
+│   │       └── widgets/
+│   │           └── transaction_card.dart
+│   ├── email_sync/
+│   │   ├── data/
+│   │   │   └── repositories/
+│   │   │       └── email_config_repository_impl.dart
+│   │   ├── domain/
+│   │   │   └── entities/
+│   │   │       └── email_config.dart
+│   │   └── presentation/
+│   │       ├── providers/
+│   │       │   └── email_sync_provider.dart
+│   │       ├── screens/
+│   │       │   └── email_config_screen.dart
+│   │       └── widgets/
+│   │           ├── gmail_connect_button.dart
+│   │           └── outlook_connect_button.dart
+│   └── profile/
+│       └── presentation/
+│           ├── screens/
+│           │   └── profile_screen.dart
+│           └── providers/
+│               └── profile_provider.dart
+└── shared/
+    └── widgets/
+        └── loading_indicator.dart</code></pre>
+
+                <h3>State Management (Riverpod)</h3>
+                <div class="collapsible open">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Providers Principales</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code>// auth_provider.dart
+@riverpod
+class Auth extends _$Auth {
+  @override
+  AsyncValue&lt;User?&gt; build() {
+    return const AsyncValue.loading();
+  }
+
+  Future&lt;void&gt; signInWithGoogle() async {
+    state = const AsyncValue.loading();
+    try {
+      final user = await ref.read(authRepositoryProvider).signInWithGoogle();
+      state = AsyncValue.data(user);
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
+  }
+
+  Future&lt;void&gt; signOut() async {
+    await ref.read(authRepositoryProvider).signOut();
+    state = const AsyncValue.data(null);
+  }
+}
+
+// transactions_provider.dart
+@riverpod
+class Transactions extends _$Transactions {
+  @override
+  Future&lt;List&lt;Transaction&gt;&gt; build() async {
+    return ref.read(transactionRepositoryProvider).getTransactions();
+  }
+
+  Future&lt;void&gt; refresh() async {
+    state = const AsyncValue.loading();
+    state = AsyncValue.data(
+      await ref.read(transactionRepositoryProvider).getTransactions()
+    );
+  }
+
+  Future&lt;void&gt; createTransaction(CreateTransactionDto dto) async {
+    await ref.read(transactionRepositoryProvider).createTransaction(dto);
+    await refresh();
+  }
+}
+
+// email_sync_provider.dart
+@riverpod
+class EmailSync extends _$EmailSync {
+  @override
+  Future&lt;EmailConfig?&gt; build() async {
+    return ref.read(emailConfigRepositoryProvider).getConfig();
+  }
+
+  Future&lt;void&gt; connectGmail(String authCode) async {
+    state = const AsyncValue.loading();
+    await ref.read(emailConfigRepositoryProvider).connectGmail(authCode);
+    state = AsyncValue.data(
+      await ref.read(emailConfigRepositoryProvider).getConfig()
+    );
+  }
+
+  Future&lt;void&gt; triggerSync() async {
+    await ref.read(emailConfigRepositoryProvider).triggerSync();
+  }
+}</code></pre>
+                    </div>
+                </div>
+
+                <h3>Flujo OAuth en App</h3>
+                <div class="diagram">
+Usuario toca "Conectar Gmail"
+            |
+            v
++----------------------------------+
+| 1. google_sign_in package        |
+|    abre browser para OAuth       |
++----------------------------------+
+            |
+            v
++----------------------------------+
+| 2. Usuario autoriza en Google    |
+|    Scopes: email, gmail.readonly |
++----------------------------------+
+            |
+            v
++----------------------------------+
+| 3. App recibe auth code          |
+|    via deep link callback        |
++----------------------------------+
+            |
+            v
++----------------------------------+
+| 4. POST /api/email-config        |
+|    con auth code                 |
++----------------------------------+
+            |
+            v
++----------------------------------+
+| 5. Backend intercambia code      |
+|    por tokens y guarda           |
++----------------------------------+
+            |
+            v
++----------------------------------+
+| 6. Backend publica evento        |
+|    a user-email-config topic     |
++----------------------------------+
+            |
+            v
++----------------------------------+
+| 7. email-sync inicia             |
+|    sincronizacion inicial        |
++----------------------------------+
+                </div>
+            </section>
+
+            <!-- INFRA-GCP SECTION -->
+            <section id="infra-gcp" class="section">
+                <h2 class="section-title">pilasfi-infra-gcp (Terraform)</h2>
+
+                <div class="project-card">
+                    <div class="project-card-header">
+                        <h2>Infraestructura GCP</h2>
+                        <div>
+                            <span class="badge badge-terraform">Terraform</span>
+                            <span class="badge badge-gcp">GCP</span>
+                        </div>
+                    </div>
+                    <div class="project-card-body">
+                        <p>Infraestructura como codigo usando Terraform para desplegar en Google Cloud Platform.
+                        Incluye Cloud Run, Cloud SQL, Pub/Sub y Secret Manager.</p>
+                    </div>
+                </div>
+
+                <h3>Estructura de Terraform</h3>
+<pre><code>terraform/
+├── main.tf                 # Provider configuration
+├── variables.tf            # Input variables
+├── outputs.tf              # Output values
+├── versions.tf             # Terraform version constraints
+├── modules/
+│   ├── cloud-run/
+│   │   ├── main.tf         # Cloud Run service definition
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   ├── cloud-sql/
+│   │   ├── main.tf         # PostgreSQL instance
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   ├── pubsub/
+│   │   ├── main.tf         # Topics and subscriptions
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   ├── secret-manager/
+│   │   ├── main.tf         # Secrets storage
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   └── networking/
+│       ├── main.tf         # VPC, subnets
+│       ├── variables.tf
+│       └── outputs.tf
+└── environments/
+    ├── dev/
+    │   ├── main.tf
+    │   └── terraform.tfvars
+    └── prod/
+        ├── main.tf
+        └── terraform.tfvars</code></pre>
+
+                <h3>Recursos Principales</h3>
+                <div class="collapsible open">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Cloud Run Services</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code># modules/cloud-run/main.tf
+
+resource "google_cloud_run_service" "pilasfi_api" {
+  name     = "pilasfi-api"
+  location = var.region
+
+  template {
+    spec {
+      containers {
+        image = var.api_image
+
+        ports {
+          container_port = 8080
+        }
+
+        env {
+          name  = "QUARKUS_DATASOURCE_JDBC_URL"
+          value = "jdbc:postgresql:///${var.db_name}?cloudSqlInstance=${var.cloud_sql_connection}&socketFactory=com.google.cloud.sql.postgres.SocketFactory"
+        }
+
+        env {
+          name = "QUARKUS_DATASOURCE_PASSWORD"
+          value_from {
+            secret_key_ref {
+              name = google_secret_manager_secret.db_password.secret_id
+              key  = "latest"
+            }
+          }
+        }
+
+        resources {
+          limits = {
+            cpu    = "1000m"
+            memory = "512Mi"
+          }
+        }
+      }
+
+      service_account_name = google_service_account.cloud_run_sa.email
+    }
+
+    metadata {
+      annotations = {
+        "autoscaling.knative.dev/minScale"      = "0"
+        "autoscaling.knative.dev/maxScale"      = "10"
+        "run.googleapis.com/cloudsql-instances" = var.cloud_sql_connection
+      }
+    }
+  }
+
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+}
+
+resource "google_cloud_run_service" "pilasfi_parser" {
+  name     = "pilasfi-parser"
+  location = var.region
+
+  template {
+    spec {
+      containers {
+        image = var.parser_image
+
+        env {
+          name = "OPENAI_API_KEY"
+          value_from {
+            secret_key_ref {
+              name = google_secret_manager_secret.openai_key.secret_id
+              key  = "latest"
+            }
+          }
+        }
+
+        env {
+          name = "GEMINI_API_KEY"
+          value_from {
+            secret_key_ref {
+              name = google_secret_manager_secret.gemini_key.secret_id
+              key  = "latest"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+resource "google_cloud_run_service" "pilasfi_email_sync" {
+  name     = "pilasfi-email-sync"
+  location = var.region
+
+  template {
+    spec {
+      containers {
+        image = var.email_sync_image
+
+        env {
+          name = "GOOGLE_CLIENT_SECRET"
+          value_from {
+            secret_key_ref {
+              name = google_secret_manager_secret.google_oauth.secret_id
+              key  = "latest"
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Pub/Sub Topics</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code># modules/pubsub/main.tf
+
+resource "google_pubsub_topic" "user_email_config" {
+  name = "user-email-config"
+
+  message_retention_duration = "604800s"  # 7 days
+}
+
+resource "google_pubsub_topic" "email_raw" {
+  name = "email-raw"
+
+  message_retention_duration = "86400s"  # 1 day
+}
+
+resource "google_pubsub_topic" "email_transaction" {
+  name = "email-transaction"
+
+  message_retention_duration = "604800s"  # 7 days
+}
+
+resource "google_pubsub_topic" "token_refreshed" {
+  name = "token-refreshed"
+
+  message_retention_duration = "86400s"  # 1 day
+}
+
+# Subscriptions
+resource "google_pubsub_subscription" "email_sync_config_sub" {
+  name  = "email-sync-config-subscription"
+  topic = google_pubsub_topic.user_email_config.name
+
+  push_config {
+    push_endpoint = "${google_cloud_run_service.pilasfi_email_sync.status[0].url}/pubsub/email-config"
+
+    oidc_token {
+      service_account_email = google_service_account.pubsub_invoker.email
+    }
+  }
+
+  ack_deadline_seconds = 60
+
+  retry_policy {
+    minimum_backoff = "10s"
+    maximum_backoff = "600s"
+  }
+}
+
+resource "google_pubsub_subscription" "parser_email_raw_sub" {
+  name  = "parser-email-raw-subscription"
+  topic = google_pubsub_topic.email_raw.name
+
+  push_config {
+    push_endpoint = "${google_cloud_run_service.pilasfi_parser.status[0].url}/pubsub/email-raw"
+  }
+}
+
+resource "google_pubsub_subscription" "api_transaction_sub" {
+  name  = "api-transaction-subscription"
+  topic = google_pubsub_topic.email_transaction.name
+
+  push_config {
+    push_endpoint = "${google_cloud_run_service.pilasfi_api.status[0].url}/pubsub/transaction"
+  }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Cloud SQL (PostgreSQL)</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code># modules/cloud-sql/main.tf
+
+resource "google_sql_database_instance" "pilasfi" {
+  name             = "pilasfi-db-instance"
+  database_version = "POSTGRES_15"
+  region           = var.region
+
+  settings {
+    tier = "db-f1-micro"  # Dev tier
+
+    ip_configuration {
+      ipv4_enabled    = false
+      private_network = var.vpc_id
+    }
+
+    backup_configuration {
+      enabled            = true
+      start_time         = "03:00"
+      binary_log_enabled = false
+
+      backup_retention_settings {
+        retained_backups = 7
+      }
+    }
+
+    database_flags {
+      name  = "max_connections"
+      value = "100"
+    }
+  }
+
+  deletion_protection = true
+}
+
+resource "google_sql_database" "pilasfi_api" {
+  name     = "pilasfi_api"
+  instance = google_sql_database_instance.pilasfi.name
+}
+
+resource "google_sql_database" "pilasfi_parser" {
+  name     = "pilasfi_parser"
+  instance = google_sql_database_instance.pilasfi.name
+}
+
+resource "google_sql_database" "pilasfi_email_sync" {
+  name     = "pilasfi_email_sync"
+  instance = google_sql_database_instance.pilasfi.name
+}
+
+resource "google_sql_user" "app_user" {
+  name     = "pilasfi_app"
+  instance = google_sql_database_instance.pilasfi.name
+  password = random_password.db_password.result
+}</code></pre>
+                    </div>
+                </div>
+
+                <h3>CI/CD con GitHub Actions</h3>
+<pre><code># .github/workflows/deploy.yml
+
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: us-central1
+
+jobs:
+  deploy-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build and Push Image
+        run: |
+          gcloud builds submit \
+            --tag gcr.io/$PROJECT_ID/pilasfi-api:${{ github.sha }}
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy pilasfi-api \
+            --image gcr.io/$PROJECT_ID/pilasfi-api:${{ github.sha }} \
+            --region $REGION \
+            --platform managed</code></pre>
+            </section>
+
+            <!-- INFRA-APPS SECTION -->
+            <section id="infra-apps" class="section">
+                <h2 class="section-title">pilasfi-infra-apps (Kubernetes)</h2>
+
+                <div class="project-card">
+                    <div class="project-card-header">
+                        <h2>Kubernetes Manifests (Alternativo)</h2>
+                        <div>
+                            <span class="badge badge-k8s">Kubernetes</span>
+                            <span class="badge" style="background:#EF652A;color:#fff;">ArgoCD</span>
+                            <span class="badge" style="background:#326CE5;color:#fff;">Kustomize</span>
+                        </div>
+                    </div>
+                    <div class="project-card-body">
+                        <p>Manifiestos Kubernetes alternativos para despliegue on-premise o en clusters GKE.
+                        Usa Kustomize para overlays y ArgoCD para GitOps.</p>
+                    </div>
+                </div>
+
+                <h3>Estructura del Repositorio</h3>
+<pre><code>pilasfi-infra-apps/
+├── apps/
+│   └── pilasfi/
+│       ├── base/
+│       │   ├── kustomization.yaml
+│       │   ├── namespace.yaml
+│       │   ├── api/
+│       │   │   ├── deployment.yaml
+│       │   │   ├── service.yaml
+│       │   │   ├── configmap.yaml
+│       │   │   └── kustomization.yaml
+│       │   ├── parser/
+│       │   │   ├── deployment.yaml
+│       │   │   ├── service.yaml
+│       │   │   └── kustomization.yaml
+│       │   ├── email-sync/
+│       │   │   ├── deployment.yaml
+│       │   │   ├── service.yaml
+│       │   │   └── kustomization.yaml
+│       │   └── kafka/
+│       │       ├── kafka-cluster.yaml      # Strimzi Kafka
+│       │       ├── kafka-topics.yaml
+│       │       └── kustomization.yaml
+│       └── overlays/
+│           ├── dev/
+│           │   ├── kustomization.yaml
+│           │   └── patches/
+│           │       └── replicas-patch.yaml
+│           └── prod/
+│               ├── kustomization.yaml
+│               └── patches/
+│                   ├── replicas-patch.yaml
+│                   └── resources-patch.yaml
+├── argocd/
+│   ├── applicationset.yaml
+│   └── projects/
+│       └── pilasfi-project.yaml
+└── operators/
+    ├── strimzi/
+    │   └── kafka-operator.yaml
+    └── zalando/
+        └── postgres-operator.yaml</code></pre>
+
+                <h3>Componentes Kubernetes</h3>
+                <table>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Operador/Tipo</th>
+                        <th>Descripcion</th>
+                    </tr>
+                    <tr>
+                        <td>Kafka</td>
+                        <td>Strimzi Operator</td>
+                        <td>Cluster Kafka con topics para mensajeria</td>
+                    </tr>
+                    <tr>
+                        <td>PostgreSQL</td>
+                        <td>Zalando Operator</td>
+                        <td>Cluster PostgreSQL con HA</td>
+                    </tr>
+                    <tr>
+                        <td>Secrets</td>
+                        <td>Sealed Secrets</td>
+                        <td>Secretos encriptados para GitOps</td>
+                    </tr>
+                    <tr>
+                        <td>Ingress</td>
+                        <td>NGINX Ingress</td>
+                        <td>Routing HTTP/HTTPS</td>
+                    </tr>
+                </table>
+
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Strimzi Kafka Cluster</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code># apps/pilasfi/base/kafka/kafka-cluster.yaml
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: pilasfi-kafka
+  namespace: pilasfi
+spec:
+  kafka:
+    version: 3.6.0
+    replicas: 3
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+    config:
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
+      transaction.state.log.min.isr: 2
+      default.replication.factor: 3
+      min.insync.replicas: 2
+    storage:
+      type: persistent-claim
+      size: 100Gi
+      class: standard
+  zookeeper:
+    replicas: 3
+    storage:
+      type: persistent-claim
+      size: 100Gi
+      class: standard
+
+---
+# kafka-topics.yaml
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: user-email-config
+  labels:
+    strimzi.io/cluster: pilasfi-kafka
+spec:
+  partitions: 3
+  replicas: 3
+  config:
+    retention.ms: 604800000
+
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: email-raw
+  labels:
+    strimzi.io/cluster: pilasfi-kafka
+spec:
+  partitions: 6
+  replicas: 3
+  config:
+    retention.ms: 86400000
+
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: email-transaction
+  labels:
+    strimzi.io/cluster: pilasfi-kafka
+spec:
+  partitions: 3
+  replicas: 3</code></pre>
+                    </div>
+                </div>
+
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>ArgoCD ApplicationSet</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+<pre><code># argocd/applicationset.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: pilasfi-apps
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - env: dev
+            cluster: https://kubernetes.default.svc
+          - env: prod
+            cluster: https://prod-cluster.example.com
+  template:
+    metadata:
+      name: 'pilasfi-{{env}}'
+    spec:
+      project: pilasfi
+      source:
+        repoURL: https://github.com/polarpipeline/pilasfi-infra-apps.git
+        targetRevision: HEAD
+        path: 'apps/pilasfi/overlays/{{env}}'
+      destination:
+        server: '{{cluster}}'
+        namespace: pilasfi-{{env}}
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EMAIL SYNC FLOW SECTION -->
+            <section id="email-sync-flow" class="section">
+                <h2 class="section-title">Flujo Completo: Sincronizacion de Email</h2>
+
+                <div class="flow-step">
+                    <span class="flow-step-number">1</span>
+                    <strong>Usuario conecta Gmail en la app</strong>
+                    <p>Abre OAuth consent screen, autoriza acceso a Gmail, app recibe auth code</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+
+                <div class="flow-step">
+                    <span class="flow-step-number">2</span>
+                    <strong>POST /api/email-config (pilasfi-quarkus)</strong>
+                    <p>Intercambia auth code por tokens, guarda en EmailConfig, publica EmailConfigUpdatedEvent</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+
+                <div class="flow-step">
+                    <span class="flow-step-number">3</span>
+                    <strong>pilasfi-email-sync consume evento</strong>
+                    <p>Recibe de topic user-email-config, intenta adquirir distributed lock</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+
+                <div class="flow-step">
+                    <span class="flow-step-number">4</span>
+                    <strong>Initial Sync (Backwards)</strong>
+                    <p>Obtiene emails en batches de 50, mas reciente primero, filtra por remitentes bancarios</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+
+                <div class="flow-step">
+                    <span class="flow-step-number">5</span>
+                    <strong>Publica a email-raw topic</strong>
+                    <p>Cada email filtrado se publica como RawEmailEvent con userId, messageId, subject, body</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+
+                <div class="flow-step">
+                    <span class="flow-step-number">6</span>
+                    <strong>pilasfi-parser-service procesa</strong>
+                    <p>Pipeline: Blacklist check → Regex DB → Discard check → AI fallback → Category parser → Display name filter</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+
+                <div class="flow-step">
+                    <span class="flow-step-number">7</span>
+                    <strong>Publica a email-transaction topic</strong>
+                    <p>TransactionParsedEvent con amount, merchant, category, date, transactionType</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+
+                <div class="flow-step">
+                    <span class="flow-step-number">8</span>
+                    <strong>pilasfi-quarkus persiste transaccion</strong>
+                    <p>Verifica duplicados por emailMessageId, guarda Transaction en PostgreSQL</p>
+                </div>
+                <div class="flow-arrow">↓</div>
+
+                <div class="flow-step">
+                    <span class="flow-step-number">9</span>
+                    <strong>App muestra transacciones</strong>
+                    <p>GET /api/transactions, lista actualizada en UI con pull-to-refresh</p>
+                </div>
+            </section>
+
+            <!-- PARSER FLOW SECTION -->
+            <section id="parser-flow" class="section">
+                <h2 class="section-title">Flujo Detallado: Pipeline de Parsing</h2>
+
+                <div class="diagram">
+                      EMAIL ENTRANTE
+                            │
+                            ▼
+              ┌─────────────────────────┐
+              │  1. BLACKLIST CHECK     │
+              │  ─────────────────────  │
+              │  sender_blacklist table │
+              │  Si match → DESCARTAR   │
+              └─────────────────────────┘
+                            │
+                            ▼
+              ┌─────────────────────────┐
+              │  2. REGEX DB PARSERS    │
+              │  ─────────────────────  │
+              │  transaction_parsers    │
+              │  Ordenados por priority │
+              │  Match sender + subject │
+              │  Extrae: amount,        │
+              │  merchant, date         │
+              └─────────────────────────┘
+                            │
+              ┌─────────────┴─────────────┐
+              │                           │
+        MATCH FOUND               NO MATCH
+              │                           │
+              ▼                           ▼
+     ┌─────────────────┐    ┌─────────────────────────┐
+     │ Continua a      │    │  3. DISCARD PARSERS     │
+     │ Category Parser │    │  ─────────────────────  │
+     └─────────────────┘    │  discard_parsers table  │
+                            │  Detecta: marketing,    │
+                            │  OTP, alertas, promos   │
+                            └─────────────────────────┘
+                                          │
+                            ┌─────────────┴─────────────┐
+                            │                           │
+                      IS DISCARDABLE           NOT DISCARDABLE
+                            │                           │
+                            ▼                           ▼
+                     ┌───────────┐      ┌─────────────────────────┐
+                     │ DESCARTAR │      │  4. AI FALLBACK         │
+                     │ (log it)  │      │  ─────────────────────  │
+                     └───────────┘      │  OpenAI GPT-4o-mini OR  │
+                                        │  Google Gemini          │
+                                        │  Prompt estructurado    │
+                                        │  Extrae: amount,        │
+                                        │  merchant, date, type   │
+                                        └─────────────────────────┘
+                                                      │
+                                                      ▼
+                                        ┌─────────────────────────┐
+                                        │  5. CATEGORY PARSER     │
+                                        │  ─────────────────────  │
+                                        │  category_parsers table │
+                                        │  Mapea merchant →       │
+                                        │  categoria predefinida  │
+                                        └─────────────────────────┘
+                                                      │
+                                                      ▼
+                                        ┌─────────────────────────┐
+                                        │  6. DISPLAY NAME FILTER │
+                                        │  ─────────────────────  │
+                                        │  Compara merchant con   │
+                                        │  user.displayName       │
+                                        │  Si match → DESCARTAR   │
+                                        │  (transferencia propia) │
+                                        └─────────────────────────┘
+                                                      │
+                                                      ▼
+                                        ┌─────────────────────────┐
+                                        │  PUBLICAR TRANSACCION   │
+                                        │  → email-transaction    │
+                                        └─────────────────────────┘
+                </div>
+
+                <h3>Ejemplos de Parsers en Base de Datos</h3>
+                <div class="collapsible open">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Transaction Parsers (Regex)</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <table>
+                            <tr>
+                                <th>Bank</th>
+                                <th>Sender Pattern</th>
+                                <th>Amount Regex</th>
+                                <th>Merchant Regex</th>
+                            </tr>
+                            <tr>
+                                <td>BCP</td>
+                                <td><code>notificaciones@bcp\.com\.pe</code></td>
+                                <td><code>S/\s*([\d,]+\.\d{2})</code></td>
+                                <td><code>en\s+(.+?)\s+el</code></td>
+                            </tr>
+                            <tr>
+                                <td>BBVA</td>
+                                <td><code>alertas@bbva\.pe</code></td>
+                                <td><code>por\s+S/\s*([\d,]+\.\d{2})</code></td>
+                                <td><code>comercio:\s*(.+)</code></td>
+                            </tr>
+                            <tr>
+                                <td>Interbank</td>
+                                <td><code>avisos@interbank\.pe</code></td>
+                                <td><code>monto:\s*S/\s*([\d,]+\.\d{2})</code></td>
+                                <td><code>establecimiento:\s*(.+)</code></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Discard Parsers</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Sender Pattern</th>
+                                <th>Subject Pattern</th>
+                                <th>Reason</th>
+                            </tr>
+                            <tr>
+                                <td>BCP Marketing</td>
+                                <td><code>marketing@bcp\.com\.pe</code></td>
+                                <td><code>.*</code></td>
+                                <td>Marketing email</td>
+                            </tr>
+                            <tr>
+                                <td>OTP Alerts</td>
+                                <td><code>.*@.*bank.*</code></td>
+                                <td><code>codigo.*seguridad|OTP|verificacion</code></td>
+                                <td>Security OTP</td>
+                            </tr>
+                            <tr>
+                                <td>Balance Alerts</td>
+                                <td><code>alertas@.*</code></td>
+                                <td><code>saldo.*cuenta|balance</code></td>
+                                <td>Balance notification</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="collapsible">
+                    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+                        <h3>Category Parsers</h3>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <table>
+                            <tr>
+                                <th>Merchant Pattern</th>
+                                <th>Category</th>
+                            </tr>
+                            <tr>
+                                <td><code>UBER.*|DIDI.*|CABIFY.*|BEAT.*</code></td>
+                                <td>Transporte</td>
+                            </tr>
+                            <tr>
+                                <td><code>WONG|METRO|PLAZA VEA|TOTTUS|VIVANDA</code></td>
+                                <td>Supermercado</td>
+                            </tr>
+                            <tr>
+                                <td><code>RAPPI|PEDIDOS YA|GLOVO</code></td>
+                                <td>Delivery</td>
+                            </tr>
+                            <tr>
+                                <td><code>NETFLIX|SPOTIFY|DISNEY|HBO|PRIME</code></td>
+                                <td>Entretenimiento</td>
+                            </tr>
+                            <tr>
+                                <td><code>CLARO|MOVISTAR|ENTEL|BITEL</code></td>
+                                <td>Telefonia</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OAUTH FLOW SECTION -->
+            <section id="oauth-flow" class="section">
+                <h2 class="section-title">Flujo OAuth Detallado</h2>
+
+                <h3>Google OAuth (Gmail)</h3>
+                <div class="diagram">
+┌─────────────┐     ┌─────────────────┐     ┌──────────────────┐
+│ Flutter App │     │ pilasfi-quarkus │     │ Google OAuth     │
+└──────┬──────┘     └────────┬────────┘     └────────┬─────────┘
+       │                     │                       │
+       │  1. User taps       │                       │
+       │  "Connect Gmail"    │                       │
+       │─────────────────────│                       │
+       │                     │                       │
+       │  2. Open browser ───│───────────────────────│───────────▶
+       │     with OAuth URL  │                       │
+       │     scope: gmail.readonly                   │
+       │                     │                       │
+       │◀────────────────────│───────────────────────│────────────
+       │  3. User authorizes │                       │
+       │     Redirect with   │                       │
+       │     auth_code       │                       │
+       │                     │                       │
+       │  4. POST /api/email-config                  │
+       │     {authCode, provider: "GMAIL"}           │
+       │────────────────────▶│                       │
+       │                     │                       │
+       │                     │  5. Exchange code     │
+       │                     │     for tokens        │
+       │                     │──────────────────────▶│
+       │                     │                       │
+       │                     │◀──────────────────────│
+       │                     │  6. access_token,     │
+       │                     │     refresh_token,    │
+       │                     │     expires_in        │
+       │                     │                       │
+       │                     │  7. Save EmailConfig  │
+       │                     │     Publish event     │
+       │                     │                       │
+       │◀────────────────────│                       │
+       │  8. 200 OK          │                       │
+       │                     │                       │
+                </div>
+
+                <h3>Microsoft OAuth (Outlook)</h3>
+                <div class="diagram">
+┌─────────────┐     ┌─────────────────┐     ┌──────────────────┐
+│ Flutter App │     │ pilasfi-quarkus │     │ Azure AD         │
+└──────┬──────┘     └────────┬────────┘     └────────┬─────────┘
+       │                     │                       │
+       │  1. User taps       │                       │
+       │  "Connect Outlook"  │                       │
+       │─────────────────────│                       │
+       │                     │                       │
+       │  2. Open browser ───│───────────────────────│───────────▶
+       │     Azure AD login  │                       │
+       │     scope: Mail.Read offline_access         │
+       │                     │                       │
+       │◀────────────────────│───────────────────────│────────────
+       │  3. User authorizes │                       │
+       │     Redirect with   │                       │
+       │     auth_code       │                       │
+       │                     │                       │
+       │  4. POST /api/email-config                  │
+       │     {authCode, provider: "OUTLOOK"}         │
+       │────────────────────▶│                       │
+       │                     │                       │
+       │                     │  5. POST /oauth2/v2.0/token
+       │                     │──────────────────────▶│
+       │                     │                       │
+       │                     │◀──────────────────────│
+       │                     │  6. tokens response   │
+       │                     │                       │
+       │                     │  7. Save & publish    │
+       │                     │                       │
+       │◀────────────────────│                       │
+       │  8. 200 OK          │                       │
+                </div>
+            </section>
+
+            <!-- TOKEN REFRESH SECTION -->
+            <section id="token-refresh" class="section">
+                <h2 class="section-title">Token Refresh Flow</h2>
+
+                <div class="alert alert-warning">
+                    <strong>Importante:</strong> Los tokens de acceso expiran (Gmail: 1 hora, Outlook: 1 hora).
+                    El sistema refresca automaticamente antes de la expiracion.
+                </div>
+
+                <div class="diagram">
+┌─────────────────────┐     ┌─────────────────┐     ┌──────────────────┐
+│ pilasfi-email-sync  │     │ OAuth Provider  │     │ pilasfi-quarkus  │
+└──────────┬──────────┘     └────────┬────────┘     └────────┬─────────┘
+           │                         │                       │
+           │  Scheduler runs         │                       │
+           │  every 5 minutes        │                       │
+           │                         │                       │
+           │  1. Check tokens        │                       │
+           │     expiring in < 5min  │                       │
+           │                         │                       │
+           │  2. POST refresh_token  │                       │
+           │────────────────────────▶│                       │
+           │                         │                       │
+           │◀────────────────────────│                       │
+           │  3. New access_token    │                       │
+           │     + refresh_token     │                       │
+           │                         │                       │
+           │  4. Publish TokenRefreshedEvent                 │
+           │     to token-refreshed topic                    │
+           │─────────────────────────│──────────────────────▶│
+           │                         │                       │
+           │                         │  5. Update EmailConfig│
+           │                         │     with new tokens   │
+           │                         │                       │
+           │                         │  6. Persist to DB     │
+           │                         │                       │
+                </div>
+
+                <h3>TokenRefreshedEvent Schema</h3>
+<pre><code>{
+  "userId": "uuid",
+  "provider": "GMAIL" | "OUTLOOK",
+  "accessToken": "new_access_token",
+  "refreshToken": "new_refresh_token",  // May be same or new
+  "expiresAt": "2026-01-23T15:30:00Z",
+  "refreshedAt": "2026-01-23T14:30:00Z"
+}</code></pre>
+            </section>
+
+            <!-- FOOTER -->
+            <footer style="margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 12px;">
+                <p>PilasFi Platform - Documentacion Tecnica v3.0</p>
+                <p>Actualizado: 2026-01-23</p>
+                <p>Generado automaticamente basado en analisis de codigo fuente</p>
+                <p>Branches analizados:</p>
+                <ul style="margin-top: 10px;">
+                    <li>pilasfi-quarkus: feat/new-backend-architecture</li>
+                    <li>pilasfi-parser-service: feature/newarch</li>
+                    <li>pilasfi-email-sync: feature/fixandres</li>
+                    <li>app-pilas-fe: main</li>
+                    <li>pilasfi-infra-gcp: feature/init</li>
+                    <li>pilasfi-infra-apps: feature/new</li>
+                </ul>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        // Toggle collapsible sections
+        document.querySelectorAll('.collapsible-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.parentElement.classList.toggle('open');
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
