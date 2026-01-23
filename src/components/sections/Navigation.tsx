@@ -7,7 +7,6 @@ import { Menu, X, Zap } from "lucide-react";
 const navLinks = [
   { name: "Funciones", href: "#features" },
   { name: "Cómo Funciona", href: "#how-it-works" },
-  { name: "Bancos", href: "#banks" },
   { name: "Seguridad", href: "#security" },
   { name: "Testimonios", href: "#testimonials" },
   { name: "FAQ", href: "#faq" },

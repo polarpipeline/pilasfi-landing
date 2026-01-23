@@ -12,19 +12,19 @@ import {
   Star,
 } from "lucide-react";
 
-// Press logos data (simulated - using text for now)
-const pressLogos = [
-  { name: "El Comercio", url: "#" },
-  { name: "El Universo", url: "#" },
-  { name: "Vistazo", url: "#" },
-  { name: "TechCrunch", url: "#" },
+// Catchy phrases for the marquee
+const catchyPhrases = [
+  { text: "Tu coach de gastos personales" },
+  { text: "Dile adiós al Excel" },
+  { text: "Finanzas claras, pareja feliz" },
+  { text: "Aprendizaje automático para tus gastos" },
 ];
 
 // Trust indicators
 const trustIndicators = [
-  { icon: Shield, text: "Encriptación bancaria", color: "#10B981" },
+  { icon: Shield, text: "Tus datos seguros", color: "#10B981" },
   { icon: Zap, text: "100% Gratis", color: "#F59E0B" },
-  { icon: Users, text: "5,000+ parejas", color: "#6366F1" },
+  { icon: Users, text: "5,000+ usuarios", color: "#6366F1" },
 ];
 
 // Animated Counter Component
@@ -53,10 +53,10 @@ function PhoneScreenContent() {
       {/* Header */}
       <div style={{ marginBottom: "1.25rem" }}>
         <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.75rem", marginBottom: "0.25rem" }}>
-          Gastos del mes
+          Resumen del mes
         </p>
         <p style={{ color: "white", fontSize: "1.25rem", fontWeight: 700 }}>
-          Andrés & María
+          Tus Finanzas
         </p>
       </div>
 
@@ -101,11 +101,11 @@ function PhoneScreenContent() {
         </div>
       </div>
 
-      {/* Stats Row */}
+      {/* Stats Row - Categories */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", marginBottom: "1rem" }}>
         {[
-          { label: "Andrés", value: "$820", color: "#10B981" },
-          { label: "María", value: "$805", color: "#06B6D4" },
+          { label: "Hogar", value: "$620", color: "#10B981" },
+          { label: "Transporte", value: "$280", color: "#06B6D4" },
         ].map((stat, i) => (
           <motion.div
             key={i}
@@ -119,22 +119,22 @@ function PhoneScreenContent() {
             }}
           >
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.65rem", marginBottom: "0.25rem" }}>
-              {stat.label} gastó
+              {stat.label}
             </p>
             <p style={{ color: stat.color, fontWeight: 700, fontSize: "1.125rem" }}>{stat.value}</p>
           </motion.div>
         ))}
       </div>
 
-      {/* Recent Transactions */}
+      {/* Recent Transactions - Auto-categorized */}
       <div style={{ flex: 1 }}>
         <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.65rem", marginBottom: "0.5rem", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-          Últimos movimientos
+          Auto-categorizado
         </p>
         {[
-          { name: "Supermaxi", amount: "-$85.50", icon: "🛒", who: "María" },
-          { name: "Luz eléctrica", amount: "-$42.00", icon: "💡", who: "Andrés" },
-          { name: "Netflix", amount: "-$15.99", icon: "🎬", who: "Compartido" },
+          { name: "Supermercado", amount: "-$85.50", icon: "🛒", category: "Hogar" },
+          { name: "Electricidad", amount: "-$42.00", icon: "💡", category: "Servicios" },
+          { name: "Netflix", amount: "-$15.99", icon: "🎬", category: "Entretenimiento" },
         ].map((tx, i) => (
           <motion.div
             key={i}
@@ -155,7 +155,7 @@ function PhoneScreenContent() {
               <span style={{ fontSize: "1rem" }}>{tx.icon}</span>
               <div>
                 <p style={{ color: "white", fontSize: "0.8rem", fontWeight: 500 }}>{tx.name}</p>
-                <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.65rem" }}>{tx.who}</p>
+                <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.65rem" }}>{tx.category}</p>
               </div>
             </div>
             <span style={{ color: "rgba(255,255,255,0.8)", fontSize: "0.8rem", fontWeight: 600 }}>
@@ -334,7 +334,7 @@ export default function Hero() {
       <div className="noise-overlay" />
 
       <div className="container" style={{ position: "relative", zIndex: 10 }}>
-        {/* Press Badges Bar */}
+        {/* Catchy Phrases Bar */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -343,18 +343,15 @@ export default function Hero() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: "1rem",
+            gap: "1.5rem",
             marginBottom: "3rem",
             flexWrap: "wrap",
           }}
         >
-          <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.8125rem" }}>
-            Mencionado en
-          </span>
           <div className="press-logos" style={{ gap: "2rem" }}>
-            {pressLogos.map((logo) => (
+            {catchyPhrases.map((phrase) => (
               <span
-                key={logo.name}
+                key={phrase.text}
                 style={{
                   color: "rgba(255,255,255,0.5)",
                   fontSize: "0.875rem",
@@ -362,7 +359,7 @@ export default function Hero() {
                   letterSpacing: "0.02em",
                 }}
               >
-                {logo.name}
+                {phrase.text}
               </span>
             ))}
           </div>
@@ -383,7 +380,7 @@ export default function Hero() {
               style={{ display: "inline-flex" }}
             >
               <Sparkles size={16} color="#818CF8" />
-              <span>La app #1 de finanzas en pareja de Ecuador</span>
+              <span>Tu coach de gastos personales con IA</span>
             </motion.div>
 
             {/* Headline - Display XL */}
@@ -397,9 +394,9 @@ export default function Hero() {
                 color: "white",
               }}
             >
-              <span className="gradient-text-glow">Ponte pilas</span>
+              <span className="gradient-text-glow">Ponte Pilas</span>
               <br />
-              con tus finanzas en pareja
+              con tus finanzas
             </motion.h1>
 
             {/* Tagline */}
@@ -415,7 +412,7 @@ export default function Hero() {
                 letterSpacing: "-0.01em",
               }}
             >
-              Organiza tus gastos. Automáticamente.
+              Visibilidad total. Categorización inteligente. Cero Excel.
             </motion.p>
 
             {/* Description */}
@@ -429,9 +426,9 @@ export default function Hero() {
                 maxWidth: "540px",
               }}
             >
-              PilasFi lee tus emails bancarios y te muestra exactamente
-              quién gastó qué. Presupuestos compartidos, metas de ahorro
-              y control total de tu economía en pareja.
+              PilasFi categoriza tus gastos automáticamente con aprendizaje automático.
+              Comparte gastos con tu pareja, crea presupuestos inteligentes y
+              olvídate de las hojas de cálculo para siempre.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -495,7 +492,7 @@ export default function Hero() {
             >
               {[
                 { value: "10K+", label: "Usuarios activos" },
-                { value: "5K+", label: "Parejas conectadas" },
+                { value: "98%", label: "Gastos categorizados" },
                 { value: "4.9", label: "Rating App Store", icon: Star },
               ].map((stat, i) => (
                 <div key={i} style={{ textAlign: "left" }}>

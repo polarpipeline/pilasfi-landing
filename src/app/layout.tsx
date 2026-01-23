@@ -21,17 +21,17 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://pilasfi.com"),
   title: {
-    default: "PilasFi - La Mejor App de Finanzas Personales para Ecuador | Gratis",
+    default: "PilasFi - Tu Coach de Finanzas Personales con IA | Gratis",
     template: "%s | PilasFi",
   },
   description:
-    "PilasFi es la app #1 de finanzas personales en Ecuador. Lee automáticamente los emails de tu banco (Pichincha, Guayaquil, Produbanco, Diners), crea presupuestos compartidos con tu pareja, define metas de ahorro y controla los gastos del hogar. 100% gratis y seguro.",
+    "PilasFi categoriza tus gastos automáticamente con aprendizaje automático. Visibilidad total de tus finanzas, presupuestos inteligentes, gastos compartidos con tu pareja. Olvídate del Excel. 100% gratis.",
   keywords: [
     // Main keywords
     "pilasfi",
     "pilas fi",
     "app finanzas personales",
-    "finanzas personales ecuador",
+    "categorizar gastos automaticamente",
     "app de gastos",
     "control de gastos",
     "presupuesto personal",
@@ -43,30 +43,20 @@ export const metadata: Metadata = {
     "gastos del hogar",
     "finanzas familiares",
     "control gastos pareja",
-    // Banking
-    "banco pichincha app",
-    "banco guayaquil app",
-    "produbanco app",
-    "diners club ecuador",
-    "pacificard",
-    "banco del pacifico",
-    "de una app",
     // Features
     "ahorro automatico",
     "metas de ahorro",
     "categorizar gastos",
-    "leer emails banco",
-    "notificaciones bancarias",
-    // Location
-    "app finanzas quito",
-    "app finanzas guayaquil",
-    "app ecuador gratis",
-    "mejor app finanzas ecuador",
+    "aprendizaje automatico finanzas",
+    "machine learning gastos",
+    "alternativa excel gastos",
     // Long-tail
     "como controlar gastos en pareja",
     "app para presupuesto familiar",
-    "mejor app para ahorrar dinero ecuador",
+    "mejor app para ahorrar dinero",
     "app gratuita finanzas personales",
+    "coach finanzas personales",
+    "visibilidad gastos",
   ],
   authors: [
     { name: "PilasFi Team", url: "https://pilasfi.com" },
@@ -84,24 +74,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://pilasfi.com",
     languages: {
-      "es-EC": "https://pilasfi.com",
       "es": "https://pilasfi.com",
     },
   },
   openGraph: {
     type: "website",
-    locale: "es_EC",
+    locale: "es",
     url: "https://pilasfi.com",
     siteName: "PilasFi",
-    title: "PilasFi - Controla tus Gastos en Pareja Automáticamente",
+    title: "PilasFi - Tu Coach de Finanzas con Aprendizaje Automático",
     description:
-      "La app #1 de finanzas en Ecuador. Lee emails de tu banco automáticamente, crea presupuestos compartidos con tu pareja y ahorra sin esfuerzo. Gratis para siempre.",
+      "Categoriza tus gastos automáticamente con IA. Visibilidad total, presupuestos inteligentes, gastos compartidos con tu pareja. Olvídate del Excel. Gratis para siempre.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "PilasFi - App de Finanzas Personales para Ecuador",
+        alt: "PilasFi - Tu Coach de Finanzas Personales con IA",
         type: "image/png",
       },
       {
@@ -112,15 +101,14 @@ export const metadata: Metadata = {
         type: "image/png",
       },
     ],
-    countryName: "Ecuador",
   },
   twitter: {
     card: "summary_large_image",
     site: "@pilasfi",
     creator: "@pilasfi",
-    title: "PilasFi - La Mejor App de Finanzas para Ecuador",
+    title: "PilasFi - Tu Coach de Finanzas con IA",
     description:
-      "Controla tus gastos en pareja automáticamente. Lee emails de tu banco, crea presupuestos compartidos y ahorra sin esfuerzo. 100% gratis.",
+      "Categoriza tus gastos automáticamente con aprendizaje automático. Presupuestos inteligentes y gastos compartidos. Olvídate del Excel. 100% gratis.",
     images: {
       url: "/og-image.png",
       alt: "PilasFi - Finanzas Personales Inteligentes",

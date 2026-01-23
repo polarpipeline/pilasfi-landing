@@ -32,50 +32,50 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    icon: Users,
-    title: "Finanzas en Pareja",
+    icon: PieChart,
+    title: "Visibilidad Total de tus Gastos",
     description:
-      "Conecta con tu pareja y manejen juntos los gastos del hogar. Vean quién gastó qué y mantengan el equilibrio financiero en tiempo real.",
+      "Ve exactamente en qué gastas tu dinero. Gráficos claros, categorías automáticas y un dashboard que te muestra la realidad de tus finanzas en tiempo real.",
     size: "large",
     gradient: "linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%)",
     highlight: true,
   },
   {
-    icon: Mail,
-    title: "Lectura Automática",
-    description:
-      "Conecta tu correo y PilasFi detecta automáticamente las notificaciones de tus bancos.",
-    size: "small",
-  },
-  {
     icon: Brain,
-    title: "IA Inteligente",
+    title: "Categorización con IA",
     description:
-      "Categorización automática que aprende de tus hábitos de gasto.",
+      "Aprendizaje automático que categoriza tus gastos inteligentemente. Aprende de tus hábitos y mejora con el tiempo.",
     size: "small",
   },
   {
-    icon: Home,
-    title: "Presupuesto del Hogar",
+    icon: Eye,
+    title: "Adiós a las Sorpresas",
     description:
-      "Crea presupuestos compartidos para el arriendo, servicios, supermercado y más. Ambos ven el progreso en tiempo real.",
+      "Nunca más te preguntes '¿en qué se fue el dinero?'. Visibilidad total, cero misterios.",
+    size: "small",
+  },
+  {
+    icon: Users,
+    title: "Gastos Compartidos en Pareja",
+    description:
+      "Conecta con tu pareja y vean juntos los gastos del hogar. Quién pagó qué, cuánto aporta cada uno, todo transparente y sin peleas.",
     size: "medium",
     gradient: "linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%)",
     highlight: true,
   },
   {
-    icon: Eye,
-    title: "Privacidad Inteligente",
+    icon: Wallet,
+    title: "Presupuestos Inteligentes",
     description:
-      "Decide qué gastos son visibles para tu pareja y cuáles son privados. Tu privacidad financiera es sagrada.",
+      "Crea presupuestos por categoría en segundos. Olvídate del Excel y las hojas de cálculo. PilasFi hace el trabajo duro por ti.",
     size: "medium",
     highlight: true,
   },
   {
-    icon: PieChart,
-    title: "Dashboard en Tiempo Real",
+    icon: Mail,
+    title: "Lectura Automática de Emails",
     description:
-      "Visualiza ingresos, gastos y tendencias con gráficos claros.",
+      "Conecta tu correo y detectamos automáticamente las notificaciones de tus bancos.",
     size: "small",
   },
   {
@@ -86,17 +86,17 @@ const features: Feature[] = [
     size: "small",
   },
   {
-    icon: Wallet,
-    title: "Presupuestos por Categoría",
+    icon: Home,
+    title: "Control del Hogar",
     description:
-      "Límites para comida, transporte, entretenimiento. Alertas cuando te acerques al límite.",
+      "Arriendo, servicios, supermercado y más. Todo organizado y categorizado automáticamente.",
     size: "small",
   },
   {
     icon: Bell,
     title: "Alertas Inteligentes",
     description:
-      "Notificaciones de gastos inusuales o cuando superas un presupuesto.",
+      "Notificaciones cuando te acerques al límite de tu presupuesto o detectemos gastos inusuales.",
     size: "small",
   },
 ];
@@ -219,9 +219,9 @@ function BentoCard({ feature, index }: { feature: Feature; index: number }) {
 // Stats Component
 function Stats() {
   const stats = [
-    { number: "7+", label: "Bancos soportados" },
+    { number: "98%", label: "Gastos categorizados" },
     { number: "100%", label: "Gratis siempre" },
-    { number: "5,000+", label: "Parejas activas" },
+    { number: "5,000+", label: "Usuarios activos" },
     { number: "4.9", label: "Rating App Store" },
   ];
 
@@ -276,15 +276,15 @@ export default function Features() {
           >
             <div className="badge" style={{ margin: "0 auto 1.5rem" }}>
               <Heart size={16} color="#818CF8" />
-              <span>Diseñado para parejas</span>
+              <span>Dile adiós al Excel</span>
             </div>
             <h2 className="display-lg">
-              Todo lo que necesitan para{" "}
-              <span className="gradient-text">manejar su dinero juntos</span>
+              Todo lo que necesitas para{" "}
+              <span className="gradient-text">controlar tu dinero</span>
             </h2>
             <p>
-              Automatizamos lo tedioso para que ustedes solo se enfoquen en
-              disfrutar su vida financiera en pareja.
+              Aprendizaje automático que categoriza tus gastos, presupuestos inteligentes
+              y la posibilidad de compartir con tu pareja. Sin hojas de cálculo.
             </p>
           </motion.div>
         </div>

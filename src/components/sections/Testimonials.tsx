@@ -4,16 +4,16 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { Star, Quote, TrendingUp } from "lucide-react";
 
-// Press logos component
-const pressLogos = [
-  "El Comercio",
-  "El Universo",
-  "Vistazo",
-  "Ecuavisa",
-  "TechCrunch Latam",
+// Catchy phrases component
+const catchyPhrases = [
+  "Ponte pilas con tus finanzas",
+  "Tu coach de gastos",
+  "Adiós Excel",
+  "Finanzas inteligentes",
+  "Aprendizaje automático",
 ];
 
-function PressLogosBar() {
+function CatchyPhrasesBar() {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -27,18 +27,6 @@ function PressLogosBar() {
         border: "1px solid rgba(255, 255, 255, 0.05)",
       }}
     >
-      <p
-        style={{
-          textAlign: "center",
-          color: "rgba(255, 255, 255, 0.4)",
-          fontSize: "0.8125rem",
-          marginBottom: "1.25rem",
-          textTransform: "uppercase",
-          letterSpacing: "0.1em",
-        }}
-      >
-        Como se ha visto en
-      </p>
       <div
         style={{
           display: "flex",
@@ -48,9 +36,9 @@ function PressLogosBar() {
           flexWrap: "wrap",
         }}
       >
-        {pressLogos.map((logo) => (
+        {catchyPhrases.map((phrase) => (
           <motion.span
-            key={logo}
+            key={phrase}
             whileHover={{ scale: 1.05, color: "rgba(255, 255, 255, 0.8)" }}
             style={{
               color: "rgba(255, 255, 255, 0.4)",
@@ -61,7 +49,7 @@ function PressLogosBar() {
               transition: "color 0.3s ease",
             }}
           >
-            {logo}
+            {phrase}
           </motion.span>
         ))}
       </div>
@@ -324,8 +312,8 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="section" style={{ background: "var(--color-dark-800)" }}>
       <div className="container">
-        {/* Press Logos Bar */}
-        <PressLogosBar />
+        {/* Catchy Phrases Bar */}
+        <CatchyPhrasesBar />
 
         {/* Header */}
         <div className="section-header">
@@ -343,7 +331,7 @@ export default function Testimonials() {
               <span className="gradient-text">parejas</span>
             </h2>
             <p>
-              Miles de parejas ecuatorianas ya manejan sus finanzas juntos con PilasFi.
+              Miles de usuarios ya controlan sus finanzas con PilasFi. Sin Excel, sin complicaciones.
             </p>
           </motion.div>
         </div>

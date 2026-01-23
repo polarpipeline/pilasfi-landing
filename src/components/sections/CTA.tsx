@@ -137,8 +137,8 @@ export default function CTA() {
                 margin: "0 auto 2.5rem",
               }}
             >
-              Únanse a miles de parejas ecuatorianas que ya mejoraron su relación
-              financiera con PilasFi. Es gratis y toma minutos configurar.
+              Únete a miles de usuarios que ya dijeron adiós al Excel.
+              Ponte pilas con tus finanzas. Es gratis y toma minutos configurar.
             </motion.p>
 
             {/* Benefits */}

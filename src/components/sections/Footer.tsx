@@ -1,14 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, Mail, MapPin, Instagram, Twitter, Linkedin, Heart } from "lucide-react";
+import { Zap, Mail, Instagram, Twitter, Linkedin, Heart } from "lucide-react";
 import Link from "next/link";
 
 const links = {
   product: [
     { name: "Funciones", href: "#features" },
     { name: "Cómo Funciona", href: "#how-it-works" },
-    { name: "Bancos", href: "#banks" },
     { name: "Seguridad", href: "#security" },
     { name: "FAQ", href: "#faq" },
   ],
@@ -75,8 +74,8 @@ export default function Footer() {
                 lineHeight: 1.7,
               }}
             >
-              La app que automatiza tus finanzas personales y te ayuda a manejar
-              el dinero en pareja. Diseñada para Ecuador.
+              Tu coach de finanzas personales con aprendizaje automático.
+              Categoriza gastos, crea presupuestos y comparte con tu pareja.
             </p>
             <div className="flex flex-col gap-3">
               <motion.a
@@ -88,13 +87,6 @@ export default function Footer() {
                 <Mail size={16} color="#818CF8" />
                 hola@pilasfi.com
               </motion.a>
-              <span
-                className="flex items-center gap-2"
-                style={{ color: "rgba(255, 255, 255, 0.4)", fontSize: "0.9375rem" }}
-              >
-                <MapPin size={16} color="#818CF8" />
-                Guayaquil, Ecuador
-              </span>
             </div>
           </div>
 
@@ -243,7 +235,7 @@ export default function Footer() {
             gap: "0.5rem",
           }}
         >
-          Hecho con <Heart size={14} color="#EF4444" fill="#EF4444" /> en Ecuador
+          Hecho con <Heart size={14} color="#EF4444" fill="#EF4444" /> para ti
         </motion.p>
       </div>
     </footer>

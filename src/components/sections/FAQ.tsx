@@ -36,9 +36,9 @@ const faqs = [
     icon: Zap,
     questions: [
       {
-        question: "¿Qué bancos están soportados?",
+        question: "¿Funciona con cualquier banco?",
         answer:
-          "Actualmente soportamos Banco Pichincha, Banco Guayaquil, Produbanco, Diners Club, Pacificard, Banco del Pacífico y De Una. Estamos agregando más bancos constantemente. Si tu banco no está en la lista, escríbenos y lo priorizamos.",
+          "PilasFi funciona con la mayoría de bancos que envían notificaciones por email. Nuestro sistema de aprendizaje automático se adapta automáticamente a los formatos de diferentes instituciones financieras. Si tu banco envía notificaciones por email, PilasFi puede leerlas.",
       },
       {
         question: "¿Funciona con cualquier email?",
@@ -93,9 +93,9 @@ const faqs = [
           "PilasFi es 100% gratis. No hay planes premium, suscripciones ocultas ni costos adicionales. Creemos que el control financiero debe ser accesible para todos.",
       },
       {
-        question: "¿Está disponible en otros países?",
+        question: "¿Está disponible en mi país?",
         answer:
-          "Actualmente PilasFi está diseñado específicamente para Ecuador, con soporte para bancos ecuatorianos. Estamos trabajando en expandir a otros países de Latinoamérica.",
+          "PilasFi funciona en cualquier país donde tu banco envíe notificaciones por email. Nuestro sistema de aprendizaje automático se adapta a diferentes formatos e idiomas. Si puedes recibir emails de tu banco, puedes usar PilasFi.",
       },
       {
         question: "¿Necesito internet para usar la app?",
