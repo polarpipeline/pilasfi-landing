@@ -59,4 +59,29 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Keyword Optimized Pages -->
+  <url>
+    <loc>https://pilasfi.com/pilas-fi</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pilasfi.com/og-image.png</image:loc>
+      <image:title>Pilas Fi - App de Finanzas Personales para Ecuador</image:title>
+      <image:caption>Pilas Fi control automático de gastos con machine learning</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://pilasfi.com/pilasfi</loc>
+    <lastmod>2026-01-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://pilasfi.com/og-image.png</image:loc>
+      <image:title>PilasFi - Inteligencia Artificial para Finanzas Personales</image:title>
+      <image:caption>PilasFi app con machine learning para categorización automática</image:caption>
+    </image:image>
+  </url>
+
 </urlset>

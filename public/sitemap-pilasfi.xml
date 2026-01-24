@@ -1,0 +1,20 @@
+User-agent: *
+Crawl-delay: 1
+
+# Allow all important pages
+Allow: /
+Allow: /pilas-fi
+Allow: /pilasfi
+Allow: /soporte
+Allow: /terminos
+Allow: /privacidad
+Allow: /licencia
+Allow: /cookies
+Allow: /eliminar-datos
+
+# Disallow technical/internal pages
+Disallow: /api/
+Disallow: /_next/static/
+Disallow: /private/
+
+Sitemap: https://pilasfi.com/sitemap.xml
