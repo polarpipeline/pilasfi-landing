@@ -99,7 +99,7 @@ export default function Features() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          style={{ textAlign: "center", marginBottom: "3rem" }}
+          style={{ textAlign: "center", marginBottom: "3rem", maxWidth: "700px", margin: "0 auto 3rem" }}
         >
           <div
             style={{
@@ -122,11 +122,20 @@ export default function Features() {
             fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
             fontWeight: 800,
             color: "#120D31",
-            marginBottom: "0.5rem"
+            marginBottom: "1rem"
           }}>
             Todo lo que necesitas para{" "}
             <span style={{ color: "#7B3FE4" }}>controlar tu dinero</span>
           </h2>
+          <p style={{
+            color: "#535A6A",
+            fontSize: "1rem",
+            lineHeight: 1.7,
+          }}>
+            Comparte a PilasFi tus gastos y de quienes desees trackear y el resto lo hacemos por ti.
+            Centraliza tus gastos (pagos a todas las entidades que realices), reconoce gastos hormigas,
+            planifica tu economía y proyecta ahorros potenciales.
+          </p>
         </motion.div>
 
         {/* Features Grid - Simple responsive grid */}
@@ -205,46 +214,6 @@ export default function Features() {
             </motion.div>
           ))}
         </div>
-
-        {/* Stats Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          style={{
-            marginTop: "3rem",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
-            gap: "1.5rem",
-            background: "#FFFFFF",
-            borderRadius: "16px",
-            padding: "1.5rem 2rem",
-            border: "1px solid #E5E5E5",
-          }}
-        >
-          {[
-            { number: "98%", label: "Gastos categorizados" },
-            { number: "100%", label: "Gratis siempre" },
-            { number: "5,000+", label: "Usuarios activos" },
-            { number: "4.9", label: "Rating App Store" },
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              style={{ textAlign: "center" }}
-            >
-              <div style={{ fontSize: "1.75rem", fontWeight: 800, color: "#7B3FE4" }}>
-                {stat.number}
-              </div>
-              <p style={{ color: "#86909E", fontSize: "0.75rem", marginTop: "0.25rem" }}>
-                {stat.label}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );

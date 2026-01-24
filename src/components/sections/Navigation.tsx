@@ -83,7 +83,13 @@ export default function Navigation() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="nav-link"
+                  style={{
+                    color: "#120D31",
+                    textDecoration: "none",
+                    fontSize: "0.9375rem",
+                    fontWeight: 500,
+                    transition: "color 0.2s ease",
+                  }}
                   aria-label={`Ir a ${link.name}`}
                 >
                   {link.name}

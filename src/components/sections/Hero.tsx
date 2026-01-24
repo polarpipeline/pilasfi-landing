@@ -6,16 +6,13 @@ import {
   ArrowRight,
   Shield,
   Zap,
-  Users,
-  Star,
   Sparkles,
 } from "lucide-react";
 
-// Trust indicators
+// Trust indicators - solo los reales
 const trustIndicators = [
   { icon: Shield, text: "Datos 100% seguros", color: "#10B981" },
   { icon: Zap, text: "100% Gratis", color: "#7B3FE4" },
-  { icon: Users, text: "5,000+ usuarios", color: "#037D7D" },
 ];
 
 // Phone Screen Content Component
@@ -235,12 +232,12 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.4 }}
               style={{
                 fontSize: "1.125rem",
-                fontWeight: 500,
-                color: "#535A6A",
-                marginBottom: "0.75rem",
+                fontWeight: 600,
+                color: "#120D31",
+                marginBottom: "1rem",
               }}
             >
-              Visibilidad total. Categorización inteligente. Cero Excel.
+              Visibilidad total. Categorización inteligente.
             </motion.p>
 
             {/* Description */}
@@ -250,14 +247,14 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.5 }}
               style={{
                 fontSize: "1rem",
-                lineHeight: 1.6,
+                lineHeight: 1.7,
                 color: "#535A6A",
                 marginBottom: "1.5rem",
-                maxWidth: "480px",
+                maxWidth: "500px",
               }}
             >
-              PilasFi categoriza tus gastos automáticamente con IA.
-              Comparte gastos con tu pareja y olvídate de las hojas de cálculo.
+              No pierdas tiempo usando hojas de cálculo, buscando pagos y cuadrando tus finanzas manualmente.
+              PilasFi categoriza tus gastos al instante, de manera automática y confiable.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -313,7 +310,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.8 }}
-              style={{ display: "flex", flexWrap: "wrap", gap: "1.25rem", marginTop: "1.5rem" }}
+              style={{ display: "flex", flexWrap: "wrap", gap: "1.25rem", marginTop: "1rem" }}
             >
               {trustIndicators.map((item, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
@@ -332,39 +329,6 @@ export default function Hero() {
                   </div>
                   <span style={{ color: "#535A6A", fontSize: "0.8125rem", fontWeight: 500 }}>
                     {item.text}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Stats Row */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1 }}
-              style={{
-                display: "flex",
-                gap: "2rem",
-                marginTop: "2rem",
-                paddingTop: "1.5rem",
-                borderTop: "1px solid #E5E5E5",
-                flexWrap: "wrap",
-              }}
-            >
-              {[
-                { value: "10K+", label: "Usuarios activos" },
-                { value: "98%", label: "Gastos categorizados" },
-                { value: "4.9", label: "Rating App Store", icon: Star },
-              ].map((stat, i) => (
-                <div key={i} style={{ textAlign: "left" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.25rem" }}>
-                    <span style={{ fontSize: "1.5rem", fontWeight: 800, color: "#7B3FE4" }}>
-                      {stat.value}
-                    </span>
-                    {stat.icon && <stat.icon size={14} fill="#F59E0B" color="#F59E0B" />}
-                  </div>
-                  <span style={{ color: "#86909E", fontSize: "0.75rem" }}>
-                    {stat.label}
                   </span>
                 </div>
               ))}

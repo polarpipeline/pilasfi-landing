@@ -341,8 +341,6 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Stats Banner */}
-        <StatsBanner />
       </div>
 
       <style jsx>{`
