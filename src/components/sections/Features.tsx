@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 import { useRef, MouseEvent } from "react";
 import {
   Mail,
@@ -9,13 +9,11 @@ import {
   Target,
   Users,
   Bell,
-  Shield,
-  TrendingUp,
   Wallet,
-  Heart,
   Home,
   Eye,
   Sparkles,
+  Zap,
 } from "lucide-react";
 
 // Bento card types
@@ -28,6 +26,7 @@ interface Feature {
   size: BentoSize;
   gradient?: string;
   highlight?: boolean;
+  tag?: string;
 }
 
 const features: Feature[] = [
@@ -37,8 +36,9 @@ const features: Feature[] = [
     description:
       "Ve exactamente en qué gastas tu dinero. Gráficos claros, categorías automáticas y un dashboard que te muestra la realidad de tus finanzas en tiempo real.",
     size: "large",
-    gradient: "linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%)",
+    gradient: "linear-gradient(135deg, rgba(246, 133, 27, 0.12) 0%, rgba(139, 92, 246, 0.12) 100%)",
     highlight: true,
+    tag: "Más popular",
   },
   {
     icon: Brain,
@@ -60,8 +60,9 @@ const features: Feature[] = [
     description:
       "Conecta con tu pareja y vean juntos los gastos del hogar. Quién pagó qué, cuánto aporta cada uno, todo transparente y sin peleas.",
     size: "medium",
-    gradient: "linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%)",
+    gradient: "linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)",
     highlight: true,
+    tag: "Para parejas",
   },
   {
     icon: Wallet,
@@ -101,7 +102,7 @@ const features: Feature[] = [
   },
 ];
 
-// Bento Card Component with mouse tracking
+// Bento Card Component with mouse tracking and MetaMask styling
 function BentoCard({ feature, index }: { feature: Feature; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
@@ -132,28 +133,51 @@ function BentoCard({ feature, index }: { feature: Feature; index: number }) {
       ref={ref}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.05, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ delay: index * 0.05, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       onMouseMove={handleMouseMove}
-      className={`bento-card ${getSizeClass(feature.size)}`}
+      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      className={`feature-card-mm ${getSizeClass(feature.size)}`}
       style={{
-        background: feature.gradient || "rgba(255, 255, 255, 0.03)",
+        background: feature.gradient || "rgba(255, 255, 255, 0.02)",
         "--mouse-x": mouseX,
         "--mouse-y": mouseY,
+        position: "relative",
       } as React.CSSProperties}
     >
-      {/* Icon */}
-      <div
-        className="feature-icon"
+      {/* Animated top border gradient */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.05 + 0.3, duration: 0.6 }}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "3px",
+          background: "linear-gradient(90deg, var(--mm-orange), var(--mm-purple), var(--mm-cyan))",
+          transformOrigin: "left",
+          borderRadius: "24px 24px 0 0",
+        }}
+      />
+
+      {/* Icon with glow */}
+      <motion.div
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        className="icon-glow-box"
         style={{
           background: feature.highlight
-            ? "linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)"
-            : undefined,
-          color: feature.highlight ? "white" : undefined,
+            ? "linear-gradient(135deg, var(--mm-orange) 0%, var(--mm-orange-dark) 100%)"
+            : "linear-gradient(135deg, rgba(246, 133, 27, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%)",
+          color: feature.highlight ? "white" : "var(--mm-orange-light)",
+          marginBottom: "1.5rem",
         }}
       >
-        <feature.icon size={feature.size === "large" ? 32 : 26} />
-      </div>
+        <feature.icon size={feature.size === "large" ? 28 : 24} />
+      </motion.div>
 
       {/* Content */}
       <div style={{ position: "relative", zIndex: 2 }}>
@@ -171,34 +195,43 @@ function BentoCard({ feature, index }: { feature: Feature; index: number }) {
           style={{
             color: "rgba(255, 255, 255, 0.6)",
             fontSize: feature.size === "large" ? "1rem" : "0.9375rem",
-            lineHeight: 1.6,
+            lineHeight: 1.7,
           }}
         >
           {feature.description}
         </p>
 
-        {feature.highlight && (
-          <span
+        {feature.tag && (
+          <motion.span
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.05 + 0.4 }}
             style={{
               display: "inline-block",
               marginTop: "1.25rem",
               fontSize: "0.75rem",
               fontWeight: 600,
-              color: "var(--color-primary-light)",
-              background: "rgba(99, 102, 241, 0.15)",
+              color: "var(--mm-orange-light)",
+              background: "rgba(246, 133, 27, 0.15)",
               padding: "0.375rem 0.875rem",
               borderRadius: "9999px",
-              border: "1px solid rgba(99, 102, 241, 0.3)",
+              border: "1px solid rgba(246, 133, 27, 0.3)",
             }}
           >
-            Para parejas
-          </span>
+            {feature.tag}
+          </motion.span>
         )}
       </div>
 
-      {/* Large card decoration */}
+      {/* Large card glow decoration */}
       {feature.size === "large" && (
-        <div
+        <motion.div
+          animate={{
+            opacity: [0.3, 0.5, 0.3],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ duration: 4, repeat: Infinity }}
           style={{
             position: "absolute",
             bottom: "-20%",
@@ -206,23 +239,37 @@ function BentoCard({ feature, index }: { feature: Feature; index: number }) {
             width: "300px",
             height: "300px",
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(246, 133, 27, 0.15) 0%, transparent 70%)",
             filter: "blur(40px)",
             pointerEvents: "none",
           }}
         />
       )}
+
+      {/* Hover spotlight effect */}
+      <motion.div
+        style={{
+          position: "absolute",
+          inset: 0,
+          borderRadius: "24px",
+          background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(246, 133, 27, 0.08), transparent 40%)`,
+          opacity: 0,
+          transition: "opacity 0.3s",
+          pointerEvents: "none",
+        }}
+        whileHover={{ opacity: 1 }}
+      />
     </motion.div>
   );
 }
 
-// Stats Component
+// Stats Component with MetaMask styling
 function Stats() {
   const stats = [
-    { number: "98%", label: "Gastos categorizados" },
-    { number: "100%", label: "Gratis siempre" },
-    { number: "5,000+", label: "Usuarios activos" },
-    { number: "4.9", label: "Rating App Store" },
+    { number: "98%", label: "Gastos categorizados", color: "#F6851B" },
+    { number: "100%", label: "Gratis siempre", color: "#10B981" },
+    { number: "5,000+", label: "Usuarios activos", color: "#8B5CF6" },
+    { number: "4.9", label: "Rating App Store", color: "#06B6D4" },
   ];
 
   return (
@@ -234,7 +281,7 @@ function Stats() {
         marginTop: "5rem",
         display: "grid",
         gridTemplateColumns: "repeat(2, 1fr)",
-        gap: "2rem",
+        gap: "1.5rem",
         textAlign: "center",
       }}
       className="stats-grid"
@@ -246,15 +293,47 @@ function Stats() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.1 }}
+          whileHover={{ y: -5, transition: { duration: 0.2 } }}
           style={{
             padding: "2rem",
-            background: "rgba(255, 255, 255, 0.03)",
+            background: "rgba(255, 255, 255, 0.02)",
             borderRadius: "20px",
             border: "1px solid rgba(255, 255, 255, 0.06)",
+            position: "relative",
+            overflow: "hidden",
           }}
         >
-          <div className="stat-number">{stat.number}</div>
-          <p style={{ color: "rgba(255, 255, 255, 0.5)", marginTop: "0.5rem", fontSize: "0.9375rem" }}>
+          {/* Top accent line */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "60px",
+              height: "3px",
+              background: `linear-gradient(90deg, transparent, ${stat.color}, transparent)`,
+              borderRadius: "0 0 4px 4px",
+            }}
+          />
+          <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 + 0.2, type: "spring", stiffness: 200 }}
+            style={{
+              fontSize: "3rem",
+              fontWeight: 800,
+              background: `linear-gradient(135deg, ${stat.color} 0%, var(--mm-purple) 100%)`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              lineHeight: 1,
+            }}
+          >
+            {stat.number}
+          </motion.div>
+          <p style={{ color: "rgba(255, 255, 255, 0.5)", marginTop: "0.75rem", fontSize: "0.9375rem" }}>
             {stat.label}
           </p>
         </motion.div>
@@ -265,8 +344,44 @@ function Stats() {
 
 export default function Features() {
   return (
-    <section id="features" className="section" style={{ background: "var(--color-dark-800)" }}>
-      <div className="container">
+    <section
+      id="features"
+      className="section"
+      style={{
+        background: "var(--color-dark-800)",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Background decorations */}
+      <div
+        style={{
+          position: "absolute",
+          top: "10%",
+          left: "-10%",
+          width: "500px",
+          height: "500px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(246, 133, 27, 0.08) 0%, transparent 70%)",
+          filter: "blur(80px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "20%",
+          right: "-10%",
+          width: "400px",
+          height: "400px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%)",
+          filter: "blur(80px)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div className="container" style={{ position: "relative", zIndex: 2 }}>
         {/* Header */}
         <div className="section-header">
           <motion.div
@@ -274,13 +389,19 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="badge" style={{ margin: "0 auto 1.5rem" }}>
-              <Heart size={16} color="#818CF8" />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="badge"
+              style={{ margin: "0 auto 1.5rem" }}
+            >
+              <Zap size={16} color="#F6851B" />
               <span>Dile adiós al Excel</span>
-            </div>
+            </motion.div>
             <h2 className="display-lg">
               Todo lo que necesitas para{" "}
-              <span className="gradient-text">controlar tu dinero</span>
+              <span className="gradient-text-mm-glow">controlar tu dinero</span>
             </h2>
             <p>
               Aprendizaje automático que categoriza tus gastos, presupuestos inteligentes
@@ -288,6 +409,21 @@ export default function Features() {
             </p>
           </motion.div>
         </div>
+
+        {/* Animated Separator Line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{
+            width: "120px",
+            height: "3px",
+            background: "linear-gradient(90deg, var(--mm-orange), var(--mm-purple))",
+            margin: "0 auto 4rem",
+            borderRadius: "2px",
+          }}
+        />
 
         {/* Bento Grid */}
         <div className="bento-grid">

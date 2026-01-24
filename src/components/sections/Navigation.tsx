@@ -57,11 +57,11 @@ export default function Navigation() {
                   width: 42,
                   height: 42,
                   borderRadius: 12,
-                  background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                  background: "linear-gradient(135deg, #F6851B, #8B5CF6)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  boxShadow: "0 4px 20px rgba(99, 102, 241, 0.3)",
+                  boxShadow: "0 4px 20px rgba(246, 133, 27, 0.4)",
                 }}
                 aria-hidden="true"
               >
@@ -74,7 +74,7 @@ export default function Navigation() {
                 letterSpacing: "-0.02em",
               }}>
                 Pilas<span style={{
-                  background: "linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%)",
+                  background: "linear-gradient(135deg, #F6851B 0%, #8B5CF6 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
