@@ -202,13 +202,13 @@ export default function Support() {
       <h3>¿Qué bancos son compatibles?</h3>
       <p>Actualmente soportamos notificaciones de:</p>
       <ul>
-        <li>Banco Pichincha</li>
-        <li>Banco Guayaquil</li>
-        <li>Produbanco</li>
-        <li>Diners Club Ecuador</li>
-        <li>Pacificard</li>
-        <li>Banco del Pacífico</li>
-        <li>De Una</li>
+        <li>Emails de notificaciones de transacciones bancarias</li>
+        <li>Alertas de movimientos financieros</li>
+        <li>Confirmaciones de operaciones</li>
+        <li>Estados y transacciones de tarjetas</li>
+        <li>Notificaciones de consumos</li>
+        <li>Alertas transaccionales</li>
+        <li>Notificaciones de movimientos</li>
       </ul>
 
       <h3>¿Cuánto cuesta PilasFi?</h3>

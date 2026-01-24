@@ -148,8 +148,7 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   verification: {
-    google: "tu-codigo-de-verificacion-google",
-    yandex: "tu-codigo-yandex",
+    // Add real verification codes when available from Google Search Console
     other: {
       "msvalidate.01": "tu-codigo-bing",
       "facebook-domain-verification": "tu-codigo-facebook",
@@ -162,7 +161,7 @@ export const metadata: Metadata = {
   },
   appLinks: {
     ios: {
-      url: "https://apps.apple.com/ec/app/pilasfi/id123456789",
+      url: "https://pilasfi.com/#download",
       app_store_id: "123456789",
     },
     android: {
@@ -318,8 +317,8 @@ export default function RootLayout({
     description: "PilasFi es la app de finanzas personales #1 en Ecuador. Lee automáticamente los emails de notificaciones de tu banco (Pichincha, Guayaquil, Produbanco, Diners Club, Pacificard, Banco del Pacífico, De Una), categoriza tus gastos automáticamente, te permite crear presupuestos compartidos con tu pareja para manejar los gastos del hogar, y te ayuda a definir metas de ahorro. Todo 100% gratis y seguro.",
     url: "https://pilasfi.com",
     downloadUrl: [
-      "https://apps.apple.com/ec/app/pilasfi/id123456789",
-      "https://play.google.com/store/apps/details?id=com.pilasfi.app",
+      "https://pilasfi.com/#download",
+      "https://pilasfi.com/#download",
     ],
     author: {
       "@id": "https://pilasfi.com/#organization",

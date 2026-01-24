@@ -43,13 +43,13 @@ export default function PrivacyPolicy() {
         ecuatorianos compatibles. Específicamente:
       </p>
       <ul>
-        <li>Emails de Banco Pichincha (notificaciones de transacciones)</li>
-        <li>Emails de Banco Guayaquil (alertas de movimientos)</li>
-        <li>Emails de Produbanco (confirmaciones de operaciones)</li>
-        <li>Emails de Diners Club Ecuador (estados y transacciones)</li>
-        <li>Emails de Pacificard (notificaciones de consumos)</li>
-        <li>Emails de Banco del Pacífico (alertas transaccionales)</li>
-        <li>Emails de De Una (notificaciones de movimientos)</li>
+        <li>Emails de Emails de notificaciones de transacciones bancarias (notificaciones de transacciones)</li>
+        <li>Emails de Alertas de movimientos financieros (alertas de movimientos)</li>
+        <li>Emails de Confirmaciones de operaciones (confirmaciones de operaciones)</li>
+        <li>Emails de Estados y transacciones de tarjetas (estados y transacciones)</li>
+        <li>Emails de Notificaciones de consumos (notificaciones de consumos)</li>
+        <li>Emails de Alertas transaccionales (alertas transaccionales)</li>
+        <li>Emails de Notificaciones de movimientos (notificaciones de movimientos)</li>
       </ul>
       <p>
         <strong>Importante:</strong> NO leemos, accedemos ni almacenamos ningún otro tipo de email personal,

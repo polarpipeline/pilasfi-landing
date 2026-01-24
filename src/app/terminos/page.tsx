@@ -91,13 +91,13 @@ export default function TermsAndConditions() {
       <h3>5.2 Bancos Compatibles</h3>
       <p>Actualmente soportamos notificaciones de:</p>
       <ul>
-        <li>Banco Pichincha</li>
-        <li>Banco Guayaquil</li>
-        <li>Produbanco</li>
-        <li>Diners Club Ecuador</li>
-        <li>Pacificard</li>
-        <li>Banco del Pacífico</li>
-        <li>De Una</li>
+        <li>Emails de notificaciones de transacciones bancarias</li>
+        <li>Alertas de movimientos financieros</li>
+        <li>Confirmaciones de operaciones</li>
+        <li>Estados y transacciones de tarjetas</li>
+        <li>Notificaciones de consumos</li>
+        <li>Alertas transaccionales</li>
+        <li>Notificaciones de movimientos</li>
       </ul>
 
       <h3>5.3 Limitación de Acceso</h3>
