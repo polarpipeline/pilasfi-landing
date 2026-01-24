@@ -10,6 +10,7 @@ const steps = [
     title: "Conecta tu email",
     description:
       "Autoriza a PilasFi a leer los correos de tus bancos. Solo leemos notificaciones bancarias, nada más. Tu privacidad está protegida.",
+    color: "#7B3FE4",
   },
   {
     number: "2",
@@ -17,6 +18,7 @@ const steps = [
     title: "Detectamos tus gastos",
     description:
       "Automáticamente identificamos cada compra, retiro o transferencia. Soportamos Pichincha, Guayaquil, Produbanco, Diners y más.",
+    color: "#037D7D",
   },
   {
     number: "3",
@@ -24,6 +26,7 @@ const steps = [
     title: "Invita a tu pareja",
     description:
       "Conecta con tu pareja para ver los gastos del hogar juntos. Creen presupuestos compartidos y definan qué gastos son visibles.",
+    color: "#F5A88E",
   },
   {
     number: "4",
@@ -31,12 +34,13 @@ const steps = [
     title: "Controlen su dinero",
     description:
       "Vean en tiempo real cuánto gasta cada uno, cómo van los presupuestos y tomen mejores decisiones financieras juntos.",
+    color: "#1A1A3E",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="section" style={{ background: "var(--color-dark-900)" }}>
+    <section id="how-it-works" className="section" style={{ background: "#FFFFFF" }}>
       <div className="container">
         {/* Header */}
         <div className="section-header">
@@ -45,13 +49,27 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="badge" style={{ margin: "0 auto 1.5rem" }}>
-              <Zap size={16} color="#818CF8" />
+            <div
+              className="badge-light"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.5rem 1rem",
+                borderRadius: "9999px",
+                marginBottom: "1rem",
+                background: "rgba(123, 63, 228, 0.1)",
+                color: "#7B3FE4",
+                fontSize: "0.875rem",
+                fontWeight: 600,
+              }}
+            >
+              <Zap size={16} />
               <span>Configuración rápida</span>
             </div>
             <h2 className="display-lg">
               Configúralo en{" "}
-              <span className="gradient-text">minutos</span>
+              <span style={{ color: "#7B3FE4" }}>minutos</span>
             </h2>
             <p>
               No necesitas ingresar nada manualmente. Conecta tu email y deja
@@ -79,35 +97,50 @@ export default function HowItWorks() {
               transition={{ delay: index * 0.1 }}
               whileHover={{
                 x: 8,
-                background: "rgba(255, 255, 255, 0.05)",
-                borderColor: "rgba(99, 102, 241, 0.3)",
+                boxShadow: "0 8px 30px rgba(0, 0, 0, 0.08)",
               }}
               style={{
                 display: "flex",
                 gap: "1.5rem",
                 alignItems: "flex-start",
                 padding: "1.75rem",
-                background: "rgba(255, 255, 255, 0.03)",
+                background: "#FFFFFF",
                 borderRadius: "20px",
-                border: "1px solid rgba(255, 255, 255, 0.06)",
+                border: "1px solid #E5E5E5",
                 transition: "all 0.3s ease",
               }}
             >
-              <div className="step-number">{step.number}</div>
+              <div
+                style={{
+                  width: 48,
+                  height: 48,
+                  borderRadius: 12,
+                  background: step.color,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: step.color === "#F5A88E" ? "#120D31" : "white",
+                  fontWeight: 800,
+                  fontSize: "1.25rem",
+                  flexShrink: 0,
+                }}
+              >
+                {step.number}
+              </div>
               <div style={{ flex: 1 }}>
                 <div className="flex items-center gap-3" style={{ marginBottom: "0.5rem" }}>
-                  <step.icon size={20} color="#818CF8" />
+                  <step.icon size={20} color={step.color} />
                   <h3
                     style={{
                       fontSize: "1.25rem",
                       fontWeight: 700,
-                      color: "white",
+                      color: "#120D31",
                     }}
                   >
                     {step.title}
                   </h3>
                 </div>
-                <p style={{ color: "rgba(255, 255, 255, 0.6)", lineHeight: 1.7 }}>
+                <p style={{ color: "#535A6A", lineHeight: 1.7 }}>
                   {step.description}
                 </p>
               </div>
@@ -124,7 +157,7 @@ export default function HowItWorks() {
         >
           <motion.a
             href="#download"
-            className="btn btn-primary-glow btn-lg"
+            className="btn btn-primary btn-lg"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             style={{ gap: "0.75rem" }}

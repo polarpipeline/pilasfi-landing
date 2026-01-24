@@ -29,16 +29,17 @@ export default function Navigation() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={isScrolled ? "nav-glass" : ""}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className={isScrolled ? "nav-scrolled" : "nav-container"}
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           zIndex: 50,
-          padding: isScrolled ? "0.75rem 0" : "1.25rem 0",
-          transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+          padding: isScrolled ? "0.75rem 0" : "1rem 0",
+          transition: "all 0.3s ease",
+          borderBottom: isScrolled ? "1px solid #E5E5E5" : "none",
         }}
       >
         <div className="container">
@@ -51,34 +52,28 @@ export default function Navigation() {
               aria-label="PilasFi - Inicio"
             >
               <motion.div
-                whileHover={{ scale: 1.05, rotate: 5 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 style={{
-                  width: 42,
-                  height: 42,
-                  borderRadius: 12,
-                  background: "linear-gradient(135deg, #F6851B, #8B5CF6)",
+                  width: 40,
+                  height: 40,
+                  borderRadius: 10,
+                  background: "#7B3FE4",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  boxShadow: "0 4px 20px rgba(246, 133, 27, 0.4)",
                 }}
                 aria-hidden="true"
               >
-                <Zap size={22} color="white" />
+                <Zap size={20} color="white" />
               </motion.div>
               <span style={{
                 fontSize: "1.375rem",
-                fontWeight: 800,
-                color: "white",
+                fontWeight: 700,
+                color: "#120D31",
                 letterSpacing: "-0.02em",
               }}>
-                Pilas<span style={{
-                  background: "linear-gradient(135deg, #F6851B 0%, #8B5CF6 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}>Fi</span>
+                Pilas<span style={{ color: "#7B3FE4" }}>Fi</span>
               </span>
             </a>
 
@@ -89,14 +84,6 @@ export default function Navigation() {
                   key={link.name}
                   href={link.href}
                   className="nav-link"
-                  style={{
-                    position: "relative",
-                    color: "rgba(255,255,255,0.7)",
-                    textDecoration: "none",
-                    fontSize: "0.9375rem",
-                    fontWeight: 500,
-                    padding: "0.5rem 0",
-                  }}
                   aria-label={`Ir a ${link.name}`}
                 >
                   {link.name}
@@ -104,12 +91,12 @@ export default function Navigation() {
               ))}
             </nav>
 
-            {/* CTA Button with Glow */}
+            {/* CTA Button */}
             <motion.a
               href="#download"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="btn btn-primary-glow"
+              className="btn btn-primary"
               style={{
                 padding: "0.75rem 1.5rem",
                 fontSize: "0.9375rem",
@@ -117,7 +104,7 @@ export default function Navigation() {
               }}
               id="desktop-cta"
             >
-              Descargar
+              Comenzar
             </motion.a>
 
             {/* Mobile Menu Button */}
@@ -127,11 +114,11 @@ export default function Navigation() {
               whileTap={{ scale: 0.9 }}
               style={{
                 padding: "0.625rem",
-                background: "rgba(255, 255, 255, 0.08)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                borderRadius: "12px",
+                background: "#F5F1EB",
+                border: "1px solid #E5E5E5",
+                borderRadius: "10px",
                 cursor: "pointer",
-                color: "white",
+                color: "#120D31",
               }}
               aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={isMobileMenuOpen}
@@ -142,94 +129,59 @@ export default function Navigation() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu - Full Screen Dark */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.nav
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.2 }}
             style={{
               position: "fixed",
               inset: 0,
               zIndex: 40,
-              background: "var(--color-dark-900)",
+              background: "#FAF8F4",
               paddingTop: "5rem",
             }}
             aria-label="Menú de navegación móvil"
           >
-            {/* Gradient Orb */}
-            <div
-              style={{
-                position: "absolute",
-                top: "20%",
-                right: "-20%",
-                width: "400px",
-                height: "400px",
-                borderRadius: "50%",
-                background: "radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)",
-                filter: "blur(60px)",
-                pointerEvents: "none",
-              }}
-            />
-
-            <div className="container" style={{ paddingTop: "2rem", position: "relative" }}>
-              <motion.div
-                className="flex flex-col gap-4"
-                initial="closed"
-                animate="open"
-                variants={{
-                  open: { transition: { staggerChildren: 0.07 } },
-                  closed: { transition: { staggerChildren: 0.05, staggerDirection: -1 } }
-                }}
-              >
+            <div className="container" style={{ paddingTop: "2rem" }}>
+              <div className="flex flex-col gap-4">
                 {navLinks.map((link, index) => (
                   <motion.a
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    variants={{
-                      open: { opacity: 1, x: 0 },
-                      closed: { opacity: 0, x: -20 }
-                    }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
                     style={{
-                      fontSize: "1.75rem",
-                      fontWeight: 700,
-                      color: "white",
+                      fontSize: "1.5rem",
+                      fontWeight: 600,
+                      color: "#120D31",
                       textDecoration: "none",
                       padding: "1rem 0",
-                      borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
+                      borderBottom: "1px solid #E5E5E5",
                     }}
                     aria-label={`Ir a ${link.name}`}
                   >
                     {link.name}
-                    <span style={{
-                      fontSize: "0.875rem",
-                      color: "rgba(255, 255, 255, 0.3)",
-                      fontWeight: 400,
-                    }}>
-                      0{index + 1}
-                    </span>
                   </motion.a>
                 ))}
                 <motion.a
                   href="#download"
-                  className="btn btn-primary-glow btn-lg"
+                  className="btn btn-primary btn-lg"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  variants={{
-                    open: { opacity: 1, y: 0 },
-                    closed: { opacity: 0, y: 20 }
-                  }}
-                  style={{ marginTop: "2rem", justifyContent: "center" }}
-                  aria-label="Descargar PilasFi gratis"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  style={{ marginTop: "1.5rem", justifyContent: "center" }}
+                  aria-label="Comenzar con PilasFi"
                 >
-                  Descargar Gratis
+                  Comenzar Gratis
                 </motion.a>
-              </motion.div>
+              </div>
             </div>
           </motion.nav>
         )}

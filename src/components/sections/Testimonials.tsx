@@ -22,9 +22,9 @@ function CatchyPhrasesBar() {
       style={{
         marginBottom: "4rem",
         padding: "2rem",
-        background: "rgba(255, 255, 255, 0.02)",
+        background: "#FFFFFF",
         borderRadius: "20px",
-        border: "1px solid rgba(255, 255, 255, 0.05)",
+        border: "1px solid #E5E5E5",
       }}
     >
       <div
@@ -39,9 +39,9 @@ function CatchyPhrasesBar() {
         {catchyPhrases.map((phrase) => (
           <motion.span
             key={phrase}
-            whileHover={{ scale: 1.05, color: "rgba(255, 255, 255, 0.8)" }}
+            whileHover={{ scale: 1.05, color: "#7B3FE4" }}
             style={{
-              color: "rgba(255, 255, 255, 0.4)",
+              color: "#86909E",
               fontSize: "1rem",
               fontWeight: 700,
               letterSpacing: "0.02em",
@@ -101,6 +101,7 @@ const testimonials = [
     content:
       "Antes peleábamos por dinero. Ahora con PilasFi vemos exactamente quién gastó qué y llevamos el presupuesto del hogar sin dramas. ¡Salvó nuestro matrimonio financiero!",
     rating: 5,
+    color: "#7B3FE4",
   },
   {
     name: "Ana Lucía",
@@ -110,6 +111,7 @@ const testimonials = [
     content:
       "Mi esposo y yo manejamos negocios separados pero gastos del hogar juntos. PilasFi nos permite ver los gastos compartidos sin mezclar lo personal.",
     rating: 5,
+    color: "#037D7D",
   },
   {
     name: "Roberto & Diana",
@@ -119,6 +121,7 @@ const testimonials = [
     content:
       "Empezamos a vivir juntos y no sabíamos cómo manejar el dinero. PilasFi nos enseñó a crear presupuestos y ahora ahorramos juntos para nuestra casa.",
     rating: 5,
+    color: "#1A1A3E",
   },
   {
     name: "Valentina",
@@ -128,6 +131,7 @@ const testimonials = [
     content:
       "El diseño es hermoso y súper fácil. Los gráficos me muestran mis patrones de gasto de un vistazo. Lo mejor: mi novio también lo usa y vemos todo junto.",
     rating: 5,
+    color: "#F5A88E",
   },
   {
     name: "Diego",
@@ -137,6 +141,7 @@ const testimonials = [
     content:
       "Las alertas de presupuesto me salvaron. Ya no me paso de mis límites. Y lo mejor es que mi esposa ve cuando gasto de más en tecnología.",
     rating: 5,
+    color: "#7B3FE4",
   },
   {
     name: "Camila & Luis",
@@ -146,6 +151,7 @@ const testimonials = [
     content:
       "Aunque no vivimos juntos, usamos PilasFi para planear viajes y gastos compartidos. Podemos ver cuánto aportó cada uno. ¡Súper útil!",
     rating: 5,
+    color: "#037D7D",
   },
 ];
 
@@ -157,7 +163,17 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className="testimonial-card"
+      whileHover={{ y: -6 }}
+      style={{
+        background: "#FFFFFF",
+        borderRadius: "20px",
+        padding: "1.75rem",
+        border: "1px solid #E5E5E5",
+        display: "flex",
+        flexDirection: "column",
+        position: "relative",
+        transition: "all 0.3s ease",
+      }}
     >
       {/* Quote Icon */}
       <div
@@ -168,7 +184,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
           opacity: 0.1,
         }}
       >
-        <Quote size={40} color="white" />
+        <Quote size={40} color="#120D31" />
       </div>
 
       {/* Stars */}
@@ -186,7 +202,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
       {/* Content */}
       <p
         style={{
-          color: "rgba(255, 255, 255, 0.8)",
+          color: "#535A6A",
           flex: 1,
           marginBottom: "1.5rem",
           lineHeight: 1.7,
@@ -204,22 +220,22 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
             width: 48,
             height: 48,
             borderRadius: "50%",
-            background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+            background: testimonial.color,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             fontWeight: 700,
-            color: "white",
+            color: testimonial.color === "#F5A88E" ? "#120D31" : "white",
             fontSize: "0.875rem",
           }}
         >
           {testimonial.initials}
         </div>
         <div>
-          <p style={{ fontWeight: 600, color: "white" }}>
+          <p style={{ fontWeight: 600, color: "#120D31" }}>
             {testimonial.name}
           </p>
-          <p style={{ fontSize: "0.8125rem", color: "rgba(255, 255, 255, 0.5)" }}>
+          <p style={{ fontSize: "0.8125rem", color: "#86909E" }}>
             {testimonial.role}
           </p>
         </div>
@@ -246,7 +262,7 @@ function StatsBanner() {
         marginTop: "5rem",
         padding: "3rem",
         borderRadius: "24px",
-        background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+        background: "#7B3FE4",
         display: "grid",
         gridTemplateColumns: "repeat(2, 1fr)",
         gap: "2rem",
@@ -256,20 +272,6 @@ function StatsBanner() {
       }}
       className="stats-banner"
     >
-      {/* Background decoration */}
-      <div
-        style={{
-          position: "absolute",
-          top: "-50%",
-          right: "-20%",
-          width: "400px",
-          height: "400px",
-          borderRadius: "50%",
-          background: "rgba(255, 255, 255, 0.1)",
-          filter: "blur(60px)",
-        }}
-      />
-
       {stats.map((stat, i) => (
         <motion.div
           key={i}
@@ -310,7 +312,7 @@ function StatsBanner() {
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="section" style={{ background: "var(--color-dark-800)" }}>
+    <section id="testimonials" className="section" style={{ background: "#FFFFFF" }}>
       <div className="container">
         {/* Catchy Phrases Bar */}
         <CatchyPhrasesBar />
@@ -322,13 +324,27 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="badge" style={{ margin: "0 auto 1.5rem" }}>
-              <TrendingUp size={16} color="#818CF8" />
+            <div
+              className="badge-light"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.5rem 1rem",
+                borderRadius: "9999px",
+                marginBottom: "1rem",
+                background: "rgba(123, 63, 228, 0.1)",
+                color: "#7B3FE4",
+                fontSize: "0.875rem",
+                fontWeight: 600,
+              }}
+            >
+              <TrendingUp size={16} />
               <span>+5,000 parejas confían en nosotros</span>
             </div>
             <h2 className="display-lg">
               Lo que dicen las{" "}
-              <span className="gradient-text">parejas</span>
+              <span style={{ color: "#7B3FE4" }}>parejas</span>
             </h2>
             <p>
               Miles de usuarios ya controlan sus finanzas con PilasFi. Sin Excel, sin complicaciones.

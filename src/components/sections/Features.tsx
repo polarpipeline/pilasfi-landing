@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useMotionValue } from "framer-motion";
-import { useRef, MouseEvent } from "react";
+import { motion } from "framer-motion";
 import {
   Mail,
   Brain,
@@ -12,21 +11,15 @@ import {
   Wallet,
   Home,
   Eye,
-  Sparkles,
   Zap,
 } from "lucide-react";
-
-// Bento card types
-type BentoSize = "large" | "medium" | "small" | "tall";
 
 interface Feature {
   icon: typeof Mail;
   title: string;
   description: string;
-  size: BentoSize;
-  gradient?: string;
-  highlight?: boolean;
-  tag?: string;
+  color: "purple" | "navy" | "teal" | "coral" | "white";
+  size?: "large" | "normal";
 }
 
 const features: Feature[] = [
@@ -34,306 +27,195 @@ const features: Feature[] = [
     icon: PieChart,
     title: "Visibilidad Total de tus Gastos",
     description:
-      "Ve exactamente en qué gastas tu dinero. Gráficos claros, categorías automáticas y un dashboard que te muestra la realidad de tus finanzas en tiempo real.",
+      "Ve exactamente en qué gastas tu dinero. Gráficos claros y categorías automáticas.",
+    color: "purple",
     size: "large",
-    gradient: "linear-gradient(135deg, rgba(246, 133, 27, 0.12) 0%, rgba(139, 92, 246, 0.12) 100%)",
-    highlight: true,
-    tag: "Más popular",
   },
   {
     icon: Brain,
     title: "Categorización con IA",
     description:
-      "Aprendizaje automático que categoriza tus gastos inteligentemente. Aprende de tus hábitos y mejora con el tiempo.",
-    size: "small",
+      "Aprendizaje automático que categoriza tus gastos inteligentemente.",
+    color: "navy",
   },
   {
     icon: Eye,
     title: "Adiós a las Sorpresas",
     description:
-      "Nunca más te preguntes '¿en qué se fue el dinero?'. Visibilidad total, cero misterios.",
-    size: "small",
+      "Nunca más te preguntes '¿en qué se fue el dinero?'.",
+    color: "teal",
   },
   {
     icon: Users,
-    title: "Gastos Compartidos en Pareja",
+    title: "Gastos Compartidos",
     description:
-      "Conecta con tu pareja y vean juntos los gastos del hogar. Quién pagó qué, cuánto aporta cada uno, todo transparente y sin peleas.",
-    size: "medium",
-    gradient: "linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%)",
-    highlight: true,
-    tag: "Para parejas",
+      "Conecta con tu pareja y vean juntos los gastos del hogar.",
+    color: "coral",
+    size: "large",
   },
   {
     icon: Wallet,
     title: "Presupuestos Inteligentes",
     description:
-      "Crea presupuestos por categoría en segundos. Olvídate del Excel y las hojas de cálculo. PilasFi hace el trabajo duro por ti.",
-    size: "medium",
-    highlight: true,
+      "Crea presupuestos por categoría en segundos. Sin Excel.",
+    color: "white",
   },
   {
     icon: Mail,
-    title: "Lectura Automática de Emails",
+    title: "Lectura de Emails",
     description:
-      "Conecta tu correo y detectamos automáticamente las notificaciones de tus bancos.",
-    size: "small",
+      "Detectamos automáticamente las notificaciones de tus bancos.",
+    color: "white",
   },
   {
     icon: Target,
     title: "Metas de Ahorro",
     description:
-      "Define cuánto quieres ahorrar y para qué. Ve tu progreso automáticamente.",
-    size: "small",
+      "Define cuánto quieres ahorrar y ve tu progreso.",
+    color: "navy",
   },
   {
     icon: Home,
     title: "Control del Hogar",
     description:
-      "Arriendo, servicios, supermercado y más. Todo organizado y categorizado automáticamente.",
-    size: "small",
+      "Arriendo, servicios, supermercado. Todo organizado.",
+    color: "teal",
   },
   {
     icon: Bell,
     title: "Alertas Inteligentes",
     description:
-      "Notificaciones cuando te acerques al límite de tu presupuesto o detectemos gastos inusuales.",
-    size: "small",
+      "Notificaciones cuando te acerques al límite.",
+    color: "purple",
   },
 ];
 
-// Bento Card Component with mouse tracking and MetaMask styling
-function BentoCard({ feature, index }: { feature: Feature; index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
+// Feature Card Component
+function FeatureCard({ feature, index }: { feature: Feature; index: number }) {
+  const colorStyles = {
+    purple: {
+      background: "#7B3FE4",
+      color: "#FFFFFF",
+      iconBg: "rgba(255,255,255,0.2)",
+    },
+    navy: {
+      background: "#1A1A3E",
+      color: "#FFFFFF",
+      iconBg: "rgba(255,255,255,0.15)",
+    },
+    teal: {
+      background: "#037D7D",
+      color: "#FFFFFF",
+      iconBg: "rgba(255,255,255,0.2)",
+    },
+    coral: {
+      background: "#F5A88E",
+      color: "#120D31",
+      iconBg: "rgba(18,13,49,0.1)",
+    },
+    white: {
+      background: "#FFFFFF",
+      color: "#120D31",
+      iconBg: "rgba(123, 63, 228, 0.1)",
+    },
   };
 
-  const getSizeClass = (size: BentoSize) => {
-    switch (size) {
-      case "large":
-        return "bento-large";
-      case "medium":
-        return "bento-medium";
-      case "tall":
-        return "bento-tall";
-      default:
-        return "";
-    }
-  };
+  const style = colorStyles[feature.color];
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ delay: index * 0.05, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      onMouseMove={handleMouseMove}
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      className={`feature-card-mm ${getSizeClass(feature.size)}`}
+      transition={{ delay: index * 0.05, duration: 0.5 }}
+      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+      className={feature.size === "large" ? "bento-large" : ""}
       style={{
-        background: feature.gradient || "rgba(255, 255, 255, 0.02)",
-        "--mouse-x": mouseX,
-        "--mouse-y": mouseY,
-        position: "relative",
-      } as React.CSSProperties}
+        background: style.background,
+        color: style.color,
+        borderRadius: "20px",
+        padding: "1.75rem",
+        border: feature.color === "white" ? "1px solid #E5E5E5" : "none",
+        height: "100%",
+        minHeight: feature.size === "large" ? "220px" : "180px",
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
-      {/* Animated top border gradient */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: index * 0.05 + 0.3, duration: 0.6 }}
+      {/* Icon */}
+      <div
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "3px",
-          background: "linear-gradient(90deg, var(--mm-orange), var(--mm-purple), var(--mm-cyan))",
-          transformOrigin: "left",
-          borderRadius: "24px 24px 0 0",
-        }}
-      />
-
-      {/* Icon with glow */}
-      <motion.div
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-        className="icon-glow-box"
-        style={{
-          background: feature.highlight
-            ? "linear-gradient(135deg, var(--mm-orange) 0%, var(--mm-orange-dark) 100%)"
-            : "linear-gradient(135deg, rgba(246, 133, 27, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%)",
-          color: feature.highlight ? "white" : "var(--mm-orange-light)",
-          marginBottom: "1.5rem",
+          width: 44,
+          height: 44,
+          borderRadius: 10,
+          background: style.iconBg,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          marginBottom: "1rem",
         }}
       >
-        <feature.icon size={feature.size === "large" ? 28 : 24} />
-      </motion.div>
-
-      {/* Content */}
-      <div style={{ position: "relative", zIndex: 2 }}>
-        <h3
-          style={{
-            fontSize: feature.size === "large" ? "1.5rem" : "1.125rem",
-            fontWeight: 700,
-            marginBottom: "0.75rem",
-            color: "white",
-          }}
-        >
-          {feature.title}
-        </h3>
-        <p
-          style={{
-            color: "rgba(255, 255, 255, 0.6)",
-            fontSize: feature.size === "large" ? "1rem" : "0.9375rem",
-            lineHeight: 1.7,
-          }}
-        >
-          {feature.description}
-        </p>
-
-        {feature.tag && (
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.05 + 0.4 }}
-            style={{
-              display: "inline-block",
-              marginTop: "1.25rem",
-              fontSize: "0.75rem",
-              fontWeight: 600,
-              color: "var(--mm-orange-light)",
-              background: "rgba(246, 133, 27, 0.15)",
-              padding: "0.375rem 0.875rem",
-              borderRadius: "9999px",
-              border: "1px solid rgba(246, 133, 27, 0.3)",
-            }}
-          >
-            {feature.tag}
-          </motion.span>
-        )}
+        <feature.icon size={22} />
       </div>
 
-      {/* Large card glow decoration */}
-      {feature.size === "large" && (
-        <motion.div
-          animate={{
-            opacity: [0.3, 0.5, 0.3],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{ duration: 4, repeat: Infinity }}
-          style={{
-            position: "absolute",
-            bottom: "-20%",
-            right: "-10%",
-            width: "300px",
-            height: "300px",
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(246, 133, 27, 0.15) 0%, transparent 70%)",
-            filter: "blur(40px)",
-            pointerEvents: "none",
-          }}
-        />
-      )}
-
-      {/* Hover spotlight effect */}
-      <motion.div
+      {/* Content */}
+      <h3
         style={{
-          position: "absolute",
-          inset: 0,
-          borderRadius: "24px",
-          background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(246, 133, 27, 0.08), transparent 40%)`,
-          opacity: 0,
-          transition: "opacity 0.3s",
-          pointerEvents: "none",
+          fontSize: feature.size === "large" ? "1.375rem" : "1.125rem",
+          fontWeight: 700,
+          marginBottom: "0.5rem",
+          lineHeight: 1.3,
         }}
-        whileHover={{ opacity: 1 }}
-      />
+      >
+        {feature.title}
+      </h3>
+      <p
+        style={{
+          fontSize: "0.9375rem",
+          lineHeight: 1.6,
+          opacity: feature.color === "coral" || feature.color === "white" ? 0.7 : 0.8,
+        }}
+      >
+        {feature.description}
+      </p>
     </motion.div>
   );
 }
 
-// Stats Component with MetaMask styling
+// Stats Component
 function Stats() {
   const stats = [
-    { number: "98%", label: "Gastos categorizados", color: "#F6851B" },
-    { number: "100%", label: "Gratis siempre", color: "#10B981" },
-    { number: "5,000+", label: "Usuarios activos", color: "#8B5CF6" },
-    { number: "4.9", label: "Rating App Store", color: "#06B6D4" },
+    { number: "98%", label: "Gastos categorizados" },
+    { number: "100%", label: "Gratis siempre" },
+    { number: "5,000+", label: "Usuarios activos" },
+    { number: "4.9", label: "Rating App Store" },
   ];
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      style={{
-        marginTop: "5rem",
-        display: "grid",
-        gridTemplateColumns: "repeat(2, 1fr)",
-        gap: "1.5rem",
-        textAlign: "center",
-      }}
       className="stats-grid"
+      style={{ marginTop: "4rem" }}
     >
       {stats.map((stat, i) => (
         <motion.div
           key={i}
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: i * 0.1 }}
-          whileHover={{ y: -5, transition: { duration: 0.2 } }}
           style={{
-            padding: "2rem",
-            background: "rgba(255, 255, 255, 0.02)",
-            borderRadius: "20px",
-            border: "1px solid rgba(255, 255, 255, 0.06)",
-            position: "relative",
-            overflow: "hidden",
+            textAlign: "center",
+            padding: "1.5rem",
+            background: "#FFFFFF",
+            borderRadius: "16px",
+            border: "1px solid #E5E5E5",
           }}
         >
-          {/* Top accent line */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "60px",
-              height: "3px",
-              background: `linear-gradient(90deg, transparent, ${stat.color}, transparent)`,
-              borderRadius: "0 0 4px 4px",
-            }}
-          />
-          <motion.div
-            initial={{ scale: 0.5, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 + 0.2, type: "spring", stiffness: 200 }}
-            style={{
-              fontSize: "3rem",
-              fontWeight: 800,
-              background: `linear-gradient(135deg, ${stat.color} 0%, var(--mm-purple) 100%)`,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              lineHeight: 1,
-            }}
-          >
-            {stat.number}
-          </motion.div>
-          <p style={{ color: "rgba(255, 255, 255, 0.5)", marginTop: "0.75rem", fontSize: "0.9375rem" }}>
+          <div className="stat-number">{stat.number}</div>
+          <p style={{ color: "#86909E", marginTop: "0.5rem", fontSize: "0.9375rem" }}>
             {stat.label}
           </p>
         </motion.div>
@@ -347,41 +229,9 @@ export default function Features() {
     <section
       id="features"
       className="section"
-      style={{
-        background: "var(--color-dark-800)",
-        position: "relative",
-        overflow: "hidden",
-      }}
+      style={{ background: "#F5F1EB" }}
     >
-      {/* Background decorations */}
-      <div
-        style={{
-          position: "absolute",
-          top: "10%",
-          left: "-10%",
-          width: "500px",
-          height: "500px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(246, 133, 27, 0.08) 0%, transparent 70%)",
-          filter: "blur(80px)",
-          pointerEvents: "none",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          bottom: "20%",
-          right: "-10%",
-          width: "400px",
-          height: "400px",
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%)",
-          filter: "blur(80px)",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div className="container" style={{ position: "relative", zIndex: 2 }}>
+      <div className="container">
         {/* Header */}
         <div className="section-header">
           <motion.div
@@ -389,46 +239,39 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="badge"
-              style={{ margin: "0 auto 1.5rem" }}
+            <div
+              className="badge-light"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.5rem 1rem",
+                borderRadius: "9999px",
+                marginBottom: "1rem",
+                background: "rgba(123, 63, 228, 0.1)",
+                color: "#7B3FE4",
+                fontSize: "0.875rem",
+                fontWeight: 600,
+              }}
             >
-              <Zap size={16} color="#F6851B" />
+              <Zap size={16} />
               <span>Dile adiós al Excel</span>
-            </motion.div>
+            </div>
             <h2 className="display-lg">
               Todo lo que necesitas para{" "}
-              <span className="gradient-text-mm-glow">controlar tu dinero</span>
+              <span style={{ color: "#7B3FE4" }}>controlar tu dinero</span>
             </h2>
             <p>
               Aprendizaje automático que categoriza tus gastos, presupuestos inteligentes
-              y la posibilidad de compartir con tu pareja. Sin hojas de cálculo.
+              y la posibilidad de compartir con tu pareja.
             </p>
           </motion.div>
         </div>
 
-        {/* Animated Separator Line */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          style={{
-            width: "120px",
-            height: "3px",
-            background: "linear-gradient(90deg, var(--mm-orange), var(--mm-purple))",
-            margin: "0 auto 4rem",
-            borderRadius: "2px",
-          }}
-        />
-
         {/* Bento Grid */}
         <div className="bento-grid">
           {features.map((feature, index) => (
-            <BentoCard key={index} feature={feature} index={index} />
+            <FeatureCard key={index} feature={feature} index={index} />
           ))}
         </div>
 

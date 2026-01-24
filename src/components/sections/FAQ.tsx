@@ -8,6 +8,7 @@ const faqs = [
   {
     category: "Seguridad y Privacidad",
     icon: Shield,
+    color: "#7B3FE4",
     questions: [
       {
         question: "¿Es seguro conectar mi email bancario?",
@@ -34,6 +35,7 @@ const faqs = [
   {
     category: "Funcionalidad",
     icon: Zap,
+    color: "#037D7D",
     questions: [
       {
         question: "¿Funciona con cualquier banco?",
@@ -60,6 +62,7 @@ const faqs = [
   {
     category: "Parejas y Compartir",
     icon: Users,
+    color: "#F5A88E",
     questions: [
       {
         question: "¿Cómo invito a mi pareja?",
@@ -86,6 +89,7 @@ const faqs = [
   {
     category: "Precios y Disponibilidad",
     icon: Zap,
+    color: "#1A1A3E",
     questions: [
       {
         question: "¿Cuánto cuesta PilasFi?",
@@ -114,7 +118,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="section" style={{ background: "var(--color-dark-900)" }}>
+    <section id="faq" className="section" style={{ background: "#F5F1EB" }}>
       <div className="container">
         {/* Header */}
         <div className="section-header">
@@ -123,13 +127,27 @@ export default function FAQ() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="badge" style={{ margin: "0 auto 1.5rem" }}>
-              <HelpCircle size={16} color="#818CF8" />
+            <div
+              className="badge-light"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.5rem 1rem",
+                borderRadius: "9999px",
+                marginBottom: "1rem",
+                background: "rgba(123, 63, 228, 0.1)",
+                color: "#7B3FE4",
+                fontSize: "0.875rem",
+                fontWeight: 600,
+              }}
+            >
+              <HelpCircle size={16} />
               <span>Resolvemos tus dudas</span>
             </div>
             <h2 className="display-lg">
               Preguntas{" "}
-              <span className="gradient-text">Frecuentes</span>
+              <span style={{ color: "#7B3FE4" }}>Frecuentes</span>
             </h2>
             <p>
               Todo lo que necesitas saber sobre PilasFi, la seguridad de tus datos y cómo funciona.
@@ -158,20 +176,19 @@ export default function FAQ() {
                     width: 44,
                     height: 44,
                     borderRadius: "12px",
-                    background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                    background: category.color,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    boxShadow: "0 4px 15px rgba(99, 102, 241, 0.3)",
                   }}
                 >
-                  <category.icon size={22} color="white" />
+                  <category.icon size={22} color={category.color === "#F5A88E" ? "#120D31" : "white"} />
                 </div>
                 <h3
                   style={{
                     fontSize: "1.25rem",
                     fontWeight: 700,
-                    color: "white",
+                    color: "#120D31",
                   }}
                 >
                   {category.category}
@@ -192,14 +209,14 @@ export default function FAQ() {
                       viewport={{ once: true }}
                       transition={{ delay: (categoryIndex * 0.1) + (questionIndex * 0.05) }}
                       whileHover={{
-                        background: "rgba(255, 255, 255, 0.05)",
+                        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.05)",
                       }}
                       style={{
                         padding: "1.25rem 1.5rem",
                         cursor: "pointer",
-                        background: "rgba(255, 255, 255, 0.03)",
+                        background: "#FFFFFF",
                         borderRadius: "16px",
-                        border: `1px solid ${isOpen ? "rgba(99, 102, 241, 0.4)" : "rgba(255, 255, 255, 0.06)"}`,
+                        border: `1px solid ${isOpen ? "#7B3FE4" : "#E5E5E5"}`,
                         transition: "all 0.3s ease",
                       }}
                       onClick={() => toggleQuestion(globalIndex)}
@@ -221,7 +238,7 @@ export default function FAQ() {
                           style={{
                             fontSize: "1rem",
                             fontWeight: 600,
-                            color: "white",
+                            color: "#120D31",
                             flex: 1,
                           }}
                         >
@@ -233,7 +250,7 @@ export default function FAQ() {
                         >
                           <ChevronDown
                             size={20}
-                            color="rgba(255, 255, 255, 0.5)"
+                            color="#86909E"
                           />
                         </motion.div>
                       </div>
@@ -248,7 +265,7 @@ export default function FAQ() {
                       >
                         <p
                           style={{
-                            color: "rgba(255, 255, 255, 0.6)",
+                            color: "#535A6A",
                             marginTop: "1rem",
                             lineHeight: 1.8,
                             fontSize: "0.9375rem",
@@ -272,7 +289,7 @@ export default function FAQ() {
           viewport={{ once: true }}
           style={{ textAlign: "center", marginTop: "3rem" }}
         >
-          <p style={{ color: "rgba(255, 255, 255, 0.5)", marginBottom: "1.25rem" }}>
+          <p style={{ color: "#86909E", marginBottom: "1.25rem" }}>
             ¿Tienes más preguntas?
           </p>
           <motion.a

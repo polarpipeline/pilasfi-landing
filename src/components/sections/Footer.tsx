@@ -27,7 +27,7 @@ const links = {
 
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--color-dark-950)", paddingTop: "5rem", paddingBottom: "2rem" }}>
+    <footer style={{ background: "#1A1A3E", paddingTop: "5rem", paddingBottom: "2rem" }}>
       <div className="container">
         {/* Main Grid */}
         <div
@@ -36,7 +36,7 @@ export default function Footer() {
             display: "grid",
             gap: "3rem",
             paddingBottom: "3rem",
-            borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
+            borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
           }}
         >
           {/* Brand */}
@@ -52,22 +52,21 @@ export default function Footer() {
                   width: 40,
                   height: 40,
                   borderRadius: 12,
-                  background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                  background: "#7B3FE4",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  boxShadow: "0 4px 20px rgba(99, 102, 241, 0.25)",
                 }}
               >
                 <Zap size={22} color="white" />
               </div>
               <span style={{ fontSize: "1.25rem", fontWeight: 800, color: "white", letterSpacing: "-0.02em" }}>
-                Pilas<span className="gradient-text">Fi</span>
+                Pilas<span style={{ color: "#7B3FE4" }}>Fi</span>
               </span>
             </motion.a>
             <p
               style={{
-                color: "rgba(255, 255, 255, 0.5)",
+                color: "rgba(255, 255, 255, 0.6)",
                 fontSize: "0.9375rem",
                 maxWidth: "300px",
                 marginBottom: "1.5rem",
@@ -81,10 +80,10 @@ export default function Footer() {
               <motion.a
                 href="mailto:hola@pilasfi.com"
                 className="flex items-center gap-2 footer-link"
-                style={{ fontSize: "0.9375rem" }}
+                style={{ fontSize: "0.9375rem", color: "rgba(255, 255, 255, 0.6)", textDecoration: "none" }}
                 whileHover={{ color: "white" }}
               >
-                <Mail size={16} color="#818CF8" />
+                <Mail size={16} color="#7B3FE4" />
                 hola@pilasfi.com
               </motion.a>
             </div>
@@ -107,8 +106,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <motion.a
                     href={link.href}
-                    className="footer-link"
-                    style={{ fontSize: "0.9375rem" }}
+                    style={{ fontSize: "0.9375rem", color: "rgba(255, 255, 255, 0.6)", textDecoration: "none" }}
                     whileHover={{ color: "white", x: 3 }}
                   >
                     {link.name}
@@ -134,14 +132,13 @@ export default function Footer() {
               {links.company.map((link) => (
                 <li key={link.name}>
                   {link.href.startsWith("/") ? (
-                    <Link href={link.href} className="footer-link" style={{ fontSize: "0.9375rem" }}>
+                    <Link href={link.href} style={{ fontSize: "0.9375rem", color: "rgba(255, 255, 255, 0.6)", textDecoration: "none" }}>
                       {link.name}
                     </Link>
                   ) : (
                     <motion.a
                       href={link.href}
-                      className="footer-link"
-                      style={{ fontSize: "0.9375rem" }}
+                      style={{ fontSize: "0.9375rem", color: "rgba(255, 255, 255, 0.6)", textDecoration: "none" }}
                       whileHover={{ color: "white", x: 3 }}
                     >
                       {link.name}
@@ -167,7 +164,7 @@ export default function Footer() {
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.875rem" }}>
               {links.legal.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="footer-link" style={{ fontSize: "0.9375rem" }}>
+                  <Link href={link.href} style={{ fontSize: "0.9375rem", color: "rgba(255, 255, 255, 0.6)", textDecoration: "none" }}>
                     {link.name}
                   </Link>
                 </li>
@@ -198,14 +195,14 @@ export default function Footer() {
                 key={i}
                 href={social.href}
                 aria-label={social.label}
-                whileHover={{ scale: 1.1, background: "rgba(99, 102, 241, 0.2)" }}
+                whileHover={{ scale: 1.1, background: "rgba(123, 63, 228, 0.3)" }}
                 whileTap={{ scale: 0.95 }}
                 style={{
                   width: 40,
                   height: 40,
                   borderRadius: "12px",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  background: "rgba(255, 255, 255, 0.08)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",

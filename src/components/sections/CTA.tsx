@@ -12,7 +12,6 @@ import {
   CheckCircle2,
   Loader2,
   ArrowRight,
-  Sparkles,
   Rocket,
 } from "lucide-react";
 
@@ -48,77 +47,24 @@ export default function CTA() {
       id="download"
       className="section"
       style={{
-        background: "var(--color-dark-950)",
+        background: "#7B3FE4",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Background Effects */}
-      <div className="mesh-gradient-bg" style={{ opacity: 0.5 }} />
-
-      {/* Grid Pattern */}
-      <div
-        className="grid-pattern"
-        style={{
-          opacity: 0.3,
-          maskImage: "radial-gradient(ellipse at center, black 20%, transparent 80%)",
-          WebkitMaskImage: "radial-gradient(ellipse at center, black 20%, transparent 80%)",
-        }}
-      />
-
       <div className="container" style={{ position: "relative", zIndex: 10 }}>
         {/* Main CTA Card */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="animated-border"
           style={{
             maxWidth: "900px",
             margin: "0 auto",
             textAlign: "center",
             position: "relative",
-            padding: "4rem 3rem",
           }}
         >
-          {/* Gradient Orbs */}
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{ duration: 5, repeat: Infinity }}
-            style={{
-              position: "absolute",
-              top: "-30%",
-              left: "-20%",
-              width: "400px",
-              height: "400px",
-              borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(246, 133, 27, 0.2) 0%, transparent 70%)",
-              filter: "blur(60px)",
-              pointerEvents: "none",
-            }}
-          />
-          <motion.div
-            animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.3, 0.4, 0.3],
-            }}
-            transition={{ duration: 6, repeat: Infinity, delay: 1 }}
-            style={{
-              position: "absolute",
-              bottom: "-30%",
-              right: "-20%",
-              width: "300px",
-              height: "300px",
-              borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%)",
-              filter: "blur(60px)",
-              pointerEvents: "none",
-            }}
-          />
-
           {/* Content */}
           <div style={{ position: "relative", zIndex: 10 }}>
             {/* Badge */}
@@ -127,11 +73,17 @@ export default function CTA() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1, type: "spring" }}
-              className="badge pulse-ring"
               style={{
-                margin: "0 auto 1.5rem",
-                background: "rgba(16, 185, 129, 0.15)",
-                borderColor: "rgba(16, 185, 129, 0.3)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.5rem 1rem",
+                borderRadius: "9999px",
+                marginBottom: "1.5rem",
+                background: "rgba(255, 255, 255, 0.2)",
+                color: "white",
+                fontSize: "0.875rem",
+                fontWeight: 600,
               }}
             >
               <span
@@ -140,23 +92,22 @@ export default function CTA() {
                   height: 8,
                   borderRadius: "50%",
                   background: "#10B981",
-                  boxShadow: "0 0 10px #10B981",
                 }}
               />
-              <span style={{ color: "#10B981" }}>Disponible ahora</span>
+              <span>Disponible ahora</span>
             </motion.div>
 
             {/* Headline */}
             <motion.h2
-              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
               className="display-lg"
-              style={{ marginBottom: "1.25rem" }}
+              style={{ marginBottom: "1.25rem", color: "white" }}
             >
               Empiecen a controlar su dinero{" "}
-              <span className="gradient-text-mm-glow">juntos</span>
+              <span style={{ color: "#FAF8F4" }}>juntos</span>
             </motion.h2>
 
             <motion.p
@@ -164,11 +115,13 @@ export default function CTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="text-body-lg"
               style={{
                 marginBottom: "2.5rem",
                 maxWidth: "500px",
                 margin: "0 auto 2.5rem",
+                color: "rgba(255, 255, 255, 0.9)",
+                fontSize: "1.125rem",
+                lineHeight: 1.7,
               }}
             >
               Únete a miles de usuarios que ya dijeron adiós al Excel.
@@ -185,9 +138,9 @@ export default function CTA() {
               style={{ marginBottom: "2.5rem" }}
             >
               {[
-                { icon: Zap, text: "2 min para configurar", color: "#F6851B" },
-                { icon: Shield, text: "100% seguro", color: "#10B981" },
-                { icon: Users, text: "Perfecto para parejas", color: "#8B5CF6" },
+                { icon: Zap, text: "2 min para configurar" },
+                { icon: Shield, text: "100% seguro" },
+                { icon: Users, text: "Perfecto para parejas" },
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -196,20 +149,20 @@ export default function CTA() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.5 + i * 0.1 }}
                   className="flex items-center gap-2"
-                  style={{ color: "rgba(255, 255, 255, 0.7)" }}
+                  style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 >
                   <div
                     style={{
                       width: 32,
                       height: 32,
                       borderRadius: 10,
-                      background: `${item.color}20`,
+                      background: "rgba(255, 255, 255, 0.2)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                     }}
                   >
-                    <item.icon size={16} color={item.color} />
+                    <item.icon size={16} color="white" />
                   </div>
                   <span style={{ fontSize: "0.9375rem", fontWeight: 500 }}>{item.text}</span>
                 </motion.div>
@@ -225,16 +178,12 @@ export default function CTA() {
               style={{
                 marginBottom: "2.5rem",
                 padding: "2rem",
-                background: "rgba(255, 255, 255, 0.02)",
+                background: "rgba(255, 255, 255, 0.1)",
                 borderRadius: "20px",
-                border: "1px solid rgba(246, 133, 27, 0.2)",
                 position: "relative",
                 overflow: "hidden",
               }}
             >
-              {/* Subtle shimmer */}
-              <div className="shimmer" style={{ position: "absolute", inset: 0, opacity: 0.3 }} />
-
               <div style={{ position: "relative", zIndex: 2 }}>
                 <h3
                   style={{
@@ -248,12 +197,12 @@ export default function CTA() {
                     gap: "0.5rem",
                   }}
                 >
-                  <Rocket size={20} color="#F6851B" />
+                  <Rocket size={20} color="white" />
                   Sé el primero en enterarte
                 </h3>
                 <p
                   style={{
-                    color: "rgba(255, 255, 255, 0.5)",
+                    color: "rgba(255, 255, 255, 0.7)",
                     fontSize: "0.875rem",
                     marginBottom: "1.5rem",
                   }}
@@ -284,8 +233,8 @@ export default function CTA() {
                         flex: 1,
                         padding: "1rem 1.25rem",
                         borderRadius: "14px",
-                        border: `1px solid ${status === "error" ? "#EF4444" : "rgba(255, 255, 255, 0.1)"}`,
-                        background: "rgba(255, 255, 255, 0.05)",
+                        border: `1px solid ${status === "error" ? "#EF4444" : "rgba(255, 255, 255, 0.3)"}`,
+                        background: "rgba(255, 255, 255, 0.15)",
                         color: "white",
                         fontSize: "1rem",
                         outline: "none",
@@ -297,12 +246,18 @@ export default function CTA() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       disabled={status === "loading" || status === "success"}
-                      className="btn btn-metamask"
                       style={{
                         padding: "1rem 1.75rem",
                         whiteSpace: "nowrap",
                         position: "relative",
                         overflow: "hidden",
+                        background: "#120D31",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "14px",
+                        fontWeight: 600,
+                        fontSize: "1rem",
+                        cursor: "pointer",
                       }}
                       aria-label="Suscribirse a la lista de espera"
                       aria-busy={status === "loading"}
@@ -332,7 +287,7 @@ export default function CTA() {
                     <motion.p
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      style={{ color: "#EF4444", fontSize: "0.875rem", marginTop: "0.75rem", textAlign: "left" }}
+                      style={{ color: "#FCA5A5", fontSize: "0.875rem", marginTop: "0.75rem", textAlign: "left" }}
                     >
                       {errorMessage}
                     </motion.p>
@@ -359,7 +314,7 @@ export default function CTA() {
               style={{
                 width: "80px",
                 height: "2px",
-                background: "linear-gradient(90deg, transparent, rgba(246, 133, 27, 0.5), transparent)",
+                background: "rgba(255, 255, 255, 0.3)",
                 margin: "2rem auto",
               }}
             />
@@ -375,7 +330,7 @@ export default function CTA() {
             >
               <p
                 style={{
-                  color: "rgba(255, 255, 255, 0.4)",
+                  color: "rgba(255, 255, 255, 0.7)",
                   fontSize: "0.875rem",
                   marginBottom: "0.5rem",
                 }}
@@ -387,17 +342,19 @@ export default function CTA() {
                   href="https://apps.apple.com/app/pilasfi"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{
-                    scale: 1.03,
-                    borderColor: "rgba(246, 133, 27, 0.5)",
-                    boxShadow: "0 10px 40px rgba(246, 133, 27, 0.15)",
-                  }}
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn btn-dark btn-lg neon-glow"
                   style={{
+                    display: "flex",
+                    alignItems: "center",
                     gap: "0.875rem",
-                    background: "rgba(255, 255, 255, 0.03)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    padding: "1rem 1.5rem",
+                    background: "#120D31",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "14px",
+                    textDecoration: "none",
+                    fontWeight: 600,
                   }}
                   aria-label="Descargar PilasFi en App Store"
                 >
@@ -413,17 +370,19 @@ export default function CTA() {
                   href="https://play.google.com/store/apps/details?id=com.pilasfi"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{
-                    scale: 1.03,
-                    borderColor: "rgba(139, 92, 246, 0.5)",
-                    boxShadow: "0 10px 40px rgba(139, 92, 246, 0.15)",
-                  }}
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="btn btn-dark btn-lg neon-glow"
                   style={{
+                    display: "flex",
+                    alignItems: "center",
                     gap: "0.875rem",
-                    background: "rgba(255, 255, 255, 0.03)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    padding: "1rem 1.5rem",
+                    background: "#120D31",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "14px",
+                    textDecoration: "none",
+                    fontWeight: 600,
                   }}
                   aria-label="Descargar PilasFi en Google Play"
                 >
