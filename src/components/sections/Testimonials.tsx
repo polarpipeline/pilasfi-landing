@@ -86,7 +86,7 @@ function AnimatedCounter({ target, suffix = "", duration = 2 }: { target: number
   }, [isInView, target, duration]);
 
   return (
-    <span ref={ref} className="animated-counter">
+    <span ref={ref}>
       {count.toLocaleString()}{suffix}
     </span>
   );
@@ -96,7 +96,6 @@ const testimonials = [
   {
     name: "María & Carlos",
     role: "Casados hace 3 años",
-    avatar: "/avatars/couple1.jpg",
     initials: "MC",
     content:
       "Antes peleábamos por dinero. Ahora con PilasFi vemos exactamente quién gastó qué y llevamos el presupuesto del hogar sin dramas. ¡Salvó nuestro matrimonio financiero!",
@@ -106,7 +105,6 @@ const testimonials = [
   {
     name: "Ana Lucía",
     role: "Emprendedora",
-    avatar: "/avatars/ana.jpg",
     initials: "AL",
     content:
       "Mi esposo y yo manejamos negocios separados pero gastos del hogar juntos. PilasFi nos permite ver los gastos compartidos sin mezclar lo personal.",
@@ -116,42 +114,11 @@ const testimonials = [
   {
     name: "Roberto & Diana",
     role: "Recién casados",
-    avatar: "/avatars/couple2.jpg",
     initials: "RD",
     content:
       "Empezamos a vivir juntos y no sabíamos cómo manejar el dinero. PilasFi nos enseñó a crear presupuestos y ahora ahorramos juntos para nuestra casa.",
     rating: 5,
     color: "#1A1A3E",
-  },
-  {
-    name: "Valentina",
-    role: "Diseñadora",
-    avatar: "/avatars/valentina.jpg",
-    initials: "V",
-    content:
-      "El diseño es hermoso y súper fácil. Los gráficos me muestran mis patrones de gasto de un vistazo. Lo mejor: mi novio también lo usa y vemos todo junto.",
-    rating: 5,
-    color: "#F5A88E",
-  },
-  {
-    name: "Diego",
-    role: "Ingeniero",
-    avatar: "/avatars/diego.jpg",
-    initials: "D",
-    content:
-      "Las alertas de presupuesto me salvaron. Ya no me paso de mis límites. Y lo mejor es que mi esposa ve cuando gasto de más en tecnología.",
-    rating: 5,
-    color: "#7B3FE4",
-  },
-  {
-    name: "Camila & Luis",
-    role: "Novios",
-    avatar: "/avatars/couple3.jpg",
-    initials: "CL",
-    content:
-      "Aunque no vivimos juntos, usamos PilasFi para planear viajes y gastos compartidos. Podemos ver cuánto aportó cada uno. ¡Súper útil!",
-    rating: 5,
-    color: "#037D7D",
   },
 ];
 
@@ -162,7 +129,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
       whileHover={{ y: -6 }}
       style={{
         background: "#FFFFFF",
@@ -188,7 +155,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
       </div>
 
       {/* Stars */}
-      <div className="flex gap-1" style={{ marginBottom: "1.25rem" }}>
+      <div style={{ display: "flex", gap: "0.25rem", marginBottom: "1.25rem" }}>
         {[...Array(testimonial.rating)].map((_, i) => (
           <Star
             key={i}
@@ -213,7 +180,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
       </p>
 
       {/* Author */}
-      <div className="flex items-center gap-3">
+      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
         {/* Avatar */}
         <div
           style={{
@@ -232,7 +199,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: typeof testimoni
           {testimonial.initials}
         </div>
         <div>
-          <p style={{ fontWeight: 600, color: "#120D31" }}>
+          <p style={{ fontWeight: 600, color: "#120D31", fontSize: "0.9375rem" }}>
             {testimonial.name}
           </p>
           <p style={{ fontSize: "0.8125rem", color: "#86909E" }}>
@@ -258,74 +225,83 @@ function StatsBanner() {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      className="stats-banner-container"
       style={{
-        marginTop: "5rem",
-        padding: "3rem",
+        marginTop: "4rem",
+        padding: "2.5rem",
         borderRadius: "24px",
         background: "#7B3FE4",
-        display: "grid",
-        gridTemplateColumns: "repeat(2, 1fr)",
-        gap: "2rem",
         textAlign: "center",
-        position: "relative",
-        overflow: "hidden",
       }}
-      className="stats-banner"
     >
-      {stats.map((stat, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: i * 0.1 }}
-          style={{ position: "relative", zIndex: 1 }}
-        >
-          <div
-            style={{
-              fontSize: "2.5rem",
-              fontWeight: 800,
-              color: "white",
-              lineHeight: 1,
-            }}
+      <div className="stats-banner-grid">
+        {stats.map((stat, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
           >
-            {stat.prefix}
-            {stat.isDecimal ? (
-              stat.value
-            ) : (
-              <AnimatedCounter target={stat.value} suffix={stat.suffix} />
-            )}
-            {stat.isDecimal && (
-              <span style={{ display: "inline-flex", alignItems: "center", marginLeft: "0.25rem" }}>
-                <Star size={20} fill="white" color="white" />
-              </span>
-            )}
-          </div>
-          <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.9375rem", marginTop: "0.5rem" }}>
-            {stat.label}
-          </p>
-        </motion.div>
-      ))}
+            <div
+              style={{
+                fontSize: "2rem",
+                fontWeight: 800,
+                color: "white",
+                lineHeight: 1,
+              }}
+            >
+              {stat.prefix}
+              {stat.isDecimal ? (
+                stat.value
+              ) : (
+                <AnimatedCounter target={stat.value} suffix={stat.suffix} />
+              )}
+              {stat.isDecimal && (
+                <span style={{ display: "inline-flex", alignItems: "center", marginLeft: "0.25rem" }}>
+                  <Star size={18} fill="white" color="white" />
+                </span>
+              )}
+            </div>
+            <p style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.875rem", marginTop: "0.5rem" }}>
+              {stat.label}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      <style jsx>{`
+        .stats-banner-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+          .stats-banner-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+      `}</style>
     </motion.div>
   );
 }
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="section" style={{ background: "#FFFFFF" }}>
+    <section id="testimonials" style={{ background: "#FFFFFF", padding: "5rem 0" }}>
       <div className="container">
         {/* Catchy Phrases Bar */}
         <CatchyPhrasesBar />
 
         {/* Header */}
-        <div className="section-header">
+        <div style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto 3rem" }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <div
-              className="badge-light"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -342,18 +318,24 @@ export default function Testimonials() {
               <TrendingUp size={16} />
               <span>+5,000 parejas confían en nosotros</span>
             </div>
-            <h2 className="display-lg">
+            <h2 style={{
+              fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
+              fontWeight: 800,
+              color: "#120D31",
+              marginBottom: "0.75rem",
+              lineHeight: 1.1,
+            }}>
               Lo que dicen las{" "}
               <span style={{ color: "#7B3FE4" }}>parejas</span>
             </h2>
-            <p>
+            <p style={{ color: "#535A6A", fontSize: "1rem", lineHeight: 1.6 }}>
               Miles de usuarios ya controlan sus finanzas con PilasFi. Sin Excel, sin complicaciones.
             </p>
           </motion.div>
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid-features">
+        <div className="testimonials-grid-container">
           {testimonials.map((t, index) => (
             <TestimonialCard key={index} testimonial={t} index={index} />
           ))}
@@ -362,6 +344,20 @@ export default function Testimonials() {
         {/* Stats Banner */}
         <StatsBanner />
       </div>
+
+      <style jsx>{`
+        .testimonials-grid-container {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+          .testimonials-grid-container {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+      `}</style>
     </section>
   );
 }
