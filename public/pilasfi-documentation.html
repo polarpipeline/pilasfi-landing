@@ -3,2771 +3,527 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PilasFi - Documentación API</title>
+    <title>PilasFi - Documentacion Tecnica API</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* =====================================================
-           PILASFI DOCS - METAMASK-INSPIRED PREMIUM DESIGN
-           Featuring: Particle Animation, 3D Cards, Neon Glow
-           ===================================================== */
-
         :root {
-            /* MetaMask-inspired palette */
-            --mm-orange: #F6851B;
-            --mm-orange-light: #FFB23F;
-            --mm-orange-glow: rgba(246, 133, 27, 0.6);
-            --mm-purple: #8B5CF6;
-            --mm-purple-light: #A78BFA;
-            --mm-purple-glow: rgba(139, 92, 246, 0.6);
-            --mm-blue: #3B82F6;
-            --mm-cyan: #06B6D4;
-            --mm-green: #10B981;
-
-            /* Dark theme */
-            --bg-void: #030305;
-            --bg-primary: #0A0A0F;
-            --bg-secondary: #111118;
-            --bg-card: rgba(17, 17, 24, 0.8);
-            --bg-glass: rgba(17, 17, 24, 0.6);
-
-            /* Text */
-            --text-primary: #FFFFFF;
-            --text-secondary: #9CA3AF;
-            --text-muted: #6B7280;
-
-            /* Borders & effects */
-            --border: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(246, 133, 27, 0.3);
-            --glow-orange: 0 0 60px rgba(246, 133, 27, 0.4);
-            --glow-purple: 0 0 60px rgba(139, 92, 246, 0.4);
-
-            /* Status colors */
-            --success: #10B981;
-            --warning: #F59E0B;
-            --error: #EF4444;
-            --info: #3B82F6;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-void);
-            color: var(--text-primary);
-            line-height: 1.7;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
-
-        /* =====================================================
-           ANIMATED PARTICLE BACKGROUND
-           ===================================================== */
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Animated gradient mesh background */
-        .bg-mesh {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .bg-mesh::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background:
-                radial-gradient(ellipse 80% 60% at 10% 20%, rgba(246, 133, 27, 0.25) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 80% at 90% 80%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
-                radial-gradient(ellipse 50% 50% at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse 40% 60% at 80% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
-            animation: meshFloat 25s ease-in-out infinite;
-        }
-
-        .bg-mesh::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(circle at 20% 80%, rgba(246, 133, 27, 0.15) 0%, transparent 30%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 30%);
-            animation: meshPulse 10s ease-in-out infinite alternate;
-        }
-
-        @keyframes meshFloat {
-            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            25% { transform: translate(3%, 2%) rotate(2deg) scale(1.02); }
-            50% { transform: translate(-2%, 4%) rotate(-1deg) scale(1.01); }
-            75% { transform: translate(4%, -2%) rotate(3deg) scale(1.03); }
-        }
-
-        @keyframes meshPulse {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
-        }
-
-        /* Floating orbs with glow */
-        .glow-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            pointer-events: none;
-            z-index: 0;
-            animation: orbFloat 20s ease-in-out infinite;
-        }
-
-        .glow-orb-1 {
-            width: 500px;
-            height: 500px;
-            top: -150px;
-            right: -150px;
-            background: linear-gradient(135deg, var(--mm-orange), var(--mm-purple));
-            opacity: 0.3;
-            animation-delay: 0s;
-        }
-
-        .glow-orb-2 {
-            width: 400px;
-            height: 400px;
-            bottom: -100px;
-            left: -100px;
-            background: linear-gradient(135deg, var(--mm-purple), var(--mm-blue));
-            opacity: 0.25;
-            animation-delay: -5s;
-        }
-
-        .glow-orb-3 {
-            width: 300px;
-            height: 300px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, var(--mm-cyan), var(--mm-green));
-            opacity: 0.15;
-            animation-delay: -10s;
-        }
-
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -20px) scale(1.05); }
-            66% { transform: translate(-20px, 30px) scale(0.95); }
-        }
-
-        /* =====================================================
-           LAYOUT & CONTAINER
-           ===================================================== */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 32px;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* =====================================================
-           HEADER - Glassmorphism with Glow
-           ===================================================== */
-        header {
-            background: rgba(10, 10, 15, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 18px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        header.scrolled {
-            background: rgba(10, 10, 15, 0.95);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: 800;
-            text-decoration: none;
-            position: relative;
-            background: linear-gradient(135deg, var(--mm-orange) 0%, var(--mm-purple) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.02em;
-            transition: all 0.3s ease;
-        }
-
-        .logo::before {
-            content: '';
-            position: absolute;
-            inset: -8px -16px;
-            background: linear-gradient(135deg, var(--mm-orange-glow), var(--mm-purple-glow));
-            border-radius: 12px;
-            opacity: 0;
-            filter: blur(20px);
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .logo:hover::before {
-            opacity: 1;
-        }
-
-        .version-badge {
-            background: linear-gradient(135deg, var(--mm-orange), var(--mm-purple));
-            color: white;
-            padding: 8px 18px;
-            border-radius: 24px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 20px rgba(246, 133, 27, 0.3);
-            animation: badgePulse 3s ease-in-out infinite;
-        }
-
-        @keyframes badgePulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(246, 133, 27, 0.3); }
-            50% { box-shadow: 0 4px 30px rgba(246, 133, 27, 0.5); }
-        }
-
-        /* =====================================================
-           DOCS LAYOUT
-           ===================================================== */
-        .docs-layout {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 48px;
-            padding: 48px 0;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* =====================================================
-           SIDEBAR - Glassmorphism
-           ===================================================== */
-        .sidebar {
-            position: sticky;
-            top: 100px;
-            height: calc(100vh - 140px);
-            overflow-y: auto;
-            padding: 24px;
-            background: var(--bg-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--mm-orange) transparent;
-        }
-
-        .sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .sidebar::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--mm-orange), var(--mm-purple));
-            border-radius: 2px;
-        }
-
-        .sidebar-section {
-            margin-bottom: 32px;
-        }
-
-        .sidebar-title {
-            font-size: 10px;
-            font-weight: 800;
-            color: var(--mm-orange);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 16px;
-            padding-left: 16px;
-            position: relative;
-        }
-
-        .sidebar-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 4px;
-            background: var(--mm-orange);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--mm-orange);
-        }
-
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            padding: 12px 16px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 4px;
-        }
-
-        .sidebar-link::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--mm-orange), var(--mm-purple));
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-            border-radius: 0 2px 2px 0;
-        }
-
-        .sidebar-link::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, rgba(246, 133, 27, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .sidebar-link:hover {
-            color: var(--text-primary);
-            transform: translateX(8px);
-        }
-
-        .sidebar-link:hover::before {
-            transform: scaleY(1);
-        }
-
-        .sidebar-link:hover::after {
-            opacity: 1;
-        }
-
-        .sidebar-link.active {
-            color: var(--mm-orange);
-            background: rgba(246, 133, 27, 0.1);
-        }
-
-        .sidebar-link.active::before {
-            transform: scaleY(1);
-        }
-
-        /* =====================================================
-           MAIN CONTENT
-           ===================================================== */
-        .main-content {
-            min-width: 0;
-        }
-
-        section {
-            margin-bottom: 80px;
-            opacity: 0;
-            transform: translateY(40px);
-            animation: sectionReveal 0.8s ease forwards;
-        }
-
-        section:nth-child(1) { animation-delay: 0.1s; }
-        section:nth-child(2) { animation-delay: 0.2s; }
-        section:nth-child(3) { animation-delay: 0.3s; }
-        section:nth-child(4) { animation-delay: 0.4s; }
-        section:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes sectionReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* =====================================================
-           TYPOGRAPHY - Bold & Impactful
-           ===================================================== */
-        h1 {
-            font-size: 56px;
-            font-weight: 900;
-            margin-bottom: 24px;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            background: linear-gradient(135deg, #FFFFFF 0%, var(--mm-orange) 50%, var(--mm-purple) 100%);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 8s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        h2 {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 24px;
-            padding-top: 40px;
-            color: var(--text-primary);
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--mm-orange), var(--mm-purple));
-            border-radius: 2px;
-        }
-
-        h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            margin-top: 36px;
-            color: var(--text-primary);
-        }
-
-        h4 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            margin-top: 24px;
-            color: var(--mm-orange-light);
-        }
-
-        p {
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-size: 16px;
-            line-height: 1.8;
-        }
-
-        /* =====================================================
-           3D CARDS - Tilt Effect with Glow
-           ===================================================== */
-        .card {
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 32px;
-            margin-bottom: 28px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--mm-orange), var(--mm-purple), var(--mm-cyan));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: var(--border-glow);
-            box-shadow:
-                0 25px 50px rgba(0, 0, 0, 0.5),
-                0 0 100px rgba(246, 133, 27, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            transform: translateY(-8px) rotateX(2deg);
-        }
-
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-        }
-
-        /* Feature Cards with 3D effect */
-        .feature-card {
-            background: linear-gradient(145deg, rgba(17, 17, 24, 0.9), rgba(10, 10, 15, 0.9));
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 28px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(246, 133, 27, 0.1) 0%, transparent 50%, rgba(139, 92, 246, 0.1) 100%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .feature-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent 0deg 340deg, rgba(246, 133, 27, 0.3) 360deg);
-            animation: cardRotate 6s linear infinite;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        @keyframes cardRotate {
-            to { transform: rotate(360deg); }
-        }
-
-        .feature-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            border-color: rgba(246, 133, 27, 0.5);
-            box-shadow:
-                0 30px 60px rgba(0, 0, 0, 0.4),
-                0 0 80px rgba(246, 133, 27, 0.15);
-        }
-
-        .feature-card:hover::before,
-        .feature-card:hover::after {
-            opacity: 1;
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            display: inline-block;
-            animation: iconFloat 3s ease-in-out infinite;
-        }
-
-        @keyframes iconFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .feature-card h4 {
-            color: var(--text-primary);
-            font-size: 18px;
-            font-weight: 700;
-            margin-top: 0;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .feature-card p {
-            font-size: 14px;
-            margin-bottom: 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* =====================================================
-           CODE BLOCKS - Terminal Style with Glow
-           ===================================================== */
-        pre {
-            background: linear-gradient(145deg, #0D0D14, #080810);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
-            padding-top: 48px;
-            overflow-x: auto;
-            margin-bottom: 20px;
-            position: relative;
-            box-shadow:
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.02);
-        }
-
-        pre::before {
-            content: '';
-            position: absolute;
-            top: 16px;
-            left: 20px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #EF4444;
-            box-shadow:
-                20px 0 0 #F59E0B,
-                40px 0 0 #10B981;
-        }
-
-        pre::after {
-            content: 'terminal';
-            position: absolute;
-            top: 14px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        code {
-            font-family: 'JetBrains Mono', 'SF Mono', monospace;
-            font-size: 13px;
-            color: var(--mm-orange-light);
-        }
-
-        pre code {
-            color: #E2E8F0;
-        }
-
-        /* =====================================================
-           TABLES - Sleek with Hover Effects
-           ===================================================== */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 28px;
-            font-size: 14px;
-            background: var(--bg-card);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-        }
-
-        th, td {
-            padding: 16px 20px;
-            text-align: left;
-        }
-
-        th {
-            background: linear-gradient(90deg, rgba(246, 133, 27, 0.1), rgba(139, 92, 246, 0.05));
-            font-weight: 700;
-            color: var(--text-primary);
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        td {
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:hover td {
-            background: rgba(246, 133, 27, 0.05);
-            color: var(--text-primary);
-        }
-
-        /* =====================================================
-           API ENDPOINTS - Neon Glow
-           ===================================================== */
-        .endpoint {
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            margin-bottom: 28px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .endpoint:hover {
-            border-color: var(--border-glow);
-            box-shadow: 0 0 40px rgba(246, 133, 27, 0.1);
-        }
-
-        .endpoint-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 20px 28px;
-            background: linear-gradient(90deg, rgba(246, 133, 27, 0.08), transparent);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .method {
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-        }
-
-        .method::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 8px;
-            opacity: 0.3;
-        }
-
-        .method-get {
-            background: rgba(16, 185, 129, 0.15);
-            color: #10B981;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
-        }
-
-        .method-post {
-            background: rgba(59, 130, 246, 0.15);
-            color: #3B82F6;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-        }
-
-        .method-put {
-            background: rgba(245, 158, 11, 0.15);
-            color: #F59E0B;
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
-        }
-
-        .method-delete {
-            background: rgba(239, 68, 68, 0.15);
-            color: #EF4444;
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
-        }
-
-        .endpoint-path {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .endpoint-body {
-            padding: 28px;
-        }
-
-        .endpoint-description {
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        /* =====================================================
-           BADGES - Glowing Pills
-           ===================================================== */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-
-        .badge:hover {
-            transform: translateY(-2px);
-        }
-
-        .badge-required {
-            background: rgba(239, 68, 68, 0.15);
-            color: #EF4444;
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
-        }
-
-        .badge-optional {
-            background: rgba(139, 92, 246, 0.15);
-            color: #A78BFA;
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
-        }
-
-        .badge-auth {
-            background: rgba(246, 133, 27, 0.15);
-            color: #F6851B;
-            box-shadow: 0 0 20px rgba(246, 133, 27, 0.2);
-        }
-
-        /* =====================================================
-           LISTS
-           ===================================================== */
-        ul, ol {
-            margin-bottom: 20px;
-            padding-left: 28px;
-        }
-
-        li {
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            font-size: 15px;
-            line-height: 1.7;
-            position: relative;
-        }
-
-        li::marker {
-            color: var(--mm-orange);
-        }
-
-        /* =====================================================
-           DIAGRAMS - Neon Terminal
-           ===================================================== */
-        .diagram {
-            background: linear-gradient(145deg, #0D0D14, #080810);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 32px;
-            margin-bottom: 28px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            line-height: 1.6;
-            overflow-x: auto;
-            white-space: pre;
-            color: var(--mm-orange-light);
-            position: relative;
-            box-shadow:
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                inset 0 0 80px rgba(246, 133, 27, 0.03);
-        }
-
-        .diagram::before {
-            content: 'architecture';
-            position: absolute;
-            top: 10px;
-            right: 16px;
-            font-size: 10px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* =====================================================
-           ALERTS - Glowing Borders
-           ===================================================== */
-        .alert {
-            padding: 20px 24px;
-            border-radius: 16px;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .alert:hover {
-            transform: translateX(4px);
-        }
-
-        .alert-info {
-            background: rgba(59, 130, 246, 0.08);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
-        }
-
-        .alert-warning {
-            background: rgba(246, 133, 27, 0.08);
-            border: 1px solid rgba(246, 133, 27, 0.3);
-            box-shadow: 0 0 30px rgba(246, 133, 27, 0.1);
-        }
-
-        .alert-success {
-            background: rgba(16, 185, 129, 0.08);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            box-shadow: 0 0 30px rgba(16, 185, 129, 0.1);
-        }
-
-        .alert span {
-            font-size: 24px;
-        }
-
-        /* =====================================================
-           SERVICE CARDS - 3D Holographic
-           ===================================================== */
-        .service-card {
-            background: linear-gradient(145deg, rgba(17, 17, 24, 0.9), rgba(10, 10, 15, 0.9));
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 32px;
-            margin-bottom: 28px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--mm-orange), var(--mm-purple), var(--mm-cyan), var(--mm-green));
-            background-size: 300% 100%;
-            animation: borderGradient 4s linear infinite;
-        }
-
-        @keyframes borderGradient {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 300% 0%; }
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            border-color: var(--border-glow);
-            box-shadow:
-                0 30px 60px rgba(0, 0, 0, 0.4),
-                0 0 100px rgba(246, 133, 27, 0.1);
-        }
-
-        .service-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .service-name {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--mm-orange) 0%, var(--mm-purple) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .service-port {
-            background: var(--bg-void);
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: var(--mm-orange-light);
-            border: 1px solid var(--border);
-            box-shadow: 0 0 20px rgba(246, 133, 27, 0.1);
-        }
-
-        /* =====================================================
-           FLOW STEPS - Animated Timeline
-           ===================================================== */
-        .flow-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            margin-bottom: 28px;
-            padding: 20px;
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .flow-step::before {
-            content: '';
-            position: absolute;
-            left: 37px;
-            top: 60px;
-            bottom: -28px;
-            width: 2px;
-            background: linear-gradient(180deg, var(--mm-orange), transparent);
-        }
-
-        .flow-step:last-child::before {
-            display: none;
-        }
-
-        .flow-step:hover {
-            background: rgba(246, 133, 27, 0.05);
-        }
-
-        .flow-number {
-            width: 44px;
-            height: 44px;
-            background: linear-gradient(135deg, var(--mm-orange) 0%, var(--mm-purple) 100%);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 16px;
-            flex-shrink: 0;
-            box-shadow: 0 8px 24px rgba(246, 133, 27, 0.3);
-            position: relative;
-            z-index: 1;
-        }
-
-        .flow-content {
-            flex: 1;
-            padding-top: 8px;
-        }
-
-        .flow-content h4 {
-            margin-top: 0;
-            color: var(--text-primary);
-            font-size: 17px;
-        }
-
-        /* =====================================================
-           TECH BADGES - Glowing Chips
-           ===================================================== */
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .tech-badge {
-            background: rgba(246, 133, 27, 0.08);
-            border: 1px solid rgba(246, 133, 27, 0.2);
-            padding: 10px 18px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: default;
-        }
-
-        .tech-badge:hover {
-            background: rgba(246, 133, 27, 0.15);
-            border-color: var(--mm-orange);
-            color: var(--mm-orange-light);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(246, 133, 27, 0.2);
-        }
-
-        /* =====================================================
-           RESPONSIVE - Mobile First
-           ===================================================== */
-        @media (max-width: 1024px) {
-            .docs-layout {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-
-            .sidebar {
-                display: none;
-            }
-
-            h1 {
-                font-size: 36px;
-            }
-
-            h2 {
-                font-size: 28px;
-            }
-
-            .container {
-                padding: 0 20px;
-            }
-
-            .glow-orb {
-                opacity: 0.15;
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 28px;
-            }
-
-            h2 {
-                font-size: 24px;
-            }
-
-            .card, .service-card, .endpoint {
-                padding: 20px;
-                border-radius: 16px;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .service-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .flow-step {
-                padding: 16px;
-            }
-
-            .flow-number {
-                width: 36px;
-                height: 36px;
-                font-size: 14px;
-            }
-        }
-
-        /* =====================================================
-           SCROLLBAR - Custom Neon
-           ===================================================== */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--mm-orange), var(--mm-purple));
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, var(--mm-orange-light), var(--mm-purple-light));
-        }
-
-        /* =====================================================
-           SELECTION
-           ===================================================== */
-        ::selection {
-            background: rgba(246, 133, 27, 0.3);
-            color: white;
-        }
-
-        /* =====================================================
-           REDUCED MOTION
-           ===================================================== */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-purple: #8b5cf6;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --border: #2a2a3a;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+        header { background: linear-gradient(180deg, var(--bg-secondary) 0%, transparent 100%); border-bottom: 1px solid var(--border); padding: 16px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(20px); }
+        .header-content { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 24px; font-weight: 700; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+        .version-badge { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%); color: white; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .docs-layout { display: grid; grid-template-columns: 260px 1fr; gap: 40px; padding: 40px 0; }
+        .sidebar { position: sticky; top: 80px; height: calc(100vh - 120px); overflow-y: auto; padding-right: 16px; }
+        .sidebar-section { margin-bottom: 24px; }
+        .sidebar-title { font-size: 11px; font-weight: 700; color: var(--accent-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; padding-left: 12px; }
+        .sidebar-link { display: block; padding: 8px 12px; color: var(--text-secondary); text-decoration: none; border-radius: 6px; font-size: 13px; transition: all 0.2s; border-left: 2px solid transparent; }
+        .sidebar-link:hover { background: var(--bg-tertiary); color: var(--text-primary); border-left-color: var(--accent); }
+        .main-content { min-width: 0; }
+        section { margin-bottom: 48px; }
+        h1 { font-size: 38px; font-weight: 800; margin-bottom: 12px; background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 26px; font-weight: 700; margin-bottom: 16px; padding-top: 24px; color: var(--text-primary); }
+        h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; margin-top: 24px; color: var(--text-primary); }
+        h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; margin-top: 16px; color: var(--accent-light); }
+        p { color: var(--text-secondary); margin-bottom: 14px; font-size: 14px; }
+        .card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+        .feature-card { background: linear-gradient(145deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+        .feature-icon { font-size: 32px; margin-bottom: 12px; }
+        .feature-card h4 { color: var(--text-primary); font-size: 15px; margin-top: 0; margin-bottom: 6px; }
+        .feature-card p { font-size: 13px; margin-bottom: 0; }
+        pre { background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 10px; padding: 16px; overflow-x: auto; margin-bottom: 14px; }
+        code { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-light); }
+        pre code { color: #e2e8f0; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13px; }
+        th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--bg-tertiary); font-weight: 600; color: var(--text-primary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+        td { color: var(--text-secondary); }
+        .endpoint { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
+        .endpoint-header { display: flex; align-items: center; gap: 12px; padding: 14px 20px; background: linear-gradient(90deg, var(--bg-tertiary) 0%, transparent 100%); border-bottom: 1px solid var(--border); }
+        .method { padding: 5px 12px; border-radius: 5px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .method-get { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+        .method-post { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+        .method-put { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+        .method-delete { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+        .endpoint-path { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text-primary); }
+        .endpoint-body { padding: 20px; }
+        .endpoint-description { color: var(--text-secondary); margin-bottom: 16px; font-size: 14px; }
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+        .badge-required { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+        .badge-optional { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+        ul, ol { margin-bottom: 14px; padding-left: 20px; }
+        li { color: var(--text-secondary); margin-bottom: 8px; font-size: 14px; }
+        .diagram { background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11px; line-height: 1.4; overflow-x: auto; white-space: pre; color: var(--text-secondary); }
+        .alert { padding: 14px 18px; border-radius: 10px; margin-bottom: 16px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert-info { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); }
+        .alert-warning { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .alert span { font-size: 18px; }
+        .service-card { background: linear-gradient(145deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .service-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+        .service-name { font-size: 20px; font-weight: 700; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .service-port { background: var(--bg-primary); padding: 5px 12px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent-light); border: 1px solid var(--border); }
+        .flow-step { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+        .flow-number { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-purple) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+        .flow-content { flex: 1; padding-top: 2px; }
+        .flow-content h4 { margin-top: 0; color: var(--text-primary); }
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .tech-badge { background: var(--bg-primary); border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; font-size: 12px; color: var(--text-secondary); transition: all 0.2s; }
+        .tech-badge:hover { border-color: var(--accent); color: var(--accent-light); }
+        @media (max-width: 1024px) { .docs-layout { grid-template-columns: 1fr; } .sidebar { position: static; height: auto; display: none; } h1 { font-size: 28px; } }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        .gradient-orb { position: fixed; width: 500px; height: 500px; border-radius: 50%; filter: blur(100px); opacity: 0.12; pointer-events: none; z-index: -1; }
+        .gradient-orb-1 { top: -150px; right: -150px; background: var(--accent); }
+        .gradient-orb-2 { bottom: -150px; left: -150px; background: var(--accent-purple); }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="bg-mesh"></div>
-    <canvas id="particles-canvas"></canvas>
-
-    <!-- Floating Glow Orbs -->
-    <div class="glow-orb glow-orb-1"></div>
-    <div class="glow-orb glow-orb-2"></div>
-    <div class="glow-orb glow-orb-3"></div>
-
+    <div class="gradient-orb gradient-orb-1"></div>
+    <div class="gradient-orb gradient-orb-2"></div>
     <header>
         <div class="container">
             <div class="header-content">
                 <a href="https://pilasfi.com" class="logo">PilasFi</a>
-                <span class="version-badge">API v1.0</span>
+                <span class="version-badge">API v1.0 - Enero 2025</span>
             </div>
         </div>
     </header>
-
     <div class="container">
         <div class="docs-layout">
             <aside class="sidebar">
                 <nav>
                     <div class="sidebar-section">
                         <div class="sidebar-title">Inicio</div>
-                        <a href="#overview" class="sidebar-link">Descripcion General</a>
+                        <a href="#overview" class="sidebar-link">Vision General</a>
                         <a href="#features" class="sidebar-link">Caracteristicas</a>
                         <a href="#tech-stack" class="sidebar-link">Stack Tecnologico</a>
                     </div>
-
                     <div class="sidebar-section">
                         <div class="sidebar-title">Arquitectura</div>
-                        <a href="#architecture" class="sidebar-link">Vision General</a>
+                        <a href="#architecture" class="sidebar-link">Sistema Distribuido</a>
                         <a href="#microservices" class="sidebar-link">Microservicios</a>
-                        <a href="#data-flow" class="sidebar-link">Flujo de Datos</a>
-                        <a href="#event-driven" class="sidebar-link">Eventos</a>
+                        <a href="#events" class="sidebar-link">Eventos Pub/Sub</a>
+                        <a href="#parsing-flow" class="sidebar-link">Flujo de Parseo</a>
                     </div>
-
                     <div class="sidebar-section">
                         <div class="sidebar-title">API Reference</div>
                         <a href="#auth" class="sidebar-link">Autenticacion</a>
+                        <a href="#email-config" class="sidebar-link">Email Config</a>
                         <a href="#transactions" class="sidebar-link">Transacciones</a>
-                        <a href="#categories" class="sidebar-link">Categorias</a>
-                        <a href="#budgets" class="sidebar-link">Presupuestos</a>
+                        <a href="#alerts" class="sidebar-link">Alertas</a>
+                        <a href="#webhooks" class="sidebar-link">Webhooks</a>
                         <a href="#analytics" class="sidebar-link">Analytics</a>
-                        <a href="#households" class="sidebar-link">Households</a>
-                        <a href="#goals" class="sidebar-link">Metas</a>
-                        <a href="#email-sync" class="sidebar-link">Email Sync</a>
                     </div>
-
                     <div class="sidebar-section">
                         <div class="sidebar-title">Modelos</div>
-                        <a href="#models" class="sidebar-link">Modelos de Datos</a>
-                        <a href="#parsers" class="sidebar-link">Parsers de Bancos</a>
+                        <a href="#models" class="sidebar-link">Base de Datos</a>
+                        <a href="#parsers-db" class="sidebar-link">Parser Database</a>
                     </div>
-
                     <div class="sidebar-section">
-                        <div class="sidebar-title">Infraestructura</div>
-                        <a href="#infrastructure" class="sidebar-link">Deployment</a>
+                        <div class="sidebar-title">Avanzado</div>
+                        <a href="#ai-parsing" class="sidebar-link">AI Parsing</a>
+                        <a href="#banks" class="sidebar-link">Bancos Soportados</a>
                         <a href="#security" class="sidebar-link">Seguridad</a>
                     </div>
                 </nav>
             </aside>
-
             <main class="main-content">
-                <!-- Overview Section -->
                 <section id="overview">
                     <h1>PilasFi - Documentacion Tecnica</h1>
-                    <p style="font-size: 18px; color: var(--text-primary); margin-bottom: 32px;">Ecosistema de Gestion Financiera Inteligente con categorizacion automatica de gastos mediante IA.</p>
-
+                    <p style="font-size: 16px; color: var(--text-primary); margin-bottom: 28px;">Sistema distribuido de finanzas personales con extraccion automatica de transacciones mediante IA.</p>
                     <div class="card">
                         <h3>Que es PilasFi?</h3>
-                        <p>PilasFi es una plataforma integral de finanzas personales que automatiza el registro de gastos mediante el procesamiento inteligente de notificaciones bancarias por correo electronico. Utilizando IA avanzada (OpenAI GPT-4o, Google Gemini), la plataforma extrae automaticamente transacciones de emails bancarios y las categoriza de forma inteligente.</p>
+                        <p>PilasFi es una plataforma que automatiza el registro de gastos procesando emails bancarios ecuatorianos. Utiliza una arquitectura de microservicios event-driven con Quarkus, Google Cloud Pub/Sub e IA (OpenAI GPT-4o / Google Gemini) para extraer y categorizar transacciones automaticamente.</p>
                     </div>
-
                     <div class="alert alert-info">
                         <span>&#8505;</span>
-                        <div>
-                            <strong>Base URL de Produccion:</strong>
-                            <code>https://api.pilasfi.com/api/v1</code>
-                        </div>
+                        <div><strong>Base URL:</strong> <code>https://api.pilasfi.com/api/v1</code></div>
                     </div>
                 </section>
-
-                <!-- Features Section -->
                 <section id="features">
                     <h2>Caracteristicas Principales</h2>
-
                     <div class="card-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">&#129302;</div>
-                            <h4>Extraccion con IA</h4>
-                            <p>Procesamiento inteligente de emails bancarios usando GPT-4o y Gemini con fallback deterministico.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">&#128231;</div>
-                            <h4>Sync de Email</h4>
-                            <p>Sincronizacion automatica con Gmail y Outlook para capturar notificaciones bancarias en tiempo real.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">&#127974;</div>
-                            <h4>Multi-Banco</h4>
-                            <p>Soporte para Pichincha, Produbanco, Guayaquil, Diners, PacifiCard, Deuna, Titanium y mas.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">&#128101;</div>
-                            <h4>Crowdsourcing</h4>
-                            <p>Categorizacion colaborativa de comerciantes que mejora con cada usuario.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">&#128106;</div>
-                            <h4>Households</h4>
-                            <p>Grupos familiares para gestionar finanzas compartidas y presupuestos conjuntos.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">&#128202;</div>
-                            <h4>Analytics</h4>
-                            <p>Dashboard con analisis de gastos, tendencias, proyecciones y comparativas mensuales.</p>
-                        </div>
+                        <div class="feature-card"><div class="feature-icon">&#129302;</div><h4>IA Dual: OpenAI + Gemini</h4><p>GPT-4o-mini y Gemini-3-Flash con Extended Thinking para decisiones criticas.</p></div>
+                        <div class="feature-card"><div class="feature-icon">&#128231;</div><h4>Gmail + Outlook</h4><p>OAuth2 con refresh automatico de tokens y webhooks en tiempo real.</p></div>
+                        <div class="feature-card"><div class="feature-icon">&#127974;</div><h4>7+ Bancos Ecuador</h4><p>Pichincha, Produbanco, Guayaquil, Diners, PacifiCard, Deuna, Titanium.</p></div>
+                        <div class="feature-card"><div class="feature-icon">&#9889;</div><h4>Auto-Discovery</h4><p>IA genera parsers regex automaticamente con 90%+ de confianza.</p></div>
+                        <div class="feature-card"><div class="feature-icon">&#128276;</div><h4>Alertas Inteligentes</h4><p>Notificaciones push por categoria, umbral de gasto o presupuesto.</p></div>
+                        <div class="feature-card"><div class="feature-icon">&#128202;</div><h4>Analytics en Tiempo Real</h4><p>Dashboard con gastos por categoria, tendencias y proyecciones.</p></div>
                     </div>
                 </section>
-
-                <!-- Tech Stack Section -->
                 <section id="tech-stack">
                     <h2>Stack Tecnologico</h2>
-
                     <div class="card">
                         <h4>Backend</h4>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Java 21</span>
-                            <span class="tech-badge">Quarkus 3.30.5</span>
-                            <span class="tech-badge">Hibernate Panache</span>
-                            <span class="tech-badge">Flyway</span>
-                            <span class="tech-badge">SmallRye Reactive</span>
-                        </div>
-
+                        <div class="tech-stack"><span class="tech-badge">Java 17+ (Runtime 21)</span><span class="tech-badge">Quarkus 3.30.5</span><span class="tech-badge">Hibernate Panache</span><span class="tech-badge">Flyway</span></div>
                         <h4>Base de Datos</h4>
-                        <div class="tech-stack">
-                            <span class="tech-badge">PostgreSQL 16</span>
-                            <span class="tech-badge">Redis 7</span>
-                        </div>
-
+                        <div class="tech-stack"><span class="tech-badge">PostgreSQL 16 (Cloud SQL)</span><span class="tech-badge">Redis (Cache)</span></div>
                         <h4>Mensajeria</h4>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Google Cloud Pub/Sub</span>
-                            <span class="tech-badge">SmallRye Reactive Messaging</span>
-                        </div>
-
-                        <h4>IA y APIs Externas</h4>
-                        <div class="tech-stack">
-                            <span class="tech-badge">OpenAI GPT-4o</span>
-                            <span class="tech-badge">Google Gemini</span>
-                            <span class="tech-badge">Gmail API</span>
-                            <span class="tech-badge">Microsoft Graph</span>
-                            <span class="tech-badge">Firebase</span>
-                        </div>
-
+                        <div class="tech-stack"><span class="tech-badge">Google Cloud Pub/Sub</span><span class="tech-badge">Webhooks Push</span></div>
+                        <h4>IA</h4>
+                        <div class="tech-stack"><span class="tech-badge">OpenAI GPT-4o-mini</span><span class="tech-badge">Google Gemini 3 Flash</span><span class="tech-badge">Extended Thinking</span></div>
                         <h4>Infraestructura</h4>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Kubernetes</span>
-                            <span class="tech-badge">Terraform</span>
-                            <span class="tech-badge">ArgoCD</span>
-                            <span class="tech-badge">Fly.io</span>
-                            <span class="tech-badge">Hetzner Cloud</span>
-                        </div>
+                        <div class="tech-stack"><span class="tech-badge">Google Cloud Run</span><span class="tech-badge">Cloud Scheduler</span><span class="tech-badge">Firebase Auth</span><span class="tech-badge">FCM Push</span></div>
                     </div>
                 </section>
-
-                <!-- Architecture Section -->
                 <section id="architecture">
                     <h2>Arquitectura del Sistema</h2>
-
-                    <p>PilasFi utiliza una arquitectura de microservicios event-driven con Google Cloud Pub/Sub como backbone de mensajeria.</p>
-
-                    <div class="diagram">+-----------------------------------------------------------------+
-|                        CLIENTES                                 |
-|   +- App Movil (Flutter)                                        |
-|   +- Frontend Web                                               |
-+-----------------------------+-----------------------------------+
-                              |
-                      +-------v--------+
-                      |  pilasfi-api   |  REST API, WebSocket
-                      |   (Quarkus)    |  Port: 8080
-                      +-------+--------+
-                              |
-              +---------------+---------------+
-              |               |               |
-              v               v               v
-        PostgreSQL        Redis        Google Cloud
-           (16)            (7)          Pub/Sub
-              |               |               |
-              +---------------+---------------+
-                              |
-              +---------------v---------------+
-              |      EVENT-DRIVEN BUS         |
-              |   (Google Cloud Pub/Sub)      |
-              |                               |
-              |  Topics:                      |
-              |  - user-email-config          |
-              |  - email-raw                  |
-              |  - email-transaction          |
-              |  - token-refreshed            |
-              |  - sync-email-request         |
-              +---------------+---------------+
-                              |
-      +-----------+-----------+-----------+-----------+
-      |           |           |           |           |
-      v           v           v           v           v
-  email-sync  parser-svc  sync-sched  (future)    (future)
-   :8081       :8082       :8082</div>
+                    <p>Arquitectura Hexagonal (Ports and Adapters) con microservicios event-driven.</p>
+                    <div class="diagram">+------------------------------------------------------------------+
+|                         CLIENTES                                 |
+|   App Flutter (iOS/Android)    +    Frontend Web                 |
++--------------------------------+---------------------------------+
+                                 |
+                         +-------v--------+
+                         |  pilasfi-api   |  REST API + Webhooks
+                         |   (Quarkus)    |  Port: 8080
+                         +-------+--------+
+                                 |
+             +-------------------+-------------------+
+             |                   |                   |
+             v                   v                   v
+       PostgreSQL            Redis           Firebase Auth
+       (Cloud SQL)          (Cache)          (JWT Tokens)
+             |                   |                   |
+             +-------------------+-------------------+
+                                 |
+             +-------------------v-------------------+
+             |        GOOGLE CLOUD PUB/SUB          |
+             |                                       |
+             |  Topics:                              |
+             |  - user-email-config                  |
+             |  - sync-email-request                 |
+             |  - email-raw                          |
+             |  - email-transaction                  |
+             |  - token-refreshed                    |
+             +-------------------+-------------------+
+                                 |
+     +-----------+---------------+---------------+-----------+
+     |           |               |               |           |
+     v           v               v               v           v
+ email-sync  parser-svc   sync-scheduler   Gmail API   Outlook API
+  :8081       :8082          :8083         (OAuth2)    (OAuth2)</div>
                 </section>
-
-                <!-- Microservices Section -->
                 <section id="microservices">
                     <h2>Microservicios</h2>
-
                     <div class="service-card">
-                        <div class="service-header">
-                            <span class="service-name">pilasfi-api</span>
-                            <span class="service-port">Port: 8080</span>
-                        </div>
-                        <p>Core business logic, user management, transactions y analytics.</p>
-                        <h4>Responsabilidades:</h4>
+                        <div class="service-header"><span class="service-name">pilasfi-api</span><span class="service-port">Port: 8080</span></div>
+                        <p>Core de negocio: usuarios, transacciones, presupuestos, alertas, autenticacion Firebase.</p>
+                        <h4>Endpoints Principales:</h4>
                         <ul>
-                            <li>Autenticacion y autorizacion (Firebase)</li>
-                            <li>API REST para transactions, budgets, analytics</li>
-                            <li>Gestion de usuarios y households</li>
-                            <li>Webhooks para Pub/Sub (inbox pattern)</li>
-                            <li>Push notifications (FCM)</li>
-                            <li>Crowdsourced merchant categorization</li>
-                        </ul>
-                        <h4>Arquitectura Hexagonal:</h4>
-                        <pre><code>domain/
-+-- model/          # Entities: User, Transaction, Category...
-+-- service/        # Domain services
-+-- exception/      # DomainException
-
-application/
-+-- port/
-|   +-- input/      # UseCases
-|   +-- output/     # Repository ports
-+-- service/        # Service implementations
-+-- dto/            # DTOs
-
-infrastructure/
-+-- adapter/
-|   +-- input/rest/ # REST Resources (@Path)
-|   +-- output/     # Persistence, Email, Notification adapters
-+-- config/         # Security, CORS, Firebase
-+-- scheduler/      # Cron jobs</code></pre>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-header">
-                            <span class="service-name">pilasfi-email-sync</span>
-                            <span class="service-port">Port: 8081</span>
-                        </div>
-                        <p>Sincronizacion de emails desde Gmail/Outlook y gestion de tokens OAuth.</p>
-                        <h4>Responsabilidades:</h4>
-                        <ul>
-                            <li>Consumir eventos de configuracion de email</li>
-                            <li>Refrescar tokens OAuth automaticamente</li>
-                            <li>Fetch de emails crudos desde Gmail/Outlook</li>
-                            <li>Normalizacion y limpieza de HTML (Jsoup)</li>
-                            <li>Publicacion de emails a email-raw topic</li>
-                            <li>Distributed locks para prevent duplicate processing</li>
+                            <li><code>POST /api/v1/auth/firebase</code> - Login con Firebase Token</li>
+                            <li><code>GET/POST/PUT/DELETE /api/v1/email-config</code> - Gestion de emails</li>
+                            <li><code>GET/POST /api/v1/transactions</code> - Transacciones</li>
+                            <li><code>GET/POST/PUT/DELETE /api/v1/alerts</code> - Alertas de gasto</li>
+                            <li><code>POST /api/v1/webhook/gmail/notify</code> - Push de Gmail</li>
+                            <li><code>POST /api/v1/webhook/outlook/notify</code> - Webhook Outlook</li>
+                            <li><code>GET /api/v1/analytics/dashboard</code> - Dashboard</li>
                         </ul>
                     </div>
-
                     <div class="service-card">
-                        <div class="service-header">
-                            <span class="service-name">pilasfi-parser-service</span>
-                            <span class="service-port">Port: 8082</span>
-                        </div>
-                        <p>Parseo de emails bancarios y extraccion de transacciones con IA.</p>
+                        <div class="service-header"><span class="service-name">pilasfi-email-sync</span><span class="service-port">Port: 8081</span></div>
+                        <p>Sincronizacion de emails via OAuth (Gmail/Outlook), gestion de tokens, filtrado de dominios.</p>
                         <h4>Responsabilidades:</h4>
                         <ul>
-                            <li>Consumir raw emails del topic email-raw</li>
-                            <li>Detectar banco basado en remitente</li>
-                            <li>Parseo deterministico (Regex + Jsoup)</li>
-                            <li>Fallback a IA (OpenAI/Gemini)</li>
-                            <li>Generar candidatos de parsers con IA</li>
-                            <li>Publicar transacciones al topic email-transaction</li>
+                            <li>Consume <code>EmailConfigUpdatedEvent</code> y <code>SyncRequestEvent</code></li>
+                            <li>Conecta a Gmail API / Microsoft Graph</li>
+                            <li>Filtra dominios personales (gmail.com, yahoo.com, etc.)</li>
+                            <li>Publica <code>EmailRawReceivedEvent</code> a topic email-raw</li>
+                            <li>Refresh automatico de OAuth tokens</li>
                         </ul>
-                        <h4>Bancos Soportados:</h4>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Pichincha</span>
-                            <span class="tech-badge">Produbanco</span>
-                            <span class="tech-badge">Banco Guayaquil</span>
-                            <span class="tech-badge">Diners Club</span>
-                            <span class="tech-badge">PacifiCard</span>
-                            <span class="tech-badge">Deuna</span>
-                            <span class="tech-badge">Titanium</span>
-                            <span class="tech-badge">+ Auto-discovery (IA)</span>
-                        </div>
                     </div>
-
                     <div class="service-card">
-                        <div class="service-header">
-                            <span class="service-name">pilasfi-sync-scheduler</span>
-                            <span class="service-port">Port: 8082</span>
-                        </div>
-                        <p>Orquestador de sincronizacion distribuida de emails.</p>
-                        <h4>Responsabilidades:</h4>
+                        <div class="service-header"><span class="service-name">pilasfi-parser-service</span><span class="service-port">Port: 8082</span></div>
+                        <p>Procesamiento inteligente de emails con IA dual (OpenAI/Gemini) y parsers regex auto-generados.</p>
+                        <h4>Pipeline de Parseo:</h4>
+                        <ol>
+                            <li>Deduplication Check</li>
+                            <li>Domain Blacklist Check</li>
+                            <li>Display Name Filter (evita transferencias personales)</li>
+                            <li>Discard Parsers (OTP, seguridad, marketing)</li>
+                            <li>Database Regex Parsers (FAST PATH)</li>
+                            <li>AI Parser con Gemini/OpenAI (FALLBACK)</li>
+                            <li>Validacion NOT_FINANCIAL_ENTITY (Extended Thinking)</li>
+                        </ol>
+                        <h4>AI Providers:</h4>
+                        <div class="tech-stack"><span class="tech-badge">gemini-3-flash-preview</span><span class="tech-badge">gpt-4o-mini</span><span class="tech-badge">Extended Thinking: LOW/MEDIUM/HIGH</span></div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-header"><span class="service-name">pilasfi-sync-scheduler</span><span class="service-port">Port: 8083</span></div>
+                        <p>Scheduler distribuido que orquesta syncs periodicos cada 5 minutos via Cloud Scheduler.</p>
+                        <h4>Endpoints:</h4>
                         <ul>
-                            <li>Recibir triggers de Cloud Scheduler (cada 5 min)</li>
-                            <li>Consultar email_configs que necesitan sincronizacion</li>
-                            <li>Crear sync_jobs (outbox pattern)</li>
-                            <li>Publicar eventos a Pub/Sub topic</li>
-                            <li>Garantizar no duplicacion con locks atomicos</li>
+                            <li><code>POST /scheduler/trigger-sync</code> - Trigger general (Cloud Scheduler)</li>
+                            <li><code>POST /scheduler/trigger-sync/{configId}</code> - Trigger manual</li>
+                            <li><code>GET /scheduler/status</code> - Estado del scheduler</li>
                         </ul>
                     </div>
                 </section>
-
-                <!-- Data Flow Section -->
-                <section id="data-flow">
-                    <h2>Flujo de Datos</h2>
-
-                    <h3>Flujo de Procesamiento de Emails</h3>
-
-                    <div class="flow-step">
-                        <div class="flow-number">1</div>
-                        <div class="flow-content">
-                            <h4>Ingesta</h4>
-                            <p>Los bancos envian notificaciones -> Gmail/Outlook -> Usuario conecta cuenta via OAuth en pilasfi-api</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-number">2</div>
-                        <div class="flow-content">
-                            <h4>Configuracion</h4>
-                            <p>pilasfi-api publica <code>EmailConfigUpdatedEvent</code> al topic <code>user-email-config</code></p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-number">3</div>
-                        <div class="flow-content">
-                            <h4>Sincronizacion</h4>
-                            <p>pilasfi-email-sync consume el evento, hace fetch de emails desde Gmail/Outlook, limpia HTML y publica a <code>email-raw</code> topic</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-number">4</div>
-                        <div class="flow-content">
-                            <h4>Parsing</h4>
-                            <p>pilasfi-parser-service consume emails, intenta parseo deterministico, si falla usa IA (OpenAI/Gemini), publica transacciones a <code>email-transaction</code> topic</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-number">5</div>
-                        <div class="flow-content">
-                            <h4>Persistencia</h4>
-                            <p>pilasfi-api consume transacciones, las guarda en DB, actualiza cache Redis, envia push notification via FCM</p>
-                        </div>
-                    </div>
-
-                    <div class="flow-step">
-                        <div class="flow-number">6</div>
-                        <div class="flow-content">
-                            <h4>Presentacion</h4>
-                            <p>App movil recibe notificacion, usuario puede categorizar si es necesario, categorizacion se propaga a todos los usuarios (crowdsourcing)</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Event-Driven Section -->
-                <section id="event-driven">
-                    <h2>Arquitectura Event-Driven</h2>
-
+                <section id="events">
+                    <h2>Eventos Pub/Sub</h2>
                     <div class="card">
-                        <h4>Topics de Google Cloud Pub/Sub</h4>
                         <table>
-                            <thead>
-                                <tr>
-                                    <th>Topic</th>
-                                    <th>Publisher</th>
-                                    <th>Consumer</th>
-                                    <th>Descripcion</th>
-                                </tr>
-                            </thead>
+                            <thead><tr><th>Topic</th><th>Publisher</th><th>Consumer</th><th>Descripcion</th></tr></thead>
                             <tbody>
-                                <tr>
-                                    <td><code>user-email-config</code></td>
-                                    <td>pilasfi-api</td>
-                                    <td>email-sync</td>
-                                    <td>Configuracion de email actualizada</td>
-                                </tr>
-                                <tr>
-                                    <td><code>email-raw</code></td>
-                                    <td>email-sync</td>
-                                    <td>parser-service</td>
-                                    <td>Emails crudos para parsear</td>
-                                </tr>
-                                <tr>
-                                    <td><code>email-transaction</code></td>
-                                    <td>parser-service</td>
-                                    <td>pilasfi-api</td>
-                                    <td>Transacciones parseadas</td>
-                                </tr>
-                                <tr>
-                                    <td><code>token-refreshed</code></td>
-                                    <td>email-sync</td>
-                                    <td>pilasfi-api</td>
-                                    <td>Token OAuth refrescado</td>
-                                </tr>
-                                <tr>
-                                    <td><code>sync-email-request</code></td>
-                                    <td>sync-scheduler</td>
-                                    <td>email-sync</td>
-                                    <td>Request de sincronizacion</td>
-                                </tr>
+                                <tr><td><code>user-email-config</code></td><td>pilasfi-api</td><td>email-sync</td><td>Config de email creada/actualizada</td></tr>
+                                <tr><td><code>sync-email-request</code></td><td>sync-scheduler</td><td>email-sync</td><td>Trigger de sincronizacion</td></tr>
+                                <tr><td><code>email-raw</code></td><td>email-sync</td><td>parser-service</td><td>Email crudo para parsear</td></tr>
+                                <tr><td><code>email-transaction</code></td><td>parser-service</td><td>pilasfi-api</td><td>Transaccion parseada</td></tr>
+                                <tr><td><code>token-refreshed</code></td><td>email-sync</td><td>pilasfi-api</td><td>Token OAuth renovado</td></tr>
                             </tbody>
                         </table>
                     </div>
-                </section>
-
-                <!-- Authentication Section -->
-                <section id="auth">
-                    <h2>Autenticacion</h2>
-
-                    <div class="alert alert-warning">
-                        <span>&#9888;</span>
-                        <div>Todos los endpoints (excepto health checks) requieren autenticacion via Firebase JWT token en el header <code>Authorization: Bearer {token}</code></div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-post">POST</span>
-                            <span class="endpoint-path">/api/v1/auth/login</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Autenticacion inicial con Firebase token</p>
-                            <h4>Request Body</h4>
-                            <pre><code>{
-  "idToken": "firebase-id-token"
+                    <h3>EmailRawReceivedEvent</h3>
+                    <pre><code>{
+  "userId": "user-123",
+  "emailId": "19d25a8e50...",
+  "senderEmail": "notificaciones@pichincha.com",
+  "senderDomain": "pichincha.com",
+  "subject": "Compra aprobada: $50.00 USD",
+  "bodyHtml": "&lt;html&gt;...&lt;/html&gt;",
+  "emailDate": "2025-01-24T10:30:00Z",
+  "userDisplayName": "Juan Perez",
+  "provider": "gmail"
 }</code></pre>
-                            <h4>Response</h4>
-                            <pre><code>{
-  "user": {
-    "id": 1,
-    "uid": "firebase-uid",
-    "email": "user@example.com",
-    "displayName": "John Doe"
-  },
-  "isNewUser": false
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/oauth/google</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Inicia flujo OAuth con Google para conectar Gmail</p>
-                            <h4>Response</h4>
-                            <pre><code>{
-  "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth?..."
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/oauth/microsoft</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Inicia flujo OAuth con Microsoft para conectar Outlook</p>
-                            <h4>Response</h4>
-                            <pre><code>{
-  "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?..."
-}</code></pre>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Transactions Section -->
-                <section id="transactions">
-                    <h2>Transacciones</h2>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/transactions</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Lista transacciones del usuario con paginacion y filtros</p>
-                            <h4>Query Parameters</h4>
-                            <table>
-                                <tr>
-                                    <td><code>page</code></td>
-                                    <td>Numero de pagina (default: 0)</td>
-                                    <td><span class="badge badge-optional">Optional</span></td>
-                                </tr>
-                                <tr>
-                                    <td><code>size</code></td>
-                                    <td>Tamano de pagina (default: 20)</td>
-                                    <td><span class="badge badge-optional">Optional</span></td>
-                                </tr>
-                                <tr>
-                                    <td><code>categoryId</code></td>
-                                    <td>Filtrar por categoria</td>
-                                    <td><span class="badge badge-optional">Optional</span></td>
-                                </tr>
-                                <tr>
-                                    <td><code>type</code></td>
-                                    <td>INCOME | EXPENSE | TRANSFER</td>
-                                    <td><span class="badge badge-optional">Optional</span></td>
-                                </tr>
-                                <tr>
-                                    <td><code>startDate</code></td>
-                                    <td>Fecha inicio (ISO 8601)</td>
-                                    <td><span class="badge badge-optional">Optional</span></td>
-                                </tr>
-                                <tr>
-                                    <td><code>endDate</code></td>
-                                    <td>Fecha fin (ISO 8601)</td>
-                                    <td><span class="badge badge-optional">Optional</span></td>
-                                </tr>
-                            </table>
-                            <h4>Response</h4>
-                            <pre><code>{
-  "content": [
-    {
-      "id": "uuid",
-      "amount": 25.50,
-      "currency": "USD",
-      "transactionType": "EXPENSE",
-      "merchantName": "SUPERMAXI",
-      "description": "Compra en supermercado",
-      "category": {
-        "id": 1,
-        "name": "Supermercado",
-        "icon": "cart",
-        "color": "#22c55e"
-      },
-      "source": "EMAIL",
-      "transactionDate": "2024-01-15T10:30:00Z"
-    }
-  ],
-  "totalElements": 150,
-  "totalPages": 8,
-  "page": 0,
-  "size": 20
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-post">POST</span>
-                            <span class="endpoint-path">/api/v1/transactions</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Crear transaccion manual</p>
-                            <h4>Request Body</h4>
-                            <pre><code>{
+                    <h3>TransactionParsedEvent</h3>
+                    <pre><code>{
+  "eventId": "uuid",
+  "userId": "user-123",
+  "sourceEmailId": "19d25a8e50...",
+  "parserUsed": "ai-generated|regex|manual",
   "amount": 50.00,
   "currency": "USD",
-  "transactionType": "EXPENSE",
-  "merchantName": "Restaurante XYZ",
-  "description": "Almuerzo de trabajo",
-  "categoryId": 5,
-  "transactionDate": "2024-01-15T12:00:00Z"
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-put">PUT</span>
-                            <span class="endpoint-path">/api/v1/transactions/{id}/category</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Categorizar transaccion (contribuye al crowdsourcing)</p>
-                            <h4>Request Body</h4>
-                            <pre><code>{
-  "categoryId": 3
-}</code></pre>
-                            <div class="alert alert-info">
-                                <span>&#8505;</span>
-                                <div>Esta accion registra un voto para el comerciante. Si la confianza alcanza 60%, transacciones futuras del mismo comerciante se categorizaran automaticamente.</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-delete">DELETE</span>
-                            <span class="endpoint-path">/api/v1/transactions/{id}</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Eliminar transaccion</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Categories Section -->
-                <section id="categories">
-                    <h2>Categorias</h2>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/categories</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Lista todas las categorias</p>
-                            <h4>Query Parameters</h4>
-                            <table>
-                                <tr>
-                                    <td><code>type</code></td>
-                                    <td>EXPENSE | INCOME | TRANSFER</td>
-                                    <td><span class="badge badge-optional">Optional</span></td>
-                                </tr>
-                            </table>
-                            <h4>Response</h4>
-                            <pre><code>[
-  {
-    "id": 1,
-    "name": "Supermercado",
-    "icon": "cart",
-    "color": "#22c55e",
-    "type": "EXPENSE",
-    "displayOrder": 1,
-    "isSystem": true
-  },
-  {
-    "id": 2,
-    "name": "Restaurantes",
-    "icon": "utensils",
-    "color": "#f59e0b",
-    "type": "EXPENSE",
-    "displayOrder": 2,
-    "isSystem": true
-  }
-]</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/merchants/{name}/category</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Obtener categoria sugerida para un comerciante (crowdsourced)</p>
-                            <h4>Response</h4>
-                            <pre><code>{
-  "merchantName": "SUPERMAXI",
-  "category": {
-    "id": 1,
-    "name": "Supermercado"
-  },
+  "merchant": "SUPERMAXI",
+  "transactionDate": "2025-01-24T10:30:00Z",
+  "transactionType": "DEBIT|CREDIT|TRANSFER_IN|TRANSFER_OUT|PAYMENT",
+  "cardLast4": "1234",
+  "bankName": "Banco Pichincha",
   "confidence": 0.95,
-  "voteCount": 234
+  "categoryId": 1,
+  "categorySlug": "food"
 }</code></pre>
-                        </div>
-                    </div>
                 </section>
-
-                <!-- Budgets Section -->
-                <section id="budgets">
-                    <h2>Presupuestos</h2>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/budgets</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Lista presupuestos del usuario</p>
-                            <h4>Response</h4>
-                            <pre><code>[
-  {
-    "id": 1,
-    "name": "Comida",
-    "amount": 500.00,
-    "spent": 325.50,
-    "remaining": 174.50,
-    "percentage": 65.1,
-    "category": {
-      "id": 1,
-      "name": "Supermercado"
-    },
-    "period": "MONTHLY",
-    "startDate": "2024-01-01",
-    "endDate": "2024-01-31"
-  }
-]</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-post">POST</span>
-                            <span class="endpoint-path">/api/v1/budgets</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Crear nuevo presupuesto</p>
-                            <h4>Request Body</h4>
-                            <pre><code>{
-  "name": "Entretenimiento",
-  "amount": 200.00,
-  "categoryId": 4,
-  "period": "MONTHLY"
-}</code></pre>
-                        </div>
-                    </div>
+                <section id="parsing-flow">
+                    <h2>Flujo de Parseo (Critico)</h2>
+                    <div class="flow-step"><div class="flow-number">1</div><div class="flow-content"><h4>Deduplication</h4><p>Verifica si el email ya fue procesado. Si existe, skip.</p></div></div>
+                    <div class="flow-step"><div class="flow-number">2</div><div class="flow-content"><h4>Domain Blacklist</h4><p>Consulta <code>domain_blacklist</code>. Si el dominio esta (ej: netflix.com), skip sin usar IA.</p></div></div>
+                    <div class="flow-step"><div class="flow-number">3</div><div class="flow-content"><h4>Display Name Filter</h4><p>Si el merchant == display name del usuario, es transferencia personal. Skip.</p></div></div>
+                    <div class="flow-step"><div class="flow-number">4</div><div class="flow-content"><h4>Discard Parsers</h4><p>Consulta <code>discard_parsers</code> para emails no-transaccionales: OTP, SECURITY, MARKETING, CREDIT_CARD_PAYMENT.</p></div></div>
+                    <div class="flow-step"><div class="flow-number">5</div><div class="flow-content"><h4>Regex Parsers (Fast Path)</h4><p>Consulta <code>email_parsers</code>. Si hay match con regex guardado, extrae datos y publica transaccion.</p></div></div>
+                    <div class="flow-step"><div class="flow-number">6</div><div class="flow-content"><h4>AI Parser (Fallback)</h4><p>Llama a Gemini/OpenAI. Si confidence >= 90%, guarda nuevo parser regex. Si >= 50%, publica transaccion.</p></div></div>
+                    <div class="flow-step"><div class="flow-number">7</div><div class="flow-content"><h4>Validacion NOT_FINANCIAL_ENTITY</h4><p>Si IA dice "no es entidad financiera", segunda pasada con Extended Thinking HIGH. Confirma antes de blacklistear dominio (irreversible).</p></div></div>
+                    <div class="alert alert-warning"><span>&#9888;</span><div><strong>Blacklisting es IRREVERSIBLE.</strong> Si se blacklistea un banco por error, el usuario pierde TODAS las transacciones de ese banco para siempre. Por eso usamos Extended Thinking HIGH para validar.</div></div>
                 </section>
-
-                <!-- Analytics Section -->
+                <section id="auth">
+                    <h2>Autenticacion</h2>
+                    <div class="alert alert-info"><span>&#128274;</span><div>Todos los endpoints requieren Firebase JWT en header <code>Authorization: Bearer {token}</code></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-post">POST</span><span class="endpoint-path">/api/v1/auth/firebase</span></div><div class="endpoint-body"><p class="endpoint-description">Login o registro con Firebase ID Token</p><h4>Request</h4><pre><code>{ "idToken": "eyJhbGciOiJSUzI1NiIs..." }</code></pre><h4>Response</h4><pre><code>{
+  "user": {
+    "id": 123,
+    "uid": "firebase-uid",
+    "email": "user@example.com",
+    "displayName": "Juan Perez",
+    "onboardingCompleted": true
+  },
+  "isNewUser": false
+}</code></pre></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-get">GET</span><span class="endpoint-path">/api/v1/auth/me</span></div><div class="endpoint-body"><p class="endpoint-description">Obtener perfil del usuario autenticado</p></div></div>
+                </section>
+                <section id="email-config">
+                    <h2>Email Config</h2>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-get">GET</span><span class="endpoint-path">/api/v1/email-config</span></div><div class="endpoint-body"><p class="endpoint-description">Listar todas las cuentas de email conectadas</p><h4>Response</h4><pre><code>[{
+  "id": 1,
+  "provider": "gmail",
+  "email": "user@gmail.com",
+  "syncEnabled": true,
+  "lastSyncDate": "2025-01-24T10:30:00Z",
+  "syncStatus": "IDLE"
+}]</code></pre></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-post">POST</span><span class="endpoint-path">/api/v1/email-config/{id}/sync</span></div><div class="endpoint-body"><p class="endpoint-description">Trigger manual de sincronizacion</p></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-post">POST</span><span class="endpoint-path">/api/v1/email-config/{id}/enable</span></div><div class="endpoint-body"><p class="endpoint-description">Habilitar sincronizacion automatica</p></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-post">POST</span><span class="endpoint-path">/api/v1/email-config/{id}/disable</span></div><div class="endpoint-body"><p class="endpoint-description">Deshabilitar sincronizacion automatica</p></div></div>
+                </section>
+                <section id="transactions">
+                    <h2>Transacciones</h2>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-get">GET</span><span class="endpoint-path">/api/v1/transactions</span></div><div class="endpoint-body"><p class="endpoint-description">Listar transacciones con filtros</p><h4>Query Parameters</h4><table><tr><td><code>page</code></td><td>Numero de pagina</td><td><span class="badge badge-optional">Optional</span></td></tr><tr><td><code>size</code></td><td>Tamano de pagina</td><td><span class="badge badge-optional">Optional</span></td></tr><tr><td><code>categoryId</code></td><td>Filtrar por categoria</td><td><span class="badge badge-optional">Optional</span></td></tr><tr><td><code>type</code></td><td>DEBIT|CREDIT|TRANSFER_IN|TRANSFER_OUT|PAYMENT</td><td><span class="badge badge-optional">Optional</span></td></tr><tr><td><code>startDate</code></td><td>Fecha inicio (ISO 8601)</td><td><span class="badge badge-optional">Optional</span></td></tr><tr><td><code>endDate</code></td><td>Fecha fin (ISO 8601)</td><td><span class="badge badge-optional">Optional</span></td></tr></table><h4>Response</h4><pre><code>{
+  "content": [{
+    "id": 456,
+    "amount": 25.50,
+    "currency": "USD",
+    "merchant": "SUPERMAXI",
+    "transactionType": "DEBIT",
+    "categorySlug": "food",
+    "bankName": "Banco Pichincha",
+    "cardLast4": "1234",
+    "parserUsed": "regex",
+    "parserConfidence": 0.95,
+    "transactionDate": "2025-01-24T10:30:00Z"
+  }],
+  "totalElements": 150,
+  "totalPages": 8
+}</code></pre></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-post">POST</span><span class="endpoint-path">/api/v1/transactions</span></div><div class="endpoint-body"><p class="endpoint-description">Crear transaccion manual</p><h4>Request</h4><pre><code>{
+  "amount": 50.00,
+  "currency": "USD",
+  "merchant": "Restaurante XYZ",
+  "transactionType": "DEBIT",
+  "categoryId": 1,
+  "transactionDate": "2025-01-24T12:00:00Z"
+}</code></pre></div></div>
+                </section>
+                <section id="alerts">
+                    <h2>Alertas</h2>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-get">GET</span><span class="endpoint-path">/api/v1/alerts</span></div><div class="endpoint-body"><p class="endpoint-description">Listar todas las alertas configuradas</p></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-get">GET</span><span class="endpoint-path">/api/v1/alerts/unread</span></div><div class="endpoint-body"><p class="endpoint-description">Alertas sin leer</p></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-post">POST</span><span class="endpoint-path">/api/v1/alerts</span></div><div class="endpoint-body"><p class="endpoint-description">Crear nueva alerta</p><h4>Request</h4><pre><code>{
+  "name": "Gasto alto en comida",
+  "alertType": "spending_threshold",
+  "conditionType": "ABOVE",
+  "thresholdAmount": 500.00,
+  "categoryId": 1
+}</code></pre></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-post">POST</span><span class="endpoint-path">/api/v1/alerts/{id}/read</span></div><div class="endpoint-body"><p class="endpoint-description">Marcar alerta como leida</p></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-post">POST</span><span class="endpoint-path">/api/v1/alerts/read-all</span></div><div class="endpoint-body"><p class="endpoint-description">Marcar todas como leidas</p></div></div>
+                </section>
+                <section id="webhooks">
+                    <h2>Webhooks</h2>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-post">POST</span><span class="endpoint-path">/api/v1/webhook/gmail/notify</span></div><div class="endpoint-body"><p class="endpoint-description">Push notification desde Gmail via Google Pub/Sub. Trigger automatico cuando llega nuevo email.</p></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-post">POST</span><span class="endpoint-path">/api/v1/webhook/outlook/notify</span></div><div class="endpoint-body"><p class="endpoint-description">Webhook de Microsoft Graph. Se renueva automaticamente cada 6 horas.</p></div></div>
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-get">GET</span><span class="endpoint-path">/api/v1/webhook/outlook/notify</span></div><div class="endpoint-body"><p class="endpoint-description">Validacion de webhook Outlook (Microsoft lo llama para verificar).</p></div></div>
+                </section>
                 <section id="analytics">
                     <h2>Analytics</h2>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/analytics/dashboard</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Dashboard completo con metricas financieras</p>
-                            <h4>Response</h4>
-                            <pre><code>{
-  "balance": {
-    "income": 3500.00,
-    "expenses": 2150.75,
-    "net": 1349.25
-  },
-  "spendingSummary": {
-    "byCategory": [
-      {"category": "Supermercado", "amount": 450.00, "percentage": 20.9},
-      {"category": "Restaurantes", "amount": 380.50, "percentage": 17.7}
-    ],
-    "topMerchants": [
-      {"name": "SUPERMAXI", "amount": 280.00, "count": 8},
-      {"name": "UBER EATS", "amount": 150.50, "count": 12}
-    ]
-  },
-  "budgetOverview": {
-    "totalBudgeted": 2000.00,
-    "totalSpent": 1580.00,
-    "onTrack": 3,
-    "overBudget": 1
-  },
-  "trends": {
-    "vsLastMonth": -12.5,
-    "vsLastYear": 8.3
-  }
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/analytics/spending-summary</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Resumen de gastos por categoria</p>
-                            <h4>Query Parameters</h4>
-                            <table>
-                                <tr>
-                                    <td><code>startDate</code></td>
-                                    <td>Fecha inicio (ISO 8601)</td>
-                                    <td><span class="badge badge-required">Required</span></td>
-                                </tr>
-                                <tr>
-                                    <td><code>endDate</code></td>
-                                    <td>Fecha fin (ISO 8601)</td>
-                                    <td><span class="badge badge-required">Required</span></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/analytics/trends</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Tendencias de gastos en el tiempo</p>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/analytics/projections</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Proyecciones de gastos basadas en tendencias historicas</p>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/analytics/monthly-comparison</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Comparativa mes a mes</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Households Section -->
-                <section id="households">
-                    <h2>Households (Grupos Familiares)</h2>
-
-                    <div class="card">
-                        <p>Los Households permiten a usuarios compartir finanzas con familiares o parejas. Las transacciones y presupuestos pueden ser compartidos dentro del household.</p>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/households/me</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Obtener household del usuario actual</p>
-                            <h4>Response</h4>
-                            <pre><code>{
-  "id": 1,
-  "name": "Familia Garcia",
-  "owner": {
-    "id": 1,
-    "displayName": "Juan Garcia"
-  },
-  "members": [
-    {"id": 1, "displayName": "Juan Garcia", "role": "OWNER"},
-    {"id": 2, "displayName": "Maria Garcia", "role": "MEMBER"}
+                    <div class="endpoint"><div class="endpoint-header"><span class="method method-get">GET</span><span class="endpoint-path">/api/v1/analytics/dashboard</span></div><div class="endpoint-body"><p class="endpoint-description">Dashboard completo con metricas</p><h4>Response</h4><pre><code>{
+  "balance": { "income": 3500.00, "expenses": 2150.75, "net": 1349.25 },
+  "spendingByCategory": [
+    {"categorySlug": "food", "amount": 450.00, "percentage": 20.9},
+    {"categorySlug": "transport", "amount": 380.50, "percentage": 17.7}
   ],
-  "createdAt": "2024-01-01T00:00:00Z"
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-post">POST</span>
-                            <span class="endpoint-path">/api/v1/households</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Crear nuevo household</p>
-                            <h4>Request Body</h4>
-                            <pre><code>{
-  "name": "Mi Familia"
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-post">POST</span>
-                            <span class="endpoint-path">/api/v1/partners/invitations</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Invitar a alguien al household</p>
-                            <h4>Request Body</h4>
-                            <pre><code>{
-  "email": "partner@example.com"
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-put">PUT</span>
-                            <span class="endpoint-path">/api/v1/partners/invitations/{id}</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Aceptar o rechazar invitacion</p>
-                            <h4>Request Body</h4>
-                            <pre><code>{
-  "action": "ACCEPT"
-}</code></pre>
-                        </div>
-                    </div>
+  "topMerchants": [{"name": "SUPERMAXI", "amount": 280.00, "count": 8}],
+  "trends": { "vsLastMonth": -12.5, "vsLastYear": 8.3 }
+}</code></pre></div></div>
                 </section>
-
-                <!-- Goals Section -->
-                <section id="goals">
-                    <h2>Metas Financieras</h2>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/goals</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Lista metas del usuario</p>
-                            <h4>Response</h4>
-                            <pre><code>[
-  {
-    "id": 1,
-    "name": "Vacaciones",
-    "targetAmount": 2000.00,
-    "currentAmount": 850.00,
-    "progress": 42.5,
-    "targetDate": "2024-06-01",
-    "status": "ON_TRACK"
-  }
-]</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-post">POST</span>
-                            <span class="endpoint-path">/api/v1/goals</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Crear nueva meta</p>
-                            <h4>Request Body</h4>
-                            <pre><code>{
-  "name": "Fondo de emergencia",
-  "targetAmount": 5000.00,
-  "targetDate": "2024-12-31"
-}</code></pre>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Email Sync Section -->
-                <section id="email-sync">
-                    <h2>Email Sync</h2>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/email-configs</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Lista cuentas de email conectadas</p>
-                            <h4>Response</h4>
-                            <pre><code>[
-  {
-    "id": 1,
-    "email": "user@gmail.com",
-    "provider": "GOOGLE",
-    "enabled": true,
-    "lastSyncAt": "2024-01-15T14:30:00Z",
-    "syncStatus": "ACTIVE"
-  }
-]</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-get">GET</span>
-                            <span class="endpoint-path">/api/v1/email-configs/{id}/sync-status</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Estado de sincronizacion de una cuenta</p>
-                            <h4>Response</h4>
-                            <pre><code>{
-  "configId": 1,
-  "status": "SYNCING",
-  "lastSyncAt": "2024-01-15T14:30:00Z",
-  "emailsSynced": 1250,
-  "transactionsFound": 89,
-  "progress": 75
-}</code></pre>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-post">POST</span>
-                            <span class="endpoint-path">/api/v1/email-configs/{id}/resync</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Forzar resincronizacion de una cuenta</p>
-                        </div>
-                    </div>
-
-                    <div class="endpoint">
-                        <div class="endpoint-header">
-                            <span class="method method-delete">DELETE</span>
-                            <span class="endpoint-path">/api/v1/email-configs/{id}</span>
-                        </div>
-                        <div class="endpoint-body">
-                            <p class="endpoint-description">Desconectar cuenta de email</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Models Section -->
                 <section id="models">
-                    <h2>Modelos de Datos</h2>
-
-                    <h3>User</h3>
+                    <h2>Modelos de Base de Datos</h2>
+                    <h3>users</h3>
+                    <div class="card"><pre><code>id: BIGSERIAL PK
+uid: VARCHAR(128) - Firebase UID
+email: VARCHAR(255) UNIQUE
+displayName: VARCHAR(255)
+authProvider: email|google|microsoft
+onboardingCompleted: BOOLEAN
+primaryGoal: savings|spending_control|investment
+notifyNewExpenses: BOOLEAN
+notifyBudgetAlerts: BOOLEAN</code></pre></div>
+                    <h3>transactions</h3>
+                    <div class="card"><pre><code>id: BIGSERIAL PK
+userId: BIGINT FK -> users
+amount: DECIMAL(15,2)
+currency: VARCHAR(3) - USD
+merchant: VARCHAR(255)
+transactionType: DEBIT|CREDIT|TRANSFER_IN|TRANSFER_OUT|PAYMENT
+categoryId: BIGINT FK -> categories
+emailSourceId: VARCHAR(500) - ID del email
+bankName: VARCHAR(100)
+cardLast4: VARCHAR(4)
+parserUsed: regex|ai-generated|ai-one-time|manual
+parserConfidence: DECIMAL(3,2)
+transactionDate: TIMESTAMP</code></pre></div>
+                    <h3>categories (14 predefinidas)</h3>
+                    <div class="card"><table><thead><tr><th>ID</th><th>Slug</th><th>Tipo</th></tr></thead><tbody><tr><td>1</td><td>food</td><td>EXPENSE</td></tr><tr><td>2</td><td>transport</td><td>EXPENSE</td></tr><tr><td>3</td><td>housing</td><td>EXPENSE</td></tr><tr><td>4</td><td>utilities</td><td>EXPENSE</td></tr><tr><td>5</td><td>entertainment</td><td>EXPENSE</td></tr><tr><td>6</td><td>shopping</td><td>EXPENSE</td></tr><tr><td>7</td><td>health</td><td>EXPENSE</td></tr><tr><td>8</td><td>education</td><td>EXPENSE</td></tr><tr><td>9</td><td>subscriptions</td><td>EXPENSE</td></tr><tr><td>10</td><td>other_expense</td><td>EXPENSE</td></tr><tr><td>11</td><td>salary</td><td>INCOME</td></tr><tr><td>12</td><td>freelance</td><td>INCOME</td></tr><tr><td>13</td><td>investments</td><td>INCOME</td></tr><tr><td>14</td><td>other_income</td><td>INCOME</td></tr></tbody></table></div>
+                </section>
+                <section id="parsers-db">
+                    <h2>Parser Database</h2>
+                    <h3>email_parsers</h3>
+                    <div class="card"><pre><code>id: UUID PK
+fromEmailPattern: Regex del remitente
+subjectRegex: Regex del subject
+bodyRegex: Regex con grupos: (?&lt;merchant&gt;), (?&lt;amount&gt;)
+staticFields: JSONB {bankName, transactionType}
+confidence: DECIMAL 0.90+
+timesUsed: INTEGER</code></pre></div>
+                    <h3>domain_blacklist</h3>
+                    <div class="card"><pre><code>id: BIGSERIAL PK
+domain: VARCHAR UNIQUE (ej: netflix.com)
+reason: NOT_FINANCIAL_ENTITY
+// Una vez blacklisteados, emails se ignoran sin usar IA</code></pre></div>
+                    <h3>discard_parsers</h3>
+                    <div class="card"><pre><code>id: UUID PK
+fromEmailPattern: Regex del remitente
+discardCategory: OTP|SECURITY|MARKETING|CREDIT_CARD_PAYMENT|WALLET_TRANSFER
+aiReasoning: TEXT
+// Emails de bancos que NO son transacciones</code></pre></div>
+                </section>
+                <section id="ai-parsing">
+                    <h2>AI Parsing</h2>
                     <div class="card">
-                        <pre><code>{
-  "id": "number",
-  "uid": "string (Firebase UID)",
-  "email": "string",
-  "displayName": "string",
-  "photoUrl": "string | null",
-  "authProvider": "email | google | microsoft",
-  "primaryGoal": "string | null",
-  "incomeRange": "string | null",
-  "savingsGoal": "number | null",
-  "householdId": "number | null",
-  "notifyNewTransaction": "boolean",
-  "notifyBudgetAlert": "boolean",
-  "notifyWeeklySummary": "boolean",
-  "createdAt": "datetime",
-  "updatedAt": "datetime"
-}</code></pre>
-                    </div>
+                        <h4>Configuracion</h4>
+                        <pre><code>pilasfi.ai.provider=gemini  # gemini o openai
 
-                    <h3>Transaction</h3>
-                    <div class="card">
-                        <pre><code>{
-  "id": "uuid",
-  "userId": "number",
-  "categoryId": "number | null",
-  "householdId": "number | null",
-  "amount": "decimal",
-  "currency": "string (USD, etc.)",
-  "transactionType": "INCOME | EXPENSE | TRANSFER",
-  "merchantName": "string",
-  "description": "string | null",
-  "source": "EMAIL | MANUAL | IMPORT | API",
-  "emailMessageId": "string | null",
-  "transactionDate": "datetime",
-  "createdAt": "datetime",
-  "updatedAt": "datetime"
-}</code></pre>
-                    </div>
+# OpenAI
+pilasfi.openai.model=gpt-4o-mini
+pilasfi.openai.max-tokens=2000
+pilasfi.openai.temperature=0.1
 
-                    <h3>Category</h3>
-                    <div class="card">
-                        <pre><code>{
-  "id": "number",
-  "name": "string",
-  "icon": "string",
-  "color": "string (hex)",
-  "type": "EXPENSE | INCOME | TRANSFER",
-  "displayOrder": "number",
-  "isActive": "boolean",
-  "isSystem": "boolean"
-}</code></pre>
-                    </div>
+# Gemini
+pilasfi.gemini.model=gemini-3-flash-preview
+pilasfi.gemini.thinking-level=low  # low/medium/high
 
-                    <h3>Budget</h3>
-                    <div class="card">
-                        <pre><code>{
-  "id": "number",
-  "userId": "number",
-  "categoryId": "number",
-  "name": "string",
-  "amount": "decimal",
-  "period": "WEEKLY | MONTHLY | YEARLY",
-  "startDate": "date",
-  "endDate": "date",
-  "createdAt": "datetime"
-}</code></pre>
-                    </div>
-
-                    <h3>Household</h3>
-                    <div class="card">
-                        <pre><code>{
-  "id": "number",
-  "name": "string",
-  "ownerId": "number",
-  "createdAt": "datetime",
-  "updatedAt": "datetime"
-}</code></pre>
-                    </div>
-
-                    <h3>MerchantCategory (Crowdsourced)</h3>
-                    <div class="card">
-                        <pre><code>{
-  "id": "number",
-  "merchantName": "string (normalizado)",
-  "categoryId": "number",
-  "confidence": "decimal (0.0-1.0)",
-  "voteCount": "number"
-}</code></pre>
+# Thresholds
+parser.confidence.threshold.save=0.90  # Guardar parser
+parser.confidence.threshold.use=0.50   # Publicar transaccion</code></pre>
+                        <h4>Casos Especiales</h4>
+                        <p><strong>1. Pagos a TC:</strong> is_transactional=false, discard_category=CREDIT_CARD_PAYMENT</p>
+                        <p><strong>2. Transferencias personales:</strong> merchant == displayName -> Skip</p>
+                        <p><strong>3. Recargas a wallets:</strong> discard_category=WALLET_TRANSFER</p>
+                        <p><strong>4. Blacklisting:</strong> Extended Thinking HIGH para validar antes de blacklistear</p>
                     </div>
                 </section>
-
-                <!-- Parsers Section -->
-                <section id="parsers">
-                    <h2>Parsers de Bancos</h2>
-
-                    <div class="card">
-                        <h4>Flujo de Parsing</h4>
-                        <div class="diagram">RawEmail (email-raw topic)
-        |
-        v
-Normalizacion (HTML cleaning con Jsoup)
-        |
-        v
-Remitente conocido?
-        |
-        +-- SI --> BankParserFactory
-        |          +-- PichinchaParser
-        |          +-- ProdubancoParser
-        |          +-- GuayaquilParser
-        |          +-- DinersClubParser
-        |          +-- PacifiCardParser
-        |          +-- DeunaParser
-        |              |
-        |              v
-        |          ParsedTransaction
-        |
-        +-- NO --> AIParserService
-                   +-- OpenAI GPT-4o / Google Gemini
-                   +-- Extract: amount, date, merchant, type
-                   +-- Generate regex patterns
-                   |
-                   +-- ParserCandidate
-                       (si confidence > 0.90 -> promover a parser)
-        |
-        v
-TransactionProducer --> email-transaction topic</div>
-                    </div>
-
-                    <h3>Bancos Soportados</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Banco</th>
-                                <th>Parser</th>
-                                <th>Tipo</th>
-                                <th>Emails</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Banco Pichincha</td>
-                                <td>PichinchaParser</td>
-                                <td>Deterministico</td>
-                                <td>notificaciones@pichincha.com</td>
-                            </tr>
-                            <tr>
-                                <td>Produbanco</td>
-                                <td>ProdubancoParser</td>
-                                <td>Deterministico</td>
-                                <td>*@produbanco.com</td>
-                            </tr>
-                            <tr>
-                                <td>Banco Guayaquil</td>
-                                <td>GuayaquilParser</td>
-                                <td>Deterministico</td>
-                                <td>*@bancoguayaquil.com</td>
-                            </tr>
-                            <tr>
-                                <td>Diners Club / Titanium</td>
-                                <td>DinersClubParser</td>
-                                <td>Deterministico</td>
-                                <td>*@dinersclub.com.ec</td>
-                            </tr>
-                            <tr>
-                                <td>PacifiCard</td>
-                                <td>PacifiCardParser</td>
-                                <td>Deterministico</td>
-                                <td>*@pacificard.com</td>
-                            </tr>
-                            <tr>
-                                <td>Deuna</td>
-                                <td>DeunaParser</td>
-                                <td>Deterministico</td>
-                                <td>*@deuna.com</td>
-                            </tr>
-                            <tr>
-                                <td>Otros</td>
-                                <td>AIParserService</td>
-                                <td>IA (GPT-4o/Gemini)</td>
-                                <td>Auto-discovery</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3>Configuracion IA</h3>
-                    <div class="card">
-                        <pre><code># application.properties
-pilasfi.ai.provider=openai  # openai | gemini
-pilasfi.ai.confidence-threshold-save=0.90
-pilasfi.ai.confidence-threshold-use=0.50
-pilasfi.ai.timeout=60s
-pilasfi.ai.max-tokens=2000
-pilasfi.ai.temperature=0.1</code></pre>
-                    </div>
+                <section id="banks">
+                    <h2>Bancos Soportados (Ecuador)</h2>
+                    <div class="card"><table><thead><tr><th>Banco</th><th>Email Sender</th><th>Parser</th></tr></thead><tbody><tr><td>Banco Pichincha</td><td>notificaciones@pichincha.com</td><td>Regex &#9989;</td></tr><tr><td>Produbanco</td><td>notificaciones@produbanco.com</td><td>Regex &#9989;</td></tr><tr><td>Banco Guayaquil</td><td>alertas@bancoguayaquil.com</td><td>Regex &#9989;</td></tr><tr><td>Diners Club</td><td>servicioalcliente@dinersclub.com.ec</td><td>Regex &#9989;</td></tr><tr><td>Titanium</td><td>servicios@titanium.com.ec</td><td>Regex &#9989;</td></tr><tr><td>PacifiCard</td><td>notificaciones@infopacificard.com.ec</td><td>Regex &#9989;</td></tr><tr><td>Deuna</td><td>notificaciones@deunaapp.com</td><td>Regex &#9989;</td></tr><tr><td>Otros</td><td>*</td><td>AI &#129302;</td></tr></tbody></table></div>
                 </section>
-
-                <!-- Infrastructure Section -->
-                <section id="infrastructure">
-                    <h2>Infraestructura</h2>
-
-                    <h3>Produccion (Fly.io + Hetzner)</h3>
-                    <div class="card">
-                        <h4>pilasfi-api (Fly.io)</h4>
-                        <ul>
-                            <li>Region: gru (Sao Paulo)</li>
-                            <li>VM: 1 GB RAM, 1 shared CPU</li>
-                            <li>Auto-scaling: 1-N machines</li>
-                            <li>Health check: /q/health/ready</li>
-                        </ul>
-
-                        <h4>Microservicios (Hetzner K8s)</h4>
-                        <ul>
-                            <li>Cluster: MicroK8s HA</li>
-                            <li>3x CPX31 (4 vCPU, 8GB RAM each)</li>
-                            <li>Load Balancer</li>
-                            <li>GitOps con ArgoCD</li>
-                        </ul>
-                    </div>
-
-                    <h3>GitOps (ArgoCD)</h3>
-                    <div class="card">
-                        <pre><code>pilasfi-infra-apps/
-+-- apps/
-|   +-- api/
-|   |   +-- base/
-|   |   |   +-- deployment.yaml
-|   |   |   +-- service.yaml
-|   |   |   +-- kustomization.yaml
-|   |   +-- overlays/
-|   |       +-- qa/
-|   |       +-- prod/
-|   +-- parser-service/
-|   +-- email-sync/
-|   +-- ingress/
-+-- shared/
-|   +-- postgresql/
-|   +-- kafka/
-+-- argocd/
-    +-- applicationset.yaml</code></pre>
-                    </div>
-
-                    <h3>Terraform</h3>
-                    <div class="card">
-                        <pre><code>pilasfi-infrastructure/
-+-- terraform/
-|   +-- modules/
-|   |   +-- hetzner-server/
-|   |   +-- hetzner-network/
-|   |   +-- hetzner-firewall/
-|   +-- environments/
-|       +-- qa/
-|       +-- prod/
-+-- kubernetes/
-    +-- platform/
-    |   +-- cert-manager/
-    |   +-- argocd/
-    |   +-- kyverno/
-    +-- apps/</code></pre>
-                    </div>
-                </section>
-
-                <!-- Security Section -->
                 <section id="security">
                     <h2>Seguridad</h2>
-
-                    <h3>Firebase Authentication</h3>
                     <div class="card">
-                        <ul>
-                            <li><strong>Metodo:</strong> JWT tokens</li>
-                            <li><strong>Flujo:</strong> Usuario login via Google/Email en app -> Firebase emite ID token -> App envia token en Authorization header -> pilasfi-api verifica con Firebase</li>
-                            <li><strong>Endpoints publicos:</strong> <code>/q/health</code>, <code>/q/swagger-ui</code></li>
-                        </ul>
-                    </div>
-
-                    <h3>OAuth Integration</h3>
-                    <div class="card">
-                        <h4>Gmail (Google)</h4>
-                        <ul>
-                            <li>Scopes: <code>gmail.readonly</code>, <code>userinfo.email</code></li>
-                            <li>Tokens almacenados encriptados en DB</li>
-                            <li>Refresh automatico</li>
-                        </ul>
-
-                        <h4>Outlook (Microsoft)</h4>
-                        <ul>
-                            <li>Scopes: <code>Mail.Read</code>, <code>User.Read</code></li>
-                            <li>Tokens almacenados encriptados en DB</li>
-                            <li>Refresh automatico</li>
-                        </ul>
-                    </div>
-
-                    <h3>Secrets Management</h3>
-                    <div class="card">
-                        <ul>
-                            <li><strong>Produccion:</strong> Google Cloud Secret Manager, sealed-secrets en K8s</li>
-                            <li><strong>Development:</strong> <code>.env</code> file (NO committed)</li>
-                            <li><strong>Encryption:</strong> AES-256 para datos sensibles</li>
-                        </ul>
+                        <h4>Firebase Authentication</h4>
+                        <p>JWT tokens verificados con Firebase Admin SDK. User ID en SecurityIdentity.</p>
+                        <h4>OAuth2 (Gmail/Outlook)</h4>
+                        <p>Tokens encriptados. Refresh automatico. Scopes: gmail.readonly, Mail.Read</p>
+                        <h4>Pub/Sub OIDC</h4>
+                        <p>Mensajes autenticados con OIDC token. Verificacion de service account.</p>
+                        <h4>Connection Pool</h4>
+                        <pre><code>jdbc.min-size=2
+jdbc.max-size=20
+jdbc.max-lifetime=PT5M  # Cloud SQL cierra idle en ~10min
+jdbc.background-validation-interval=PT2M</code></pre>
                     </div>
                 </section>
-
-                <!-- Footer -->
-                <footer style="margin-top: 80px; padding: 40px 0; border-top: 1px solid var(--border); text-align: center;">
-                    <p style="color: var(--text-secondary); font-size: 14px;">
-                        PilasFi Documentation &copy; 2025 |
-                        <a href="https://pilasfi.com" style="color: var(--accent);">pilasfi.com</a>
-                    </p>
-                    <p style="color: var(--text-secondary); font-size: 12px; margin-top: 8px;">
-                        Ultima actualizacion: Enero 2025
-                    </p>
+                <footer style="margin-top: 60px; padding: 32px 0; border-top: 1px solid var(--border); text-align: center;">
+                    <p style="color: var(--text-secondary); font-size: 13px;">PilasFi Documentation 2025 | <a href="https://pilasfi.com" style="color: var(--accent);">pilasfi.com</a></p>
+                    <p style="color: var(--text-secondary); font-size: 11px; margin-top: 6px;">Ramas: feat/new-backend-architecture, feature/newarch, feature/fixandres</p>
                 </footer>
             </main>
         </div>
     </div>
-
-    <!-- =====================================================
-         JAVASCRIPT - Particles, Animations & Interactions
-         ===================================================== -->
-    <script>
-        // =====================================================
-        // PARTICLE SYSTEM - Floating Stars/Dots
-        // =====================================================
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let mouse = { x: null, y: null, radius: 150 };
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.5 + 0.2;
-                this.color = Math.random() > 0.5 ? '#F6851B' : '#8B5CF6';
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                // Wrap around screen
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-
-                // Mouse interaction
-                if (mouse.x !== null && mouse.y !== null) {
-                    const dx = mouse.x - this.x;
-                    const dy = mouse.y - this.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < mouse.radius) {
-                        const force = (mouse.radius - distance) / mouse.radius;
-                        this.x -= dx * force * 0.02;
-                        this.y -= dy * force * 0.02;
-                    }
-                }
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.globalAlpha = this.opacity;
-                ctx.fill();
-                ctx.globalAlpha = 1;
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            const particleCount = Math.min(100, Math.floor((canvas.width * canvas.height) / 15000));
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function connectParticles() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 120) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(246, 133, 27, ${0.1 * (1 - distance / 120)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-
-            connectParticles();
-            requestAnimationFrame(animateParticles);
-        }
-
-        // Track mouse position
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-        });
-
-        window.addEventListener('mouseout', () => {
-            mouse.x = null;
-            mouse.y = null;
-        });
-
-        initParticles();
-        animateParticles();
-
-        // =====================================================
-        // HEADER SCROLL EFFECT
-        // =====================================================
-        const header = document.querySelector('header');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        }, { passive: true });
-
-        // =====================================================
-        // SIDEBAR ACTIVE LINK TRACKING
-        // =====================================================
-        const sections = document.querySelectorAll('section[id]');
-        const sidebarLinks = document.querySelectorAll('.sidebar-link');
-
-        function updateActiveLink() {
-            const scrollPosition = window.scrollY + 150;
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                const sectionId = section.getAttribute('id');
-
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    sidebarLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }
-
-        window.addEventListener('scroll', updateActiveLink, { passive: true });
-        updateActiveLink();
-
-        // =====================================================
-        // SMOOTH SCROLL FOR SIDEBAR LINKS
-        // =====================================================
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                const target = document.getElementById(targetId);
-
-                if (target) {
-                    const offsetTop = target.offsetTop - 100;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // =====================================================
-        // 3D TILT EFFECT FOR CARDS
-        // =====================================================
-        const cards = document.querySelectorAll('.feature-card, .service-card');
-
-        cards.forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = (y - centerY) / 20;
-                const rotateY = (centerX - x) / 20;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
-            });
-        });
-
-        // =====================================================
-        // INTERSECTION OBSERVER FOR FADE-IN ANIMATIONS
-        // =====================================================
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach((section, index) => {
-            section.style.transitionDelay = `${index * 0.1}s`;
-            observer.observe(section);
-        });
-
-        // =====================================================
-        // TYPING EFFECT FOR CODE BLOCKS (Optional enhancement)
-        // =====================================================
-        const codeBlocks = document.querySelectorAll('pre code');
-        codeBlocks.forEach(block => {
-            block.style.opacity = '0';
-            block.style.transition = 'opacity 0.5s ease';
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            observer.observe(block);
-        });
-
-        // =====================================================
-        // PARALLAX EFFECT ON GLOW ORBS
-        // =====================================================
-        const orbs = document.querySelectorAll('.glow-orb');
-
-        window.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth - 0.5) * 30;
-            const y = (e.clientY / window.innerHeight - 0.5) * 30;
-
-            orbs.forEach((orb, index) => {
-                const depth = (index + 1) * 0.5;
-                orb.style.transform = `translate(${x * depth}px, ${y * depth}px)`;
-            });
-        });
-
-        console.log('%c🚀 PilasFi Docs loaded with MetaMask-inspired design!', 'color: #F6851B; font-size: 16px; font-weight: bold;');
-    </script>
 </body>
 </html>
