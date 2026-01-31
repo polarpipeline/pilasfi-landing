@@ -650,8 +650,13 @@ export default function RootLayout({
         {/* Contenido estático visible para crawlers - se oculta con JS */}
         <div id="static-content" style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", background: "#FAF8F4" }}>
           <header style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "2rem" }}>
-            <div style={{ width: "40px", height: "40px", background: "#7B3FE4", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ color: "white", fontSize: "20px" }}>⚡</span>
+            <div style={{ width: "40px", height: "40px", background: "linear-gradient(135deg, #818CF8, #4F46E5)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <rect x="8" y="6" width="24" height="14" rx="2" fill="white" opacity="0.4" transform="rotate(-6 20 13)" />
+                <rect x="8" y="9" width="24" height="14" rx="2" fill="white" opacity="0.65" transform="rotate(-3 20 16)" />
+                <rect x="8" y="12" width="24" height="14" rx="2" fill="white" opacity="0.95" />
+                <rect x="10" y="15" width="6" height="4" rx="1" fill="#7B3FE4" opacity="0.85" />
+              </svg>
             </div>
             <span style={{ fontSize: "1.5rem", fontWeight: "800", color: "#120D31" }}>Pilas<span style={{ color: "#7B3FE4" }}>Fi</span></span>
           </header>

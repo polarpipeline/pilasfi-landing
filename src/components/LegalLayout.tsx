@@ -1,6 +1,19 @@
 "use client";
 
-import { Zap, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+
+// Logo icon component - card stack design
+function LogoIcon({ size = 22 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+      <rect x="8" y="6" width="24" height="14" rx="2" fill="white" opacity="0.4" transform="rotate(-6 20 13)" />
+      <rect x="8" y="9" width="24" height="14" rx="2" fill="white" opacity="0.65" transform="rotate(-3 20 16)" />
+      <rect x="8" y="12" width="24" height="14" rx="2" fill="white" opacity="0.95" />
+      <rect x="10" y="15" width="6" height="4" rx="1" fill="#7B3FE4" opacity="0.85" />
+      <text x="20" y="35" fontFamily="Arial" fontSize="8" fontWeight="bold" fill="white" textAnchor="middle" opacity="0.95">Pilas</text>
+    </svg>
+  );
+}
 import Link from "next/link";
 
 interface LegalLayoutProps {
@@ -37,13 +50,14 @@ export default function LegalLayout({ title, lastUpdated, children }: LegalLayou
                   width: 40,
                   height: 40,
                   borderRadius: 12,
-                  background: "#7B3FE4",
+                  background: "linear-gradient(135deg, #818CF8, #4F46E5)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  overflow: "hidden",
                 }}
               >
-                <Zap size={22} color="white" />
+                <LogoIcon size={40} />
               </div>
               <span style={{ fontSize: "1.25rem", fontWeight: 800, color: "#120D31", letterSpacing: "-0.02em" }}>
                 Pilas<span style={{ color: "#7B3FE4" }}>Fi</span>

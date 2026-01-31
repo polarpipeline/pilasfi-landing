@@ -2,7 +2,23 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
+
+// Logo icon component - card stack design
+function LogoIcon({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
+      {/* Card stack */}
+      <rect x="8" y="6" width="24" height="14" rx="2" fill="white" opacity="0.4" transform="rotate(-6 20 13)" />
+      <rect x="8" y="9" width="24" height="14" rx="2" fill="white" opacity="0.65" transform="rotate(-3 20 16)" />
+      <rect x="8" y="12" width="24" height="14" rx="2" fill="white" opacity="0.95" />
+      {/* Chip */}
+      <rect x="10" y="15" width="6" height="4" rx="1" fill="#7B3FE4" opacity="0.85" />
+      {/* Text "Pilas" */}
+      <text x="20" y="35" fontFamily="Arial" fontSize="8" fontWeight="bold" fill="white" textAnchor="middle" opacity="0.95">Pilas</text>
+    </svg>
+  );
+}
 
 const navLinks = [
   { name: "Funciones", href: "#features" },
@@ -58,14 +74,15 @@ export default function Navigation() {
                   width: 40,
                   height: 40,
                   borderRadius: 10,
-                  background: "#7B3FE4",
+                  background: "linear-gradient(135deg, #818CF8, #4F46E5)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
+                  overflow: "hidden",
                 }}
                 aria-hidden="true"
               >
-                <Zap size={20} color="white" />
+                <LogoIcon size={40} />
               </motion.div>
               <span style={{
                 fontSize: "1.375rem",
