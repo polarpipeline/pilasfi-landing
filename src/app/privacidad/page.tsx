@@ -11,12 +11,17 @@ export default function PrivacyPolicy() {
     <LegalLayout title="Política de Privacidad" lastUpdated="18 de enero de 2026">
       <div className="highlight-box">
         <p>
-          <strong>Resumen:</strong> PilasFi respeta tu privacidad. Solo leemos emails de notificaciones bancarias,
-          nunca accedemos a tu cuenta bancaria, y nunca vendemos tus datos a terceros.
+          <strong>Resumen:</strong> PilasFi respeta tu privacidad. Solo leemos emails de notificaciones bancarias
+          de tu cuenta de Gmail, nunca accedemos a tu cuenta bancaria, y nunca vendemos tus datos a terceros.
         </p>
       </div>
 
       <h2>1. Introducción</h2>
+      <p>
+        <strong>Nombre de la aplicación:</strong> PilasFi<br />
+        <strong>Desarrollador:</strong> PilasFi Team<br />
+        <strong>Sitio web:</strong> https://pilasfi.com
+      </p>
       <p>
         PilasFi ("nosotros", "nuestro" o "la aplicación") se compromete a proteger la privacidad de nuestros
         usuarios. Esta Política de Privacidad explica cómo recopilamos, usamos, almacenamos y protegemos tu
@@ -37,10 +42,36 @@ export default function PrivacyPolicy() {
         <li>Foto de perfil (opcional)</li>
       </ul>
 
-      <h3>2.2 Información de Emails Bancarios</h3>
+      <h3>2.2 Acceso a Gmail (Datos de Google)</h3>
       <p>
-        PilasFi accede <strong>únicamente</strong> a los emails de notificaciones bancarias de los bancos
-        ecuatorianos compatibles. Específicamente:
+        PilasFi utiliza la API de Gmail de Google para acceder a tu cuenta de correo electrónico con
+        <strong> permisos de solo lectura</strong>. Este acceso se utiliza exclusivamente para:
+      </p>
+      <ul>
+        <li>Detectar y leer emails de notificaciones bancarias de bancos ecuatorianos</li>
+        <li>Extraer información de transacciones (monto, fecha, comercio) de dichos emails</li>
+      </ul>
+      <p>
+        <strong>Qué datos de Google recopilamos:</strong>
+      </p>
+      <ul>
+        <li>Tu dirección de correo electrónico de Gmail (para identificar tu cuenta)</li>
+        <li>El contenido de emails que provienen específicamente de bancos ecuatorianos</li>
+      </ul>
+      <p>
+        <strong>Qué datos de Google NO recopilamos:</strong>
+      </p>
+      <ul>
+        <li>Emails personales, laborales o de cualquier otro remitente que no sea un banco</li>
+        <li>Contactos de Gmail</li>
+        <li>Archivos de Google Drive</li>
+        <li>Cualquier otro dato de tu cuenta de Google</li>
+      </ul>
+
+      <h3>2.3 Información de Emails Bancarios</h3>
+      <p>
+        De tu cuenta de Gmail, PilasFi accede <strong>únicamente</strong> a los emails de notificaciones
+        bancarias de los bancos ecuatorianos compatibles. Específicamente:
       </p>
       <ul>
         <li>Emails de Emails de notificaciones de transacciones bancarias (notificaciones de transacciones)</li>

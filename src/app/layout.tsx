@@ -658,30 +658,52 @@ export default function RootLayout({
                 <rect x="10" y="15" width="6" height="4" rx="1" fill="#7B3FE4" opacity="0.85" />
               </svg>
             </div>
-            <span style={{ fontSize: "1.5rem", fontWeight: "800", color: "#120D31" }}>Pilas<span style={{ color: "#7B3FE4" }}>Fi</span></span>
+            <span style={{ fontSize: "1.5rem", fontWeight: "800", color: "#120D31" }}>PilasFi</span>
           </header>
           <h1 style={{ fontSize: "2.5rem", fontWeight: "800", color: "#120D31", marginBottom: "1rem" }}>
-            <span style={{ color: "#7B3FE4" }}>PilasFi</span>: Tu App de Finanzas Personales
+            PilasFi - App de Finanzas Personales
           </h1>
           <p style={{ fontSize: "1.25rem", color: "#535A6A", marginBottom: "1.5rem" }}>
-            Controla tus gastos automáticamente con IA. 100% Gratis.
+            <strong>PilasFi</strong> es una aplicación móvil gratuita que te ayuda a controlar tus gastos automáticamente.
           </p>
-          <p style={{ color: "#535A6A", lineHeight: "1.8", marginBottom: "2rem" }}>
-            PilasFi es una aplicación gratuita de finanzas personales para Ecuador. Automatiza el control de tus gastos
-            leyendo los emails de notificaciones de tu banco y categorizándolos con inteligencia artificial.
-            No necesitas login para ver esta página.
+
+          <h2 style={{ fontSize: "1.25rem", fontWeight: "700", color: "#120D31", marginBottom: "0.75rem" }}>¿Qué hace PilasFi?</h2>
+          <p style={{ color: "#535A6A", lineHeight: "1.8", marginBottom: "1.5rem" }}>
+            PilasFi lee automáticamente los emails de notificaciones bancarias que recibes en tu cuenta de Gmail
+            para extraer información de tus transacciones (montos, fechas, comercios). Con esta información,
+            PilasFi categoriza tus gastos usando inteligencia artificial y te muestra un dashboard de tus finanzas.
           </p>
-          <h2 style={{ fontSize: "1.5rem", fontWeight: "700", color: "#120D31", marginBottom: "1rem" }}>Características principales de PilasFi</h2>
-          <ul style={{ color: "#535A6A", lineHeight: "2", marginBottom: "2rem", paddingLeft: "1.5rem" }}>
+
+          <h2 style={{ fontSize: "1.25rem", fontWeight: "700", color: "#120D31", marginBottom: "0.75rem" }}>¿Por qué PilasFi necesita acceso a tu Gmail?</h2>
+          <p style={{ color: "#535A6A", lineHeight: "1.8", marginBottom: "1.5rem" }}>
+            PilasFi solicita acceso de solo lectura a tu Gmail para detectar únicamente los emails de notificaciones
+            bancarias. NO leemos emails personales, laborales ni de ningún otro tipo. Solo procesamos los emails
+            que provienen de bancos ecuatorianos con información de transacciones.
+          </p>
+
+          <h2 style={{ fontSize: "1.25rem", fontWeight: "700", color: "#120D31", marginBottom: "0.75rem" }}>Características de PilasFi</h2>
+          <ul style={{ color: "#535A6A", lineHeight: "2", marginBottom: "1.5rem", paddingLeft: "1.5rem" }}>
+            <li>Lectura automática de emails bancarios</li>
             <li>Categorización inteligente de gastos con IA</li>
-            <li>Presupuestos compartidos para parejas y familias</li>
+            <li>Presupuestos compartidos para parejas</li>
             <li>Metas de ahorro personalizadas</li>
-            <li>Dashboard financiero en tiempo real</li>
             <li>100% gratis, sin costos ocultos</li>
           </ul>
-          <p style={{ marginBottom: "1rem" }}>
-            <a href="/privacidad/" style={{ color: "#7B3FE4" }}>Política de Privacidad</a> |
-            <a href="/terminos/" style={{ color: "#7B3FE4" }}> Términos y Condiciones</a>
+
+          <h2 style={{ fontSize: "1.25rem", fontWeight: "700", color: "#120D31", marginBottom: "0.75rem" }}>Seguridad y Privacidad</h2>
+          <p style={{ color: "#535A6A", lineHeight: "1.8", marginBottom: "1.5rem" }}>
+            Tu privacidad es nuestra prioridad. PilasFi usa encriptación AES-256, nunca almacena tus credenciales
+            bancarias, y nunca vende ni comparte tus datos con terceros.
+          </p>
+
+          <p style={{ marginBottom: "1rem", fontSize: "1rem" }}>
+            <strong>Documentos legales:</strong><br />
+            <a href="https://pilasfi.com/privacidad/" style={{ color: "#7B3FE4", textDecoration: "underline" }}>Política de Privacidad de PilasFi</a> |
+            <a href="https://pilasfi.com/terminos/" style={{ color: "#7B3FE4", textDecoration: "underline" }}> Términos y Condiciones</a>
+          </p>
+
+          <p style={{ color: "#535A6A", fontSize: "0.875rem" }}>
+            Contacto: hola@pilasfi.com | Esta página no requiere login para ser visualizada.
           </p>
         </div>
         <script dangerouslySetInnerHTML={{ __html: `document.getElementById('static-content').style.display='none';` }} />
