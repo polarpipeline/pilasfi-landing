@@ -650,10 +650,24 @@ export default function RootLayout({
       <body className="antialiased">
         {/* Contenido para crawlers sin JavaScript - usa noscript */}
         <noscript>
-          <div style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", background: "#FAF8F4" }}>
-            <p style={{ fontSize: "1.25rem", color: "#535A6A", marginBottom: "1.5rem" }}>
-              <strong>PilasFi</strong> es una aplicación móvil gratuita que te ayuda a controlar tus gastos automáticamente.
-              Para ver el contenido completo, por favor activa JavaScript.
+          <div style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto", fontFamily: "system-ui, -apple-system, sans-serif" }}>
+            <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem", color: "#120D31" }}>PilasFi - App de Finanzas Personales</h1>
+            <p style={{ fontSize: "1.2rem", lineHeight: "1.6", color: "#535A6A", marginBottom: "2rem" }}>
+              PilasFi es una aplicación gratuita que categoriza tus gastos automáticamente leyendo las notificaciones de tu banco.
+              No requiere login para ver esta información.
+            </p>
+            
+            <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Características</h2>
+            <ul style={{ marginBottom: "2rem", lineHeight: "1.6" }}>
+              <li>Lectura automática de emails bancarios (solo lectura)</li>
+              <li>Categorización con Inteligencia Artificial</li>
+              <li>100% Gratis y Seguro</li>
+            </ul>
+
+            <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Privacidad</h2>
+            <p style={{ marginBottom: "1rem" }}>
+              PilasFi cumple con las políticas de datos de usuario de Google API Services. 
+              <a href="/privacidad">Ver Política de Privacidad</a>
             </p>
           </div>
         </noscript>
