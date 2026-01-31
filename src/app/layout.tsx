@@ -680,11 +680,18 @@ export default function RootLayout({
             </p>
 
             <h2 style={{ fontSize: "1.25rem", fontWeight: "700", color: "#120D31", marginBottom: "0.75rem" }}>¿Por qué PilasFi necesita acceso a tu Gmail?</h2>
-            <p style={{ color: "#535A6A", lineHeight: "1.8", marginBottom: "1.5rem" }}>
+            <p style={{ color: "#535A6A", lineHeight: "1.8", marginBottom: "1rem" }}>
               PilasFi solicita acceso de solo lectura a tu Gmail para detectar únicamente los emails de notificaciones
               bancarias. NO leemos emails personales, laborales ni de ningún otro tipo. Solo procesamos los emails
               que provienen de bancos ecuatorianos con información de transacciones.
             </p>
+            <div style={{ background: "rgba(123, 63, 228, 0.1)", padding: "1rem", borderRadius: "8px", marginBottom: "1.5rem", border: "1px solid rgba(123, 63, 228, 0.2)" }}>
+              <p style={{ color: "#535A6A", lineHeight: "1.6", margin: 0, fontSize: "0.9375rem" }}>
+                <strong style={{ color: "#120D31" }}>Cumplimiento con Google:</strong> El uso y transferencia de información
+                recibida de las APIs de Google por parte de PilasFi cumple con la Política de Datos de Usuario de los
+                Servicios de API de Google, incluyendo los requisitos de Uso Limitado.
+              </p>
+            </div>
 
             <h2 style={{ fontSize: "1.25rem", fontWeight: "700", color: "#120D31", marginBottom: "0.75rem" }}>Características de PilasFi</h2>
             <ul style={{ color: "#535A6A", lineHeight: "2", marginBottom: "1.5rem", paddingLeft: "1.5rem" }}>

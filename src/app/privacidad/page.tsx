@@ -68,6 +68,23 @@ export default function PrivacyPolicy() {
         <li>Cualquier otro dato de tu cuenta de Google</li>
       </ul>
 
+      <div className="highlight-box">
+        <p>
+          <strong>Cumplimiento con Google API Services User Data Policy:</strong> El uso y transferencia
+          a cualquier otra aplicación de la información recibida de las APIs de Google por parte de PilasFi
+          cumplirá con la{" "}
+          <a
+            href="https://developers.google.com/terms/api-services-user-data-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#7B3FE4" }}
+          >
+            Política de Datos de Usuario de los Servicios de API de Google
+          </a>
+          , incluyendo los requisitos de Uso Limitado (Limited Use requirements).
+        </p>
+      </div>
+
       <h3>2.3 Información de Emails Bancarios</h3>
       <p>
         De tu cuenta de Gmail, PilasFi accede <strong>únicamente</strong> a los emails de notificaciones
