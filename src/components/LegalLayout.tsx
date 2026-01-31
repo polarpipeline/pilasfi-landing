@@ -1,6 +1,5 @@
-"use client";
-
 import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 // Logo icon component - card stack design
 function LogoIcon({ size = 22 }: { size?: number }) {
@@ -14,7 +13,6 @@ function LogoIcon({ size = 22 }: { size?: number }) {
     </svg>
   );
 }
-import Link from "next/link";
 
 interface LegalLayoutProps {
   title: string;

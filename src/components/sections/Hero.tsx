@@ -232,7 +232,7 @@ export default function Hero() {
               Controla tus gastos automáticamente con IA. 100% Gratis.
             </motion.p>
 
-            {/* Description */}
+            {/* Description - Explains app purpose and Google data usage for OAuth verification */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -241,13 +241,39 @@ export default function Hero() {
                 fontSize: "1rem",
                 lineHeight: 1.7,
                 color: "#535A6A",
-                marginBottom: "1.5rem",
-                maxWidth: "500px",
+                marginBottom: "1rem",
+                maxWidth: "520px",
               }}
             >
-              No pierdas tiempo usando hojas de cálculo, buscando pagos y cuadrando tus finanzas manualmente.
-              PilasFi categoriza tus gastos al instante, de manera automática y confiable.
+              <strong>PilasFi</strong> lee automáticamente los emails de notificaciones bancarias de tu cuenta de Gmail
+              para extraer tus transacciones y categorizarlas con inteligencia artificial.
+              No necesitas ingresar nada manualmente.
             </motion.p>
+
+            {/* How it works with Google data - Required for OAuth verification */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
+              style={{
+                background: "rgba(123, 63, 228, 0.08)",
+                borderRadius: "12px",
+                padding: "1rem 1.25rem",
+                marginBottom: "1.5rem",
+                maxWidth: "520px",
+                border: "1px solid rgba(123, 63, 228, 0.15)",
+              }}
+            >
+              <p style={{ fontSize: "0.9375rem", lineHeight: 1.6, color: "#535A6A", margin: 0 }}>
+                <strong style={{ color: "#120D31" }}>¿Cómo funciona?</strong> PilasFi solicita acceso de{" "}
+                <strong>solo lectura</strong> a tu Gmail para detectar únicamente emails de bancos ecuatorianos.
+                Nunca accedemos a tu cuenta bancaria, no leemos emails personales, y{" "}
+                <strong>nunca vendemos tus datos</strong>.{" "}
+                <a href="/privacidad" style={{ color: "#7B3FE4", textDecoration: "underline" }}>
+                  Ver política de privacidad
+                </a>
+              </p>
+            </motion.div>
 
             {/* CTA Buttons */}
             <motion.div

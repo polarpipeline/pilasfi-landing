@@ -10,8 +10,8 @@ import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 
 export const metadata: Metadata = {
-  title: "PilasFi - Tu Coach de Finanzas Personales con IA | Gratis",
-  description: "PilasFi categoriza tus gastos automáticamente con aprendizaje automático. Visibilidad total de tus finanzas, presupuestos inteligentes, gastos compartidos con tu pareja. Olvídate del Excel. 100% gratis.",
+  title: "PilasFi | App de Finanzas Personales - Lee emails bancarios automáticamente",
+  description: "PilasFi es una app gratuita que lee automáticamente los emails de notificaciones bancarias de tu Gmail para categorizar tus gastos con IA. Presupuestos compartidos con tu pareja. 100% gratis y seguro.",
   alternates: {
     canonical: "https://pilasfi.com/",
   },
