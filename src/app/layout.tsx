@@ -651,71 +651,9 @@ export default function RootLayout({
         {/* Contenido para crawlers sin JavaScript - usa noscript */}
         <noscript>
           <div style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", background: "#FAF8F4" }}>
-            <header style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "2rem" }}>
-              <div style={{ width: "40px", height: "40px", background: "linear-gradient(135deg, #818CF8, #4F46E5)", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <rect x="8" y="6" width="24" height="14" rx="2" fill="white" opacity="0.4" transform="rotate(-6 20 13)" />
-                  <rect x="8" y="9" width="24" height="14" rx="2" fill="white" opacity="0.65" transform="rotate(-3 20 16)" />
-                  <rect x="8" y="12" width="24" height="14" rx="2" fill="white" opacity="0.95" />
-                  <rect x="10" y="15" width="6" height="4" rx="1" fill="#7B3FE4" opacity="0.85" />
-                </svg>
-              </div>
-              <span style={{ fontSize: "1.5rem", fontWeight: "800", color: "#120D31" }}>PilasFi</span>
-            </header>
-            <h1 style={{ fontSize: "2.5rem", fontWeight: "800", color: "#7B3FE4", marginBottom: "0.5rem" }}>
-              PilasFi
-            </h1>
-            <p style={{ fontSize: "1.5rem", fontWeight: "700", color: "#120D31", marginBottom: "1rem" }}>
-              Tu App de Finanzas Personales
-            </p>
             <p style={{ fontSize: "1.25rem", color: "#535A6A", marginBottom: "1.5rem" }}>
               <strong>PilasFi</strong> es una aplicación móvil gratuita que te ayuda a controlar tus gastos automáticamente.
-            </p>
-
-            <h2 style={{ fontSize: "1.25rem", fontWeight: "700", color: "#120D31", marginBottom: "0.75rem" }}>¿Qué hace PilasFi?</h2>
-            <p style={{ color: "#535A6A", lineHeight: "1.8", marginBottom: "1.5rem" }}>
-              PilasFi lee automáticamente los emails de notificaciones bancarias que recibes en tu cuenta de Gmail
-              para extraer información de tus transacciones (montos, fechas, comercios). Con esta información,
-              PilasFi categoriza tus gastos usando inteligencia artificial y te muestra un dashboard de tus finanzas.
-            </p>
-
-            <h2 style={{ fontSize: "1.25rem", fontWeight: "700", color: "#120D31", marginBottom: "0.75rem" }}>¿Por qué PilasFi necesita acceso a tu Gmail?</h2>
-            <p style={{ color: "#535A6A", lineHeight: "1.8", marginBottom: "1rem" }}>
-              PilasFi solicita acceso de solo lectura a tu Gmail para detectar únicamente los emails de notificaciones
-              bancarias. NO leemos emails personales, laborales ni de ningún otro tipo. Solo procesamos los emails
-              que provienen de bancos ecuatorianos con información de transacciones.
-            </p>
-            <div style={{ background: "rgba(123, 63, 228, 0.1)", padding: "1rem", borderRadius: "8px", marginBottom: "1.5rem", border: "1px solid rgba(123, 63, 228, 0.2)" }}>
-              <p style={{ color: "#535A6A", lineHeight: "1.6", margin: 0, fontSize: "0.9375rem" }}>
-                <strong style={{ color: "#120D31" }}>Cumplimiento con Google:</strong> El uso y transferencia de información
-                recibida de las APIs de Google por parte de PilasFi cumple con la Política de Datos de Usuario de los
-                Servicios de API de Google, incluyendo los requisitos de Uso Limitado.
-              </p>
-            </div>
-
-            <h2 style={{ fontSize: "1.25rem", fontWeight: "700", color: "#120D31", marginBottom: "0.75rem" }}>Características de PilasFi</h2>
-            <ul style={{ color: "#535A6A", lineHeight: "2", marginBottom: "1.5rem", paddingLeft: "1.5rem" }}>
-              <li>Lectura automática de emails bancarios</li>
-              <li>Categorización inteligente de gastos con IA</li>
-              <li>Presupuestos compartidos para parejas</li>
-              <li>Metas de ahorro personalizadas</li>
-              <li>100% gratis, sin costos ocultos</li>
-            </ul>
-
-            <h2 style={{ fontSize: "1.25rem", fontWeight: "700", color: "#120D31", marginBottom: "0.75rem" }}>Seguridad y Privacidad</h2>
-            <p style={{ color: "#535A6A", lineHeight: "1.8", marginBottom: "1.5rem" }}>
-              Tu privacidad es nuestra prioridad. PilasFi usa encriptación AES-256, nunca almacena tus credenciales
-              bancarias, y nunca vende ni comparte tus datos con terceros.
-            </p>
-
-            <p style={{ marginBottom: "1rem", fontSize: "1rem" }}>
-              <strong>Documentos legales:</strong><br />
-              <a href="https://pilasfi.com/privacidad/" style={{ color: "#7B3FE4", textDecoration: "underline" }}>Política de Privacidad de PilasFi</a> |
-              <a href="https://pilasfi.com/terminos/" style={{ color: "#7B3FE4", textDecoration: "underline" }}> Términos y Condiciones</a>
-            </p>
-
-            <p style={{ color: "#535A6A", fontSize: "0.875rem" }}>
-              Contacto: andreco87@gmail.com | Esta página no requiere login para ser visualizada.
+              Para ver el contenido completo, por favor activa JavaScript.
             </p>
           </div>
         </noscript>

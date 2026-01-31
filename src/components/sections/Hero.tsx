@@ -185,10 +185,7 @@ export default function Hero() {
           {/* Text Content */}
           <motion.div className="hero-text-content" style={{ opacity }}>
             {/* Headline - H1 must be exactly "PilasFi" for Google OAuth verification */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+            <h1
               style={{
                 fontSize: "clamp(2.25rem, 5vw, 3.5rem)",
                 fontWeight: 800,
@@ -199,7 +196,7 @@ export default function Hero() {
               }}
             >
               PilasFi
-            </motion.h1>
+            </h1>
             {/* Subtitle */}
             <motion.p
               initial={{ opacity: 0, y: 25 }}
@@ -233,10 +230,7 @@ export default function Hero() {
             </motion.p>
 
             {/* Description - Explains app purpose and Google data usage for OAuth verification */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+            <p
               style={{
                 fontSize: "1rem",
                 lineHeight: 1.7,
@@ -248,7 +242,7 @@ export default function Hero() {
               <strong>PilasFi</strong> lee automáticamente los emails de notificaciones bancarias de tu cuenta de Gmail
               para extraer tus transacciones y categorizarlas con inteligencia artificial.
               No necesitas ingresar nada manualmente.
-            </motion.p>
+            </p>
 
             {/* How it works with Google data - Required for OAuth verification */}
             <motion.div
