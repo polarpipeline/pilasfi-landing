@@ -533,6 +533,7 @@ export default function RootLayout({
     "@id": "https://pilasfi.com/#product",
     name: "PilasFi - App de Finanzas Personales",
     description: "La mejor app gratuita de finanzas personales para Ecuador. Control automático de gastos, presupuestos en pareja y metas de ahorro.",
+    image: "https://pilasfi.com/logo.png",
     brand: {
       "@type": "Brand",
       name: "PilasFi",
