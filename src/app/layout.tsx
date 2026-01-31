@@ -620,7 +620,7 @@ export default function RootLayout({
 
         {/* Noscript content for crawlers that don't execute JavaScript */}
         <noscript>
-          <meta name="description" content="PilasFi es una app gratuita de finanzas personales para Ecuador. Automatiza el control de tus gastos leyendo emails bancarios. Categorización con IA, presupuestos compartidos para parejas. Compatible con Banco Pichincha, Guayaquil, Produbanco, Diners Club, Pacificard, Banco del Pacífico y De Una. Sin login requerido para ver esta página." />
+          <meta name="description" content="PilasFi es una app gratuita de finanzas personales para Ecuador. Automatiza el control de tus gastos leyendo emails bancarios. Categorización con IA, presupuestos compartidos para parejas. Sin login requerido para ver esta página." />
         </noscript>
 
         {/* Canonical */}
@@ -651,17 +651,14 @@ export default function RootLayout({
         <noscript>
           <div style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}>
             <h1>PilasFi - App de Finanzas Personales</h1>
-            <p>PilasFi es una aplicación gratuita de finanzas personales diseñada para Ecuador. Automatiza el control de tus gastos leyendo los emails de notificaciones de tu banco y categorizándolos con inteligencia artificial.</p>
+            <p>PilasFi es una aplicación gratuita de finanzas personales para Ecuador. Automatiza el control de tus gastos leyendo los emails de notificaciones de tu banco y categorizándolos con inteligencia artificial.</p>
             <h2>Características principales</h2>
             <ul>
-              <li>Lectura automática de emails bancarios de 7 bancos ecuatorianos</li>
               <li>Categorización inteligente con IA</li>
               <li>Presupuestos compartidos para parejas</li>
               <li>Metas de ahorro personalizadas</li>
               <li>100% gratis, sin costos ocultos</li>
             </ul>
-            <h2>Bancos compatibles</h2>
-            <p>Banco Pichincha, Banco Guayaquil, Produbanco, Diners Club, Pacificard, Banco del Pacífico, De Una</p>
             <p>Para usar la aplicación completa, habilita JavaScript en tu navegador.</p>
             <p><a href="/privacidad/">Política de Privacidad</a> | <a href="/terminos/">Términos y Condiciones</a></p>
           </div>
