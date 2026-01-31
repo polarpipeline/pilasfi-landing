@@ -21,7 +21,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://pilasfi.com"),
   title: {
-    default: "PilasFi - Tu Coach de Finanzas Personales con IA | Gratis",
+    default: "PilasFi | App de Finanzas Personales",
     template: "%s | PilasFi",
   },
   description:
@@ -662,8 +662,11 @@ export default function RootLayout({
             <span style={{ fontSize: "1.5rem", fontWeight: "800", color: "#120D31" }}>PilasFi</span>
           </header>
           <h1 style={{ fontSize: "2.5rem", fontWeight: "800", color: "#120D31", marginBottom: "1rem" }}>
-            PilasFi - App de Finanzas Personales
+            PilasFi
           </h1>
+          <h2 style={{ fontSize: "1.5rem", fontWeight: "600", color: "#535A6A", marginBottom: "1rem" }}>
+            App de Finanzas Personales para Ecuador
+          </h2>
           <p style={{ fontSize: "1.25rem", color: "#535A6A", marginBottom: "1.5rem" }}>
             <strong>PilasFi</strong> es una aplicación móvil gratuita que te ayuda a controlar tus gastos automáticamente.
           </p>
