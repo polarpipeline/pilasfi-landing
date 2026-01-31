@@ -78,13 +78,13 @@ export default function Footer() {
             </p>
             <div className="flex flex-col gap-3">
               <motion.a
-                href="mailto:hola@pilasfi.com"
+                href="mailto:andreco87@gmail.com"
                 className="flex items-center gap-2 footer-link"
                 style={{ fontSize: "0.9375rem", color: "rgba(255, 255, 255, 0.6)", textDecoration: "none" }}
                 whileHover={{ color: "white" }}
               >
                 <Mail size={16} color="#7B3FE4" />
-                hola@pilasfi.com
+                andreco87@gmail.com
               </motion.a>
             </div>
           </div>

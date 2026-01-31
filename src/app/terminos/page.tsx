@@ -227,7 +227,7 @@ export default function TermsAndConditions() {
       <h3>13.1 Terminación por el Usuario</h3>
       <p>
         Puedes eliminar tu cuenta en cualquier momento desde la configuración de la aplicación o contactando a
-        soporte@pilasfi.com.
+        andreco87@gmail.com.
       </p>
 
       <h3>13.2 Terminación por PilasFi</h3>
@@ -282,10 +282,10 @@ export default function TermsAndConditions() {
       <p>Para preguntas sobre estos Términos:</p>
       <ul>
         <li>
-          <strong>Email:</strong> <a href="mailto:legal@pilasfi.com">legal@pilasfi.com</a>
+          <strong>Email:</strong> <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
         </li>
         <li>
-          <strong>Soporte:</strong> <a href="mailto:soporte@pilasfi.com">soporte@pilasfi.com</a>
+          <strong>Soporte:</strong> <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
         </li>
         <li>
           <strong>Sitio web:</strong> <a href="https://pilasfi.com">pilasfi.com</a>

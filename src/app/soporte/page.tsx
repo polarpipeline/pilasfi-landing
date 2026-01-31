@@ -13,8 +13,8 @@ export default function Support() {
       icon: Mail,
       title: "Correo Electrónico",
       description: "Respuesta en 24-48 horas hábiles",
-      action: "soporte@pilasfi.com",
-      href: "mailto:soporte@pilasfi.com",
+      action: "andreco87@gmail.com",
+      href: "mailto:andreco87@gmail.com",
     },
     {
       icon: MessageCircle,
@@ -229,7 +229,7 @@ export default function Support() {
         <li>Desde la app: Configuración → Cuenta → Eliminar mi cuenta</li>
         <li>
           Por email: Envía un correo a{" "}
-          <a href="mailto:eliminar@pilasfi.com">eliminar@pilasfi.com</a>
+          <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
         </li>
         <li>
           Visita nuestra página de <a href="/eliminar-datos">Eliminación de Datos</a>
@@ -252,7 +252,7 @@ export default function Support() {
         <li>Capturas de pantalla si es posible</li>
       </ul>
       <p>
-        Envía tu reporte a: <a href="mailto:bugs@pilasfi.com">bugs@pilasfi.com</a>
+        Envía tu reporte a: <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
       </p>
 
       <h2>Sugerencias y Mejoras</h2>
@@ -274,7 +274,7 @@ export default function Support() {
           </p>
           <p style={{ margin: 0, color: "var(--color-gray-600)" }}>
             Nos encanta escuchar sugerencias de nuestros usuarios. Envíanos tus ideas a{" "}
-            <a href="mailto:ideas@pilasfi.com">ideas@pilasfi.com</a> y las consideraremos para futuras
+            <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a> y las consideraremos para futuras
             actualizaciones.
           </p>
         </div>
@@ -293,42 +293,42 @@ export default function Support() {
           <tr style={{ borderBottom: "1px solid var(--color-gray-100)" }}>
             <td style={{ padding: "0.75rem" }}>Soporte General</td>
             <td style={{ padding: "0.75rem" }}>
-              <a href="mailto:soporte@pilasfi.com">soporte@pilasfi.com</a>
+              <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
             </td>
             <td style={{ padding: "0.75rem" }}>Ayuda general y preguntas</td>
           </tr>
           <tr style={{ borderBottom: "1px solid var(--color-gray-100)" }}>
             <td style={{ padding: "0.75rem" }}>Privacidad</td>
             <td style={{ padding: "0.75rem" }}>
-              <a href="mailto:privacidad@pilasfi.com">privacidad@pilasfi.com</a>
+              <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
             </td>
             <td style={{ padding: "0.75rem" }}>Temas de privacidad y datos</td>
           </tr>
           <tr style={{ borderBottom: "1px solid var(--color-gray-100)" }}>
             <td style={{ padding: "0.75rem" }}>Eliminación de Datos</td>
             <td style={{ padding: "0.75rem" }}>
-              <a href="mailto:eliminar@pilasfi.com">eliminar@pilasfi.com</a>
+              <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
             </td>
             <td style={{ padding: "0.75rem" }}>Solicitar eliminación de cuenta</td>
           </tr>
           <tr style={{ borderBottom: "1px solid var(--color-gray-100)" }}>
             <td style={{ padding: "0.75rem" }}>Errores Técnicos</td>
             <td style={{ padding: "0.75rem" }}>
-              <a href="mailto:bugs@pilasfi.com">bugs@pilasfi.com</a>
+              <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
             </td>
             <td style={{ padding: "0.75rem" }}>Reportar bugs y errores</td>
           </tr>
           <tr style={{ borderBottom: "1px solid var(--color-gray-100)" }}>
             <td style={{ padding: "0.75rem" }}>Sugerencias</td>
             <td style={{ padding: "0.75rem" }}>
-              <a href="mailto:ideas@pilasfi.com">ideas@pilasfi.com</a>
+              <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
             </td>
             <td style={{ padding: "0.75rem" }}>Ideas y mejoras</td>
           </tr>
           <tr style={{ borderBottom: "1px solid var(--color-gray-100)" }}>
             <td style={{ padding: "0.75rem" }}>Legal</td>
             <td style={{ padding: "0.75rem" }}>
-              <a href="mailto:legal@pilasfi.com">legal@pilasfi.com</a>
+              <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
             </td>
             <td style={{ padding: "0.75rem" }}>Asuntos legales</td>
           </tr>
@@ -339,7 +339,7 @@ export default function Support() {
         <p>
           <strong>Tiempo de respuesta:</strong> Nos esforzamos por responder todas las consultas dentro de 24-48
           horas hábiles. Para asuntos urgentes de seguridad, contáctanos inmediatamente a{" "}
-          <a href="mailto:seguridad@pilasfi.com">seguridad@pilasfi.com</a>.
+          <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>.
         </p>
       </div>
     </LegalLayout>

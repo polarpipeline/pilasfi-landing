@@ -206,8 +206,8 @@ export const metadata: Metadata = {
     "revisit-after": "7 days",
 
     // Business info
-    "contact": "hola@pilasfi.com",
-    "reply-to": "hola@pilasfi.com",
+    "contact": "andreco87@gmail.com",
+    "reply-to": "andreco87@gmail.com",
     "url": "https://pilasfi.com",
     "identifier-URL": "https://pilasfi.com",
 
@@ -252,7 +252,7 @@ export default function RootLayout({
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      email: "hola@pilasfi.com",
+      email: "andreco87@gmail.com",
       availableLanguage: ["Spanish", "English"],
     },
     sameAs: [
@@ -715,7 +715,7 @@ export default function RootLayout({
             </p>
 
             <p style={{ color: "#535A6A", fontSize: "0.875rem" }}>
-              Contacto: hola@pilasfi.com | Esta página no requiere login para ser visualizada.
+              Contacto: andreco87@gmail.com | Esta página no requiere login para ser visualizada.
             </p>
           </div>
         </noscript>

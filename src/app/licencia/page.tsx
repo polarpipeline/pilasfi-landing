@@ -264,10 +264,10 @@ export default function EULA() {
       <p>Si tienes preguntas sobre este EULA, contáctanos:</p>
       <ul>
         <li>
-          <strong>Email:</strong> <a href="mailto:legal@pilasfi.com">legal@pilasfi.com</a>
+          <strong>Email:</strong> <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
         </li>
         <li>
-          <strong>Soporte:</strong> <a href="mailto:soporte@pilasfi.com">soporte@pilasfi.com</a>
+          <strong>Soporte:</strong> <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
         </li>
         <li>
           <strong>Sitio web:</strong> <a href="https://pilasfi.com">pilasfi.com</a>

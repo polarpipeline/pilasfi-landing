@@ -170,7 +170,7 @@ export default function CookiePolicy() {
       <p>Si tienes preguntas sobre nuestra política de cookies:</p>
       <ul>
         <li>
-          <strong>Email:</strong> <a href="mailto:privacidad@pilasfi.com">privacidad@pilasfi.com</a>
+          <strong>Email:</strong> <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
         </li>
       </ul>
     </LegalLayout>

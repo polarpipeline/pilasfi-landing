@@ -293,7 +293,7 @@ export default function FAQ() {
             ¿Tienes más preguntas?
           </p>
           <motion.a
-            href="mailto:hola@pilasfi.com"
+            href="mailto:andreco87@gmail.com"
             className="btn btn-secondary"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}

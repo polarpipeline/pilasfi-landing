@@ -251,7 +251,7 @@ export default function DataDeletion() {
       <h3>Opción 2: Por Correo Electrónico</h3>
       <p>Si no puedes acceder a la aplicación, envía un correo a:</p>
       <p style={{ fontSize: "1.25rem", fontWeight: 600 }}>
-        <a href="mailto:eliminar@pilasfi.com">eliminar@pilasfi.com</a>
+        <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
       </p>
       <p>Incluye en tu solicitud:</p>
       <ul>
@@ -350,13 +350,13 @@ export default function DataDeletion() {
       <ul>
         <li>
           <strong>Email de eliminación:</strong>{" "}
-          <a href="mailto:eliminar@pilasfi.com">eliminar@pilasfi.com</a>
+          <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
         </li>
         <li>
-          <strong>Soporte general:</strong> <a href="mailto:soporte@pilasfi.com">soporte@pilasfi.com</a>
+          <strong>Soporte general:</strong> <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
         </li>
         <li>
-          <strong>Privacidad:</strong> <a href="mailto:privacidad@pilasfi.com">privacidad@pilasfi.com</a>
+          <strong>Privacidad:</strong> <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
         </li>
       </ul>
 
