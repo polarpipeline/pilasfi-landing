@@ -6,7 +6,6 @@ import {
   ArrowRight,
   Shield,
   Zap,
-  Sparkles,
 } from "lucide-react";
 
 // Trust indicators - solo los reales
@@ -185,28 +184,6 @@ export default function Hero() {
         <div className="hero-grid-layout">
           {/* Text Content */}
           <motion.div className="hero-text-content" style={{ opacity }}>
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.375rem 0.875rem",
-                borderRadius: "9999px",
-                marginBottom: "1.25rem",
-                background: "rgba(123, 63, 228, 0.1)",
-                color: "#7B3FE4",
-                fontSize: "0.8125rem",
-                fontWeight: 600,
-              }}
-            >
-              <Sparkles size={14} />
-              <span>Potenciado con IA</span>
-            </motion.div>
-
             {/* Headline - H1 must be exactly "PilasFi" for Google OAuth verification */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
