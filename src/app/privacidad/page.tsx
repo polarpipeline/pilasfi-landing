@@ -225,8 +225,7 @@ export default function PrivacyPolicy() {
         </li>
       </ul>
       <p>
-        Para ejercer estos derechos, contáctanos en{" "}
-        <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
+        Para ejercer estos derechos, contáctanos en <strong>andreco87@gmail.com</strong>
       </p>
 
       <h2>9. Privacidad de Menores</h2>
@@ -253,10 +252,10 @@ export default function PrivacyPolicy() {
       <p>Si tienes preguntas sobre esta política de privacidad, contáctanos:</p>
       <ul>
         <li>
-          <strong>Email:</strong> <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
+          <strong>Email:</strong> andreco87@gmail.com
         </li>
         <li>
-          <strong>Soporte:</strong> <a href="mailto:andreco87@gmail.com">andreco87@gmail.com</a>
+          <strong>Soporte:</strong> andreco87@gmail.com
         </li>
         <li>
           <strong>Sitio web:</strong> <a href="https://pilasfi.com/soporte">pilasfi.com/soporte</a>
