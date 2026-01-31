@@ -207,7 +207,7 @@ export default function Hero() {
               <span>Potenciado con IA</span>
             </motion.div>
 
-            {/* Headline */}
+            {/* Headline - H1 must be exactly "PilasFi" for Google OAuth verification */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -217,14 +217,28 @@ export default function Hero() {
                 fontWeight: 800,
                 letterSpacing: "-0.03em",
                 lineHeight: 1.1,
-                marginBottom: "1rem",
+                marginBottom: "0.5rem",
+                color: "#7B3FE4",
               }}
             >
-              <span style={{ color: "#7B3FE4" }}>PilasFi</span>
-              <span style={{ color: "#120D31" }}>: Tu App de</span>
-              <br />
-              <span style={{ color: "#120D31" }}>Finanzas Personales</span>
+              PilasFi
             </motion.h1>
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.35 }}
+              style={{
+                fontSize: "clamp(1.5rem, 3.5vw, 2.25rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.2,
+                marginBottom: "1rem",
+                color: "#120D31",
+              }}
+            >
+              Tu App de Finanzas Personales
+            </motion.p>
 
             {/* Tagline */}
             <motion.p
