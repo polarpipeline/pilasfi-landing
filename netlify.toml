@@ -5,12 +5,8 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Static export - cada página tiene su propio HTML, no necesita SPA fallback
-# Solo redirigir 404s al index para mejor UX
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 404
+# Static export - cada página tiene su propio HTML generado
+# NO usar redirects catchall para que cada página sirva su propio index.html
 
 [[headers]]
   for = "/*"

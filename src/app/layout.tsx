@@ -647,22 +647,39 @@ export default function RootLayout({
         ))}
       </head>
       <body className="antialiased">
-        {/* Contenido accesible para crawlers y lectores de pantalla */}
-        <noscript>
-          <div style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}>
-            <h1>PilasFi - App de Finanzas Personales</h1>
-            <p>PilasFi es una aplicación gratuita de finanzas personales para Ecuador. Automatiza el control de tus gastos leyendo los emails de notificaciones de tu banco y categorizándolos con inteligencia artificial.</p>
-            <h2>Características principales</h2>
-            <ul>
-              <li>Categorización inteligente con IA</li>
-              <li>Presupuestos compartidos para parejas</li>
-              <li>Metas de ahorro personalizadas</li>
-              <li>100% gratis, sin costos ocultos</li>
-            </ul>
-            <p>Para usar la aplicación completa, habilita JavaScript en tu navegador.</p>
-            <p><a href="/privacidad/">Política de Privacidad</a> | <a href="/terminos/">Términos y Condiciones</a></p>
-          </div>
-        </noscript>
+        {/* Contenido estático visible para crawlers - se oculta con JS */}
+        <div id="static-content" style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto", background: "#FAF8F4" }}>
+          <header style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "2rem" }}>
+            <div style={{ width: "40px", height: "40px", background: "#7B3FE4", borderRadius: "10px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ color: "white", fontSize: "20px" }}>⚡</span>
+            </div>
+            <span style={{ fontSize: "1.5rem", fontWeight: "800", color: "#120D31" }}>Pilas<span style={{ color: "#7B3FE4" }}>Fi</span></span>
+          </header>
+          <h1 style={{ fontSize: "2.5rem", fontWeight: "800", color: "#120D31", marginBottom: "1rem" }}>
+            <span style={{ color: "#7B3FE4" }}>PilasFi</span>: Tu App de Finanzas Personales
+          </h1>
+          <p style={{ fontSize: "1.25rem", color: "#535A6A", marginBottom: "1.5rem" }}>
+            Controla tus gastos automáticamente con IA. 100% Gratis.
+          </p>
+          <p style={{ color: "#535A6A", lineHeight: "1.8", marginBottom: "2rem" }}>
+            PilasFi es una aplicación gratuita de finanzas personales para Ecuador. Automatiza el control de tus gastos
+            leyendo los emails de notificaciones de tu banco y categorizándolos con inteligencia artificial.
+            No necesitas login para ver esta página.
+          </p>
+          <h2 style={{ fontSize: "1.5rem", fontWeight: "700", color: "#120D31", marginBottom: "1rem" }}>Características principales de PilasFi</h2>
+          <ul style={{ color: "#535A6A", lineHeight: "2", marginBottom: "2rem", paddingLeft: "1.5rem" }}>
+            <li>Categorización inteligente de gastos con IA</li>
+            <li>Presupuestos compartidos para parejas y familias</li>
+            <li>Metas de ahorro personalizadas</li>
+            <li>Dashboard financiero en tiempo real</li>
+            <li>100% gratis, sin costos ocultos</li>
+          </ul>
+          <p style={{ marginBottom: "1rem" }}>
+            <a href="/privacidad/" style={{ color: "#7B3FE4" }}>Política de Privacidad</a> |
+            <a href="/terminos/" style={{ color: "#7B3FE4" }}> Términos y Condiciones</a>
+          </p>
+        </div>
+        <script dangerouslySetInnerHTML={{ __html: `document.getElementById('static-content').style.display='none';` }} />
         {children}
       </body>
     </html>
