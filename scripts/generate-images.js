@@ -4,17 +4,72 @@ const path = require('path');
 
 const PUBLIC_DIR = path.join(__dirname, '../public');
 
-// SVG for the logo icon
+// SVG for the logo icon - PilasFi card stack design
 const logoSvg = `
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#6366F1"/>
-      <stop offset="100%" style="stop-color:#06B6D4"/>
+    <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#818CF8"/>
+      <stop offset="100%" style="stop-color:#4F46E5"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="102" fill="url(#bgGradient)"/>
-  <path d="M288 96L160 272H240L224 416L352 240H272L288 96Z" fill="white" stroke="white" stroke-width="8" stroke-linejoin="round"/>
+
+  <!-- Fondo -->
+  <rect x="0" y="0" width="512" height="512" rx="114" ry="114" fill="url(#mainGrad)"/>
+
+  <!-- Tarjeta trasera -->
+  <rect
+    x="106"
+    y="80"
+    width="300"
+    height="180"
+    rx="24"
+    fill="white"
+    opacity="0.4"
+    transform="rotate(-6 256 170)"
+  />
+
+  <!-- Tarjeta media -->
+  <rect
+    x="106"
+    y="115"
+    width="300"
+    height="180"
+    rx="24"
+    fill="white"
+    opacity="0.65"
+    transform="rotate(-3 256 205)"
+  />
+
+  <!-- Tarjeta frontal -->
+  <rect
+    x="106"
+    y="150"
+    width="300"
+    height="180"
+    rx="24"
+    fill="white"
+    opacity="0.95"
+  />
+
+  <!-- Detalles de la tarjeta frontal -->
+  <!-- Chip -->
+  <rect x="136" y="190" width="70" height="50" rx="8" fill="#6366F1" opacity="0.85"/>
+  <!-- Líneas de número -->
+  <rect x="136" y="268" width="180" height="14" rx="7" fill="#6366F1" opacity="0.25"/>
+  <rect x="136" y="294" width="120" height="10" rx="5" fill="#6366F1" opacity="0.15"/>
+
+  <!-- Texto "Pilas" -->
+  <text
+    x="256"
+    y="410"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="72"
+    font-weight="bold"
+    fill="white"
+    text-anchor="middle"
+    opacity="0.95"
+  >Pilas</text>
 </svg>
 `;
 
@@ -44,10 +99,15 @@ const ogImageSvg = `
   <circle cx="1000" cy="100" r="200" fill="#6366F1" fill-opacity="0.1"/>
   <circle cx="200" cy="500" r="150" fill="#06B6D4" fill-opacity="0.1"/>
 
-  <!-- Logo icon -->
+  <!-- Logo icon - Card stack -->
   <g transform="translate(80, 80)">
     <rect width="80" height="80" rx="16" fill="url(#logoGrad)"/>
-    <path d="M45 15L25 42H37L34 65L55 38H43L45 15Z" fill="white" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+    <!-- Mini card stack -->
+    <rect x="18" y="14" width="44" height="26" rx="4" fill="white" opacity="0.4" transform="rotate(-6 40 27)"/>
+    <rect x="18" y="20" width="44" height="26" rx="4" fill="white" opacity="0.65" transform="rotate(-3 40 33)"/>
+    <rect x="18" y="26" width="44" height="26" rx="4" fill="white" opacity="0.95"/>
+    <rect x="22" y="32" width="10" height="7" rx="1" fill="#6366F1" opacity="0.85"/>
+    <text x="40" y="68" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white" text-anchor="middle" opacity="0.95">Pilas</text>
   </g>
 
   <!-- Logo text -->
@@ -118,10 +178,15 @@ const ogImageSquareSvg = `
   <circle cx="1000" cy="200" r="300" fill="#6366F1" fill-opacity="0.1"/>
   <circle cx="200" cy="1000" r="250" fill="#06B6D4" fill-opacity="0.1"/>
 
-  <!-- Logo -->
+  <!-- Logo - Card stack -->
   <g transform="translate(450, 200)">
     <rect width="300" height="300" rx="60" fill="url(#accentGrad2)"/>
-    <path d="M169 45L94 162H139L127 247L202 130H157L169 45Z" fill="white" stroke="white" stroke-width="6" stroke-linejoin="round"/>
+    <!-- Card stack scaled -->
+    <rect x="62" y="47" width="176" height="106" rx="14" fill="white" opacity="0.4" transform="rotate(-6 150 100)"/>
+    <rect x="62" y="68" width="176" height="106" rx="14" fill="white" opacity="0.65" transform="rotate(-3 150 121)"/>
+    <rect x="62" y="88" width="176" height="106" rx="14" fill="white" opacity="0.95"/>
+    <rect x="80" y="112" width="41" height="29" rx="5" fill="#6366F1" opacity="0.85"/>
+    <text x="150" y="250" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="white" text-anchor="middle" opacity="0.95">Pilas</text>
   </g>
 
   <!-- Text -->

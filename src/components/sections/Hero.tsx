@@ -220,9 +220,10 @@ export default function Hero() {
                 marginBottom: "1rem",
               }}
             >
-              <span style={{ color: "#7B3FE4" }}>Ponte Pilas</span>
+              <span style={{ color: "#7B3FE4" }}>PilasFi</span>
+              <span style={{ color: "#120D31" }}>: Tu App de</span>
               <br />
-              <span style={{ color: "#120D31" }}>con tus finanzas</span>
+              <span style={{ color: "#120D31" }}>Finanzas Personales</span>
             </motion.h1>
 
             {/* Tagline */}
@@ -237,7 +238,7 @@ export default function Hero() {
                 marginBottom: "1rem",
               }}
             >
-              Visibilidad total. Categorización inteligente.
+              Controla tus gastos automáticamente con IA. 100% Gratis.
             </motion.p>
 
             {/* Description */}
