@@ -11,14 +11,14 @@ interface LegalLayoutProps {
 
 export default function LegalLayout({ title, lastUpdated, children }: LegalLayoutProps) {
   return (
-    <div style={{ minHeight: "100vh", background: "var(--color-dark-950)" }}>
+    <div style={{ minHeight: "100vh", background: "#FAF8F4" }}>
       {/* Header */}
       <header
         style={{
-          background: "rgba(10, 10, 15, 0.9)",
+          background: "rgba(250, 248, 244, 0.95)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
+          borderBottom: "1px solid #E5E5E5",
           padding: "1rem 0",
           position: "sticky",
           top: 0,
@@ -37,24 +37,23 @@ export default function LegalLayout({ title, lastUpdated, children }: LegalLayou
                   width: 40,
                   height: 40,
                   borderRadius: 12,
-                  background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                  background: "#7B3FE4",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  boxShadow: "0 4px 15px rgba(99, 102, 241, 0.3)",
                 }}
               >
                 <Zap size={22} color="white" />
               </div>
-              <span style={{ fontSize: "1.25rem", fontWeight: 800, color: "white", letterSpacing: "-0.02em" }}>
-                Pilas<span className="gradient-text">Fi</span>
+              <span style={{ fontSize: "1.25rem", fontWeight: 800, color: "#120D31", letterSpacing: "-0.02em" }}>
+                Pilas<span style={{ color: "#7B3FE4" }}>Fi</span>
               </span>
             </Link>
             <Link
               href="/"
               className="flex items-center gap-2"
               style={{
-                color: "rgba(255, 255, 255, 0.6)",
+                color: "#535A6A",
                 textDecoration: "none",
                 fontSize: "0.9375rem",
                 fontWeight: 500,
@@ -73,17 +72,18 @@ export default function LegalLayout({ title, lastUpdated, children }: LegalLayou
         <div className="container" style={{ maxWidth: "800px" }}>
           <div
             style={{
-              background: "rgba(255, 255, 255, 0.03)",
+              background: "#FFFFFF",
               borderRadius: "24px",
               padding: "2.5rem",
-              border: "1px solid rgba(255, 255, 255, 0.06)",
+              border: "1px solid #E5E5E5",
+              boxShadow: "0 4px 20px rgba(0, 0, 0, 0.05)",
             }}
           >
             <h1
               style={{
                 fontSize: "2.5rem",
                 fontWeight: 800,
-                color: "white",
+                color: "#120D31",
                 marginBottom: "0.5rem",
                 letterSpacing: "-0.02em",
               }}
@@ -92,10 +92,10 @@ export default function LegalLayout({ title, lastUpdated, children }: LegalLayou
             </h1>
             <p
               style={{
-                color: "rgba(255, 255, 255, 0.5)",
+                color: "#535A6A",
                 marginBottom: "2rem",
                 paddingBottom: "2rem",
-                borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
+                borderBottom: "1px solid #E5E5E5",
               }}
             >
               Última actualización: {lastUpdated}
@@ -109,14 +109,14 @@ export default function LegalLayout({ title, lastUpdated, children }: LegalLayou
       {/* Footer */}
       <footer
         style={{
-          background: "var(--color-dark-900)",
+          background: "#1A1A3E",
           padding: "2rem 0",
           textAlign: "center",
-          borderTop: "1px solid rgba(255, 255, 255, 0.06)",
+          borderTop: "1px solid #E5E5E5",
         }}
       >
         <div className="container">
-          <p style={{ color: "rgba(255, 255, 255, 0.4)", fontSize: "0.875rem" }}>
+          <p style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "0.875rem" }}>
             © {new Date().getFullYear()} PilasFi. Todos los derechos reservados.
           </p>
           <div
@@ -128,19 +128,19 @@ export default function LegalLayout({ title, lastUpdated, children }: LegalLayou
               flexWrap: "wrap",
             }}
           >
-            <Link href="/privacidad" className="footer-link" style={{ fontSize: "0.875rem" }}>
+            <Link href="/privacidad/" className="footer-link" style={{ fontSize: "0.875rem" }}>
               Privacidad
             </Link>
-            <Link href="/terminos" className="footer-link" style={{ fontSize: "0.875rem" }}>
+            <Link href="/terminos/" className="footer-link" style={{ fontSize: "0.875rem" }}>
               Términos
             </Link>
-            <Link href="/cookies" className="footer-link" style={{ fontSize: "0.875rem" }}>
+            <Link href="/cookies/" className="footer-link" style={{ fontSize: "0.875rem" }}>
               Cookies
             </Link>
-            <Link href="/licencia" className="footer-link" style={{ fontSize: "0.875rem" }}>
+            <Link href="/licencia/" className="footer-link" style={{ fontSize: "0.875rem" }}>
               Licencia
             </Link>
-            <Link href="/soporte" className="footer-link" style={{ fontSize: "0.875rem" }}>
+            <Link href="/soporte/" className="footer-link" style={{ fontSize: "0.875rem" }}>
               Soporte
             </Link>
           </div>

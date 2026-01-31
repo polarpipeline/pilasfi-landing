@@ -805,6 +805,19 @@ input[type="text"]:focus {
   text-decoration: underline;
 }
 
+.highlight-box {
+  background: rgba(123, 63, 228, 0.08);
+  border-left: 4px solid var(--color-purple);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin: 1.5rem 0;
+}
+
+.highlight-box p {
+  color: var(--color-text-primary);
+  margin-bottom: 0;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    BANKS GRID
    ═══════════════════════════════════════════════════════════════════════════ */
